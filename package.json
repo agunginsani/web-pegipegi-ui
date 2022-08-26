@@ -1,5 +1,5 @@
 {
-  "name": "@pegipegi/pegipegi-ui",
+  "name": "@pegipegi/pegipegi-web-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
