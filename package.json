@@ -1,11 +1,12 @@
 {
-  "name": "pegipegi-ui",
+  "name": "@pegipegi/pegipegi-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "start-storybook -p 6006",
     "build": "build-storybook",
+    "dev": "start-storybook -p 6006",
+    "lint": "eslint src/**/*.{ts,tsx,vue}",
     "preview": "vite serve storybook-static"
   },
   "dependencies": {
@@ -21,11 +22,16 @@
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "^6.5.10",
     "@vitejs/plugin-vue": "^3.0.3",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.4.0",
     "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
-    "typescript": "^4.6.4",
+    "typescript": "^4.7.4",
     "vite": "^3.0.7",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.39.5"

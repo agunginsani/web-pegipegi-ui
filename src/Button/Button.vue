@@ -1,13 +1,21 @@
-<script lang="ts" setup>
-type ButtonProps = {
-  variant?: 'filled' | 'outline' | 'text';
-  size?: 'small' | 'medium' | 'large';
-};
+<script lang="ts">
+  import { defineComponent } from "vue";
 
-withDefaults(defineProps<ButtonProps>(), {
-  variant: 'filled',
-  size: 'medium',
-});
+  defineComponent({
+    name: "PButton",
+  });
+</script>
+
+<script lang="ts" setup>
+  type ButtonProps = {
+    variant?: "filled" | "outline" | "text";
+    size?: "small" | "medium" | "large";
+  };
+
+  withDefaults(defineProps<ButtonProps>(), {
+    variant: "filled",
+    size: "medium",
+  });
 </script>
 
 <template>
