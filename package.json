@@ -7,13 +7,16 @@
     "build": "build-storybook",
     "dev": "start-storybook -p 6006",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
-    "preview": "vite serve storybook-static"
+    "preview": "vite serve storybook-static",
+    "prepare": "husky install"
   },
   "dependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -28,6 +31,7 @@
     "babel-loader": "^8.2.5",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.4.0",
+    "husky": "^8.0.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
