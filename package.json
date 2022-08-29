@@ -24,7 +24,7 @@
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "preview": "vite serve storybook-static",
     "prepare": "husky install",
-    "publish": "npm build-lib && npm publish"
+    "prepublishOnly": "npm run build-lib"
   },
   "peerDependencies": {
     "vue": "^3.2.37"
