@@ -1,10 +1,11 @@
-<script lang="ts">
+<!-- eslint-disable vue/multi-word-component-names -->
+<!-- <script lang="ts">
   import { defineComponent } from "vue";
 
   export default defineComponent({
     name: "PInput",
   });
-</script>
+</script> -->
 
 <script lang="ts" setup>
   type InputProps = {
