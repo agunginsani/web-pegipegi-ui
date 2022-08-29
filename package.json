@@ -23,7 +23,8 @@
     "dev": "start-storybook -p 6006",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "preview": "vite serve storybook-static",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish": "npm build-lib && npm publish"
   },
   "peerDependencies": {
     "vue": "^3.2.37"
