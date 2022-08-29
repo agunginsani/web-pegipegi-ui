@@ -16,11 +16,16 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/main.ts"),
-      formats: ["es"],
       fileName: "main",
+      name: "PegipegiWebUI",
     },
     rollupOptions: {
       external: ["vue"],
+      output: {
+        globals: {
+          vue: "Vue",
+        },
+      },
     },
   },
 });

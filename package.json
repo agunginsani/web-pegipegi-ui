@@ -3,11 +3,16 @@
   "version": "0.0.5",
   "type": "module",
   "types": "./dist/types/main.d.ts",
+  "main": "./dist/main.umd.cjs",
+  "module": "./dist/main.js",
   "files": [
     "dist"
   ],
   "exports": {
-    ".": "./dist/main.js",
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.umd.cjs"
+    },
     "./style": "./dist/style.css",
     "./tailwind-preset": "./dist/tailwind.config.cjs"
   },
