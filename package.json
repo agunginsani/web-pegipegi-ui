@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "build-storybook",
+    "build-storybook": "build-storybook",
+    "build-library": "vite build",
     "dev": "start-storybook -p 6006",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "preview": "vite serve storybook-static",
