@@ -1,4 +1,2 @@
-import Button from "./Button/Button.vue";
-import Input from "./Input/Input.vue";
-
-export { Button, Input };
+export { default as Button } from "./Button/Button.vue";
+export { default as Input } from "./Input/Input.vue";
