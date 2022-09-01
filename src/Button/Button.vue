@@ -14,17 +14,17 @@
     block?: boolean;
   };
 
-  withDefaults(defineProps<ButtonProps>(), {
+  const props = withDefaults(defineProps<ButtonProps>(), {
     variant: "filled",
     size: "medium",
     disabled: false,
     block: false,
   });
 
-  function rippleEffect(this: HTMLElement, event: MouseEvent): void {
+  function createRippleEffect(this: HTMLElement, event: MouseEvent): void {
     const circle = document.createElement("span") as HTMLSpanElement | null;
 
-    if (circle != null) {
+    if (circle) {
       const diameter = Math.max(this.clientWidth, this.clientHeight);
       const radius = diameter / 2;
 
@@ -37,20 +37,20 @@
         "rounded-full",
         "scale-0",
         "animate-ripple",
-        "bg-orange-400"
+        props.variant === "filled" ? "bg-orange-400" : "bg-orange-25"
       );
 
       const ripple = this.getElementsByClassName("ripple")[0];
 
       if (ripple) ripple.remove();
 
-      this.appendChild(circle);
+      this.insertBefore(circle, this.children[0]);
     }
   }
 
   const button = ref<HTMLButtonElement | null>(null);
   onMounted(() => {
-    button.value?.addEventListener("click", rippleEffect);
+    button.value?.addEventListener("click", createRippleEffect);
   });
 </script>
 
@@ -64,7 +64,7 @@
           variant === 'filled',
         'bg-transparent text-orange-400 border-orange-400 hover:border-orange-500 hover:text-orange-500 disabled:border-gray-50 disabled:text-platinum-400':
           variant === 'outline',
-        'border-transparent hover:bg-orange-25 disabled:bg-transparent text-orange-400':
+        'border-transparent disabled:bg-transparent text-orange-400':
           variant === 'text',
         'py-2 px-4 text-sm rounded-[18px]': size === 'small',
         'py-3 px-6 text-sm rounded-[22px]': size === 'medium',
@@ -74,6 +74,8 @@
     ]"
     :disabled="disabled"
   >
-    <slot />
+    <div class="relative">
+      <slot />
+    </div>
   </button>
 </template>
