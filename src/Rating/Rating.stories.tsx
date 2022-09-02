@@ -7,17 +7,21 @@ export default {
   parameters: { actions: { argTypesRegex: "^on.*" } },
   argTypes: {
     value: {
-      control: "radio",
-      options: [5, 4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1, 0],
-      defaultValue: 5,
+      control: "number",
+      defaultValue: 3,
     },
     max: {
       control: "number",
       defaultValue: 5,
     },
     precision: {
-      control: "number",
-      defaultValue: 0.5 | 1,
+      control: "radio",
+      options: [0.5, 1],
+      defaultValue: 1,
+    },
+    disabled: {
+      control: "boolean",
+      defaultValue: false,
     },
   },
 } as Meta<typeof Rating>;
