@@ -25,7 +25,7 @@
     (e: "input", value: number): void;
   }>();
 
-  const ratings = [...Array(props.max * 2).keys()].map(
+  const ratingOptions = [...Array(props.max * 2).keys()].map(
     (rating) => (rating + 1) * 0.5
   );
 
@@ -40,9 +40,10 @@
 
         if (ratingIndex < currentRatingIndex) {
           icon.classList.add("fill-orange-100");
+          icon.classList.remove("fill-platinum-200");
         } else {
-          icon.classList.remove("fill-orange-100");
           icon.classList.add("fill-platinum-200");
+          icon.classList.remove("fill-orange-100");
         }
       });
     }
@@ -95,7 +96,6 @@
         if (ratingIndex < currentRattingIndex) {
           icon.classList.add("fill-orange-100");
         } else {
-          icon.classList.remove("fill-orange-100");
           icon.classList.add("fill-platinum-200");
         }
 
@@ -114,17 +114,17 @@
 <template>
   <div class="ratings flex">
     <div
-      v-for="ratingStar in ratings"
-      :key="`rating-${ratingStar}`"
+      v-for="option in ratingOptions"
+      :key="`rating-${option}`"
       ref="starIcon"
       class="cursor-pointer"
     >
       <input
-        :id="`rating-${ratingStar}`"
+        :id="`rating-${option}`"
         class="hidden opacity-0"
         type="radio"
         name="rating"
-        :value="ratingStar"
+        :value="option"
       /><svg
         width="10"
         height="21"
