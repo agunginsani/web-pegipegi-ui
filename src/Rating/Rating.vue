@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from "vue";
+  import { defineComponent, ref } from "vue";
 
   defineComponent({
     name: "PRating",
@@ -10,122 +10,69 @@
   type RatingProps = {
     value?: number;
     max?: number;
-    precision?: number;
+    precision?: 0.5 | 1;
     disabled?: boolean;
   };
 
   const props = withDefaults(defineProps<RatingProps>(), {
     value: 3,
     max: 5,
-    precision: 1, // 1 | 0.5
-    disabled: false, // true | false
+    precision: 1,
+    disabled: false,
   });
 
   const emit = defineEmits<{
     (e: "input", value: number): void;
   }>();
 
-  const ratingOptions = [...Array(props.max * 2).keys()].map(
-    (rating) => (rating + 1) * 0.5
-  );
+  const ratingOptions = [...Array(props.max * 2).keys()].map((rating) => {
+    return { ratingValue: (rating + 1) * 0.5 };
+  });
 
-  const starIcon = ref<HTMLElement | null>(null);
-  const rating = ref<number>(props.value);
+  const rating = ref(props.value);
+  const ratingIndex = ref(props.value * 2);
 
-  function handleColorRating(currentRatingIndex: number) {
-    if (starIcon.value) {
-      Object.entries(starIcon.value).forEach(([index, el]) => {
-        const icon = el.children[1];
-        const ratingIndex = Number(index);
-
-        if (ratingIndex < currentRatingIndex) {
-          icon.classList.add("fill-orange-100");
-          icon.classList.remove("fill-platinum-200");
-        } else {
-          icon.classList.add("fill-platinum-200");
-          icon.classList.remove("fill-orange-100");
-        }
-      });
-    }
-  }
-
-  function onChangeRating(this: HTMLElement) {
-    const { value } = this.children[0] as HTMLInputElement;
-    const numValue = Number(value);
-
-    if (props.precision === 1) {
-      rating.value = numValue % 1 !== 0 ? Math.floor(numValue) + 1 : numValue;
-    } else {
-      rating.value = numValue;
-    }
+  function onChangeRating() {
+    rating.value =
+      props.precision === 1 ? ratingIndex.value / 2 : ratingIndex.value * 0.5;
 
     emit("input", rating.value);
   }
-
-  function onHoverInRating(this: HTMLElement) {
-    const { value } = this.children[0] as HTMLInputElement;
-    let ratingIndex = Number(value) * 2;
-
-    if (props.precision === 1) {
-      ratingIndex = ratingIndex % 2 === 1 ? ratingIndex + 1 : ratingIndex;
-    }
-
-    handleColorRating(ratingIndex);
-  }
-
-  function onHoverOutRating(this: HTMLElement) {
-    const { value } = this.children[0] as HTMLInputElement;
-    const ratingIndex = Number(value) * 2;
-    const currentRatingIndex = rating.value * 2;
-
-    if (ratingIndex !== currentRatingIndex)
-      handleColorRating(currentRatingIndex);
-  }
-
-  onMounted(() => {
-    if (starIcon.value) {
-      Object.entries(starIcon.value).forEach(([index, el]) => {
-        const icon = el.children[1];
-        const ratingIndex = Number(index);
-        const currentRattingIndex = rating.value * 2;
-
-        if (ratingIndex % 2 === 1)
-          icon.classList.add("scale-x-[-1]", "mr-[16px]");
-        if (ratingIndex + 1 === props.max * 2)
-          icon.classList.remove("mr-[16px]");
-        if (ratingIndex < currentRattingIndex) {
-          icon.classList.add("fill-orange-100");
-        } else {
-          icon.classList.add("fill-platinum-200");
-        }
-
-        if (!props.disabled) {
-          el.addEventListener("click", onChangeRating);
-          el.addEventListener("mouseover", onHoverInRating);
-          el.addEventListener("mouseleave", onHoverOutRating);
-        } else {
-          el.classList.remove("cursor-pointer");
-        }
-      });
-    }
-  });
 </script>
 
 <template>
   <div class="ratings flex">
     <div
-      v-for="option in ratingOptions"
-      :key="`rating-${option}`"
-      ref="starIcon"
-      class="cursor-pointer"
+      v-for="({ ratingValue }, index) in ratingOptions"
+      :key="`rating-${ratingValue}`"
+      :class="[
+        { 'cursor-pointer': !disabled },
+        { 'pointer-events-none': disabled },
+      ]"
+      @click="onChangeRating"
+      @mouseover="
+        ratingIndex =
+          precision === 1 && index % 2 === 0
+            ? index > 0
+              ? index
+              : 2
+            : index + 1
+      "
+      @mouseleave="ratingIndex = rating * 2"
     >
       <input
-        :id="`rating-${option}`"
+        :id="`rating-${ratingValue}`"
         class="hidden opacity-0"
         type="radio"
         name="rating"
-        :value="option"
-      /><svg
+        :value="ratingValue"
+      />
+      <svg
+        :class="[
+          index < ratingIndex ? 'fill-[#FFB81C]' : 'fill-platinum-200',
+          index % 2 === 1 ? 'scale-x-[-1]' : '',
+          index % 2 === 1 && index + 1 !== max * 2 ? 'mr-[16px]' : '',
+        ]"
         width="10"
         height="21"
         viewBox="0 0 10 21"
