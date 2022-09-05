@@ -20,6 +20,10 @@ export default {
       control: "boolean",
       defaultValue: false,
     },
+    block: {
+      control: "boolean",
+      defaultValue: false,
+    },
   },
 } as Meta<typeof Button>;
 

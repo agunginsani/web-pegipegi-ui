@@ -2,6 +2,22 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
+    extend: {
+      keyframes: {
+        ripple: {
+          "0%": {
+            transform: "scale(0)",
+          },
+          "100%": {
+            transform: "scale(4)",
+            opacity: "0",
+          },
+        },
+      },
+      animation: {
+        ripple: "ripple 0.6s linear",
+      },
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
