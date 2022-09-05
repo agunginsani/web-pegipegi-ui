@@ -22,41 +22,39 @@
   });
 
   function createRippleEffect(this: HTMLElement, event: MouseEvent): void {
-    const circle = document.createElement("span") as HTMLSpanElement | null;
+    const circle = document.createElement("span");
 
-    if (circle) {
-      const diameter = Math.max(this.clientWidth, this.clientHeight);
-      const radius = diameter / 2;
+    const diameter = Math.max(this.clientWidth, this.clientHeight);
+    const radius = diameter / 2;
 
-      circle.style.width = circle.style.height = `${diameter}px`;
-      circle.style.left = `${event.clientX - (this.offsetLeft + radius)}px`;
-      circle.style.top = `${event.clientY - (this.offsetTop + radius)}px`;
-      circle.classList.add(
-        "ripple",
-        "absolute",
-        "rounded-full",
-        "scale-0",
-        "animate-ripple",
-        props.variant === "filled" ? "bg-orange-400" : "bg-orange-25"
-      );
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - (this.offsetLeft + radius)}px`;
+    circle.style.top = `${event.clientY - (this.offsetTop + radius)}px`;
+    circle.classList.add(
+      "ripple",
+      "absolute",
+      "rounded-full",
+      "scale-0",
+      "animate-ripple",
+      props.variant === "filled" ? "bg-orange-400" : "bg-orange-25"
+    );
 
-      const ripple = this.getElementsByClassName("ripple")[0];
+    const ripple = this.getElementsByClassName("ripple")[0];
 
-      if (ripple) ripple.remove();
+    if (ripple) ripple.remove();
 
-      this.insertBefore(circle, this.children[0]);
-    }
+    this.insertBefore(circle, this.children[0]);
   }
 
-  const button = ref<HTMLButtonElement | null>(null);
+  const buttonRef = ref<HTMLButtonElement | null>(null);
   onMounted(() => {
-    button.value?.addEventListener("click", createRippleEffect);
+    buttonRef.value?.addEventListener("click", createRippleEffect);
   });
 </script>
 
 <template>
   <button
-    ref="button"
+    ref="buttonRef"
     :class="[
       'border font-bold disabled:text-platinum-400 relative overflow-hidden',
       {
