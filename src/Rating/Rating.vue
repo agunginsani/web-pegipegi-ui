@@ -69,7 +69,7 @@
           <span class="sr-only">Rating {{ ratingValue }} out of {{ max }}</span>
           <svg
             :class="[
-              ratingValue <= hover ? 'fill-[#FFB81C]' : 'fill-platinum-200',
+              ratingValue <= hover ? 'fill-[#FFB81C]' : 'fill-platinum-50',
               { 'scale-x-[-1]': ratingValue % 1 === 0 },
             ]"
             width="10"
