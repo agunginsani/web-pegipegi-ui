@@ -27,7 +27,7 @@ export default {
 } as Meta<typeof Rating>;
 
 export const Template: StoryFn<typeof Rating> = (args) => ({
-  components: { Rating: Rating },
+  components: { Rating },
   setup() {
     return { args };
   },
