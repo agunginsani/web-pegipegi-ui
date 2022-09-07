@@ -83,7 +83,11 @@
           <span class="sr-only">Rating {{ ratingValue }} out of {{ max }}</span>
           <svg
             :class="[
+<<<<<<< HEAD
               ratingValue <= hover ? 'fill-yellow-400' : 'fill-platinum-200',
+=======
+              ratingValue <= hover ? 'fill-[#FFB81C]' : 'fill-platinum-50',
+>>>>>>> 8f95c75 (chore: adjust style rating)
               { 'scale-x-[-1]': ratingValue % 1 === 0 },
             ]"
             width="10"
