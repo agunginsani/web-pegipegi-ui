@@ -48,7 +48,7 @@
 </script>
 
 <template>
-  <fieldset class="ratings flex">
+  <div class="ratings flex">
     <span
       v-for="star in Math.ceil(ratingOptions.length / 2)"
       :key="`rating-${uuid}-${star}`"
@@ -108,5 +108,5 @@
         />
       </template>
     </span>
-  </fieldset>
+  </div>
 </template>
