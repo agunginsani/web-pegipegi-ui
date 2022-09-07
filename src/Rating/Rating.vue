@@ -13,14 +13,14 @@
     value?: number;
     max?: number;
     precision?: 0.5 | 1;
-    readOnly?: boolean;
+    readonly?: boolean;
   };
 
   const props = withDefaults(defineProps<RatingProps>(), {
     value: 3,
     max: 5,
     precision: 1,
-    readOnly: false,
+    readonly: false,
   });
 
   const emit = defineEmits<{
@@ -53,7 +53,7 @@
       v-for="star in Math.ceil(ratingOptions.length / 2)"
       :key="`rating-${uuid}-${star}`"
       class="rating flex hover:scale-[1.2]"
-      :class="[{ 'pointer-events-none': readOnly }]"
+      :class="[{ 'pointer-events-none': readonly }]"
     >
       <svg
         class="absolute"

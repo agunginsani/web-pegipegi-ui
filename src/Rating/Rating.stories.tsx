@@ -19,7 +19,7 @@ export default {
       options: [0.5, 1],
       defaultValue: 1,
     },
-    readOnly: {
+    readonly: {
       control: "boolean",
       defaultValue: false,
     },
