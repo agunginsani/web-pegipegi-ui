@@ -31,21 +31,19 @@
     (rating) => (rating + 1) * 0.5
   );
   const rating = ref(props.value);
+  const hover = ref(props.value);
   const uuid = uuidv4();
 
-  function handleRatingHoverIn(value: number) {
+  function handleRatingChange(value: number) {
     rating.value =
       props.precision === 1 && value % 1 !== 0 ? value + 0.5 : value;
+
+    emit("input", rating.value);
   }
 
-  function handleRatingHoverOut() {
-    const { value } = document.querySelector(
-      "input[name='rating']:checked"
-    ) as HTMLInputElement;
-    const numValue = Number(value);
-
-    rating.value =
-      props.precision === 1 && numValue % 1 !== 0 ? numValue + 0.5 : numValue;
+  function handleRatingHover(value: number) {
+    hover.value =
+      props.precision === 1 && value % 1 !== 0 ? value + 0.5 : value;
   }
 </script>
 
@@ -62,7 +60,7 @@
       <svg
         :class="[
           'absolute',
-          star <= rating ? 'fill-yellow-500' : 'fill-neutral-50',
+          star <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
         ]"
         width="20"
         height="20"
@@ -84,13 +82,13 @@
             'cursor-pointer relative',
             { 'last-of-type:pr-[16px]': star !== max },
           ]"
-          @mouseover="handleRatingHoverIn(ratingValue)"
-          @mouseleave="handleRatingHoverOut"
+          @mouseover="handleRatingHover(ratingValue)"
+          @mouseleave="hover = rating"
         >
           <span class="sr-only">Rating {{ ratingValue }} out of {{ max }}</span>
           <svg
             :class="[
-              ratingValue <= rating ? 'fill-yellow-500' : 'fill-neutral-50',
+              ratingValue <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
               { 'scale-x-[-1]': ratingValue % 1 === 0 },
             ]"
             width="10"
@@ -111,7 +109,7 @@
           class="sr-only"
           :value="ratingValue"
           :checked="ratingValue === value"
-          @change="emit('input', ratingValue)"
+          @change="handleRatingChange(ratingValue)"
         />
       </template>
     </span>
