@@ -4,8 +4,60 @@
 
 @tailwind utilities;
 
-@layer base {
-  html {
-    font-family: Proxima Nova, system-ui, sans-serif;
-  }
+@font-face {
+  font-family: Lato;
+  font-display: swap;
+  font-weight: 400;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/Lato-Regular.woff');
+}
+
+@font-face {
+  font-family: Lato;
+  font-display: swap;
+  font-weight: 500;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/Lato-Semibold.woff');
+}
+
+@font-face {
+  font-family: Lato;
+  font-display: swap;
+  font-weight: 700;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/Lato-Bold.woff');
+}
+
+@font-face {
+  font-family: Lato;
+  font-display: swap;
+  font-weight: 900;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/Lato-Black.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  font-display: swap;
+  font-weight: 400;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/ProximaNova.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/ProximaNova-Italic.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  font-display: swap;
+  font-weight: 700;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/ProximaNova-Bold.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  font-display: swap;
+  font-weight: 700;
+  font-style: italic;
+  src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/ProximaNova-BoldItalic.woff');
 }
