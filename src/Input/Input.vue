@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent } from 'vue';
 
   defineComponent({
-    name: "PInput",
+    name: 'PInput',
   });
 </script>
 
 <script lang="ts" setup>
   type InputProps = {
-    size?: "small" | "medium" | "large";
+    size?: 'small' | 'medium' | 'large';
     error?: boolean;
     disabled?: boolean;
   };
 
   withDefaults(defineProps<InputProps>(), {
-    size: "medium",
+    size: 'medium',
     error: false,
     disabled: false,
   });

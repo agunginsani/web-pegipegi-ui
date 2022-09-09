@@ -1,21 +1,21 @@
-import Input from "./Input.vue";
-import { Meta, StoryFn } from "@storybook/vue3";
+import Input from './Input.vue';
+import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
-  title: "Input",
+  title: 'Input',
   component: Input,
   argTypes: {
     size: {
-      control: "radio",
-      options: ["small", "medium", "large"],
-      defaultValue: "medium",
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+      defaultValue: 'medium',
     },
     disabled: {
-      control: "boolean",
+      control: 'boolean',
       defaultValue: false,
     },
     error: {
-      control: "boolean",
+      control: 'boolean',
       defaultValue: false,
     },
   },
@@ -29,4 +29,4 @@ export const Template: StoryFn<typeof Input> = (args) => ({
   template: '<Input v-bind="args" />',
 });
 
-Template.storyName = "Input";
+Template.storyName = 'Input';

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, ref } from 'vue';
 
   defineComponent({
-    name: "PRating",
+    name: 'PRating',
   });
 </script>
 
 <script lang="ts" setup>
-  import { v4 as uuidv4 } from "uuid";
+  import { v4 as uuidv4 } from 'uuid';
 
   type RatingProps = {
     value?: number;
@@ -24,7 +24,7 @@
   });
 
   const emit = defineEmits<{
-    (e: "input", value: number): void;
+    (e: 'input', value: number): void;
   }>();
 
   const ratingOptions = [...Array(props.max * 2).keys()].map(
@@ -38,7 +38,7 @@
     rating.value =
       props.precision === 1 && value % 1 !== 0 ? value + 0.5 : value;
 
-    emit("input", rating.value);
+    emit('input', rating.value);
   }
 
   function handleRatingHover(value: number) {

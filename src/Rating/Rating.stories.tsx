@@ -1,26 +1,26 @@
-import Rating from "./Rating.vue";
-import { Meta, StoryFn } from "@storybook/vue3";
+import Rating from './Rating.vue';
+import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
-  title: "Rating",
+  title: 'Rating',
   component: Rating,
-  parameters: { actions: { argTypesRegex: "^on.*" } },
+  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     value: {
-      control: "number",
+      control: 'number',
       defaultValue: 3,
     },
     max: {
-      control: "number",
+      control: 'number',
       defaultValue: 5,
     },
     precision: {
-      control: "radio",
+      control: 'radio',
       options: [0.5, 1],
       defaultValue: 1,
     },
     readonly: {
-      control: "boolean",
+      control: 'boolean',
       defaultValue: false,
     },
   },
@@ -34,4 +34,4 @@ export const Template: StoryFn<typeof Rating> = (args) => ({
   template: '<Rating v-bind="args" />',
 });
 
-Template.storyName = "Rating";
+Template.storyName = 'Rating';

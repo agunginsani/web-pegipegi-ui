@@ -1,27 +1,27 @@
-import Button from "./Button.vue";
-import { Meta, StoryFn } from "@storybook/vue3";
+import Button from './Button.vue';
+import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
-  title: "Button",
+  title: 'Button',
   component: Button,
-  parameters: { actions: { argTypesRegex: "^on.*" } },
+  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     variant: {
-      control: "radio",
-      options: ["filled", "outline", "text"],
-      defaultValue: "filled",
+      control: 'radio',
+      options: ['filled', 'outline', 'text'],
+      defaultValue: 'filled',
     },
     size: {
-      control: "radio",
-      options: ["small", "medium", "large"],
-      defaultValue: "medium",
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+      defaultValue: 'medium',
     },
     disabled: {
-      control: "boolean",
+      control: 'boolean',
       defaultValue: false,
     },
     block: {
-      control: "boolean",
+      control: 'boolean',
       defaultValue: false,
     },
   },
@@ -35,4 +35,4 @@ export const Template: StoryFn<typeof Button> = (args) => ({
   template: '<Button v-bind="args">Button</Button>',
 });
 
-Template.storyName = "Button";
+Template.storyName = 'Button';

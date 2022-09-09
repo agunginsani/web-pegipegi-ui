@@ -27,6 +27,7 @@
     "build-lib": "vue-tsc --noEmit && vite build && vue-tsc -p tsconfig.lib.json",
     "dev": "start-storybook -p 6006",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
+    "lint-fix": "eslint src/**/*.{ts,tsx,vue} --fix",
     "preview": "vite serve storybook-static",
     "prepare": "husky install",
     "prepublishOnly": "npm run build-lib"
