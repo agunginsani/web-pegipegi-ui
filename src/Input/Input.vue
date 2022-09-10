@@ -11,13 +11,27 @@
     size?: 'small' | 'medium' | 'large';
     error?: boolean;
     disabled?: boolean;
+    modelValue?: string;
+  };
+
+  type InputEmits = {
+    (e: 'input', value: Event): void;
+    (e: 'update:modelValue', value: string): void;
   };
 
   withDefaults(defineProps<InputProps>(), {
     size: 'medium',
     error: false,
     disabled: false,
+    modelValue: '',
   });
+
+  const emit = defineEmits<InputEmits>();
+
+  function handleInput(event: Event) {
+    emit('input', event);
+    emit('update:modelValue', (event.target as HTMLInputElement).value);
+  }
 </script>
 
 <template>
@@ -36,5 +50,7 @@
         : 'bg-transparent border-gray-50 text-gray-900',
     ]"
     :disabled="disabled"
+    :value="modelValue"
+    @input="handleInput"
   />
 </template>

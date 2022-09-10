@@ -23,14 +23,16 @@
     "url": "https://github.com/pegipegi/pegipegi-web-ui.git"
   },
   "scripts": {
-    "build-storybook": "build-storybook",
-    "build-lib": "vue-tsc --noEmit && vite build && vue-tsc -p tsconfig.lib.json",
     "dev": "start-storybook -p 6006",
+    "build-lib": "vue-tsc --noEmit && vite build && vue-tsc -p tsconfig.lib.json",
+    "build-storybook": "build-storybook",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "lint-fix": "eslint src/**/*.{ts,tsx,vue} --fix",
-    "preview": "vite serve storybook-static",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build-lib"
+    "prepublishOnly": "npm run build-lib",
+    "preview": "vite serve storybook-static",
+    "test": "vitest",
+    "test-coverage": "vitest run --coverage"
   },
   "peerDependencies": {
     "tailwindcss": "^3.1.8",
@@ -47,8 +49,12 @@
     "@storybook/builder-vite": "^0.2.2",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "^6.5.10",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/user-event": "^14.4.3",
+    "@testing-library/vue": "^6.6.1",
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-vue": "^3.0.3",
+    "@vitest/coverage-c8": "^0.23.1",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "autoprefixer": "^10.4.8",
@@ -56,17 +62,16 @@
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.4.0",
     "husky": "^8.0.0",
+    "jsdom": "^20.0.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.7.4",
     "vite": "^3.0.7",
     "vite-plugin-static-copy": "^0.8.0",
+    "vitest": "^0.23.1",
     "vue": "^3.2.37",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.39.5"
-  },
-  "dependencies": {
-    "uuid": "^9.0.0"
   }
 }
