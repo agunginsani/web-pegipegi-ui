@@ -18,6 +18,10 @@ export default {
       control: 'boolean',
       defaultValue: false,
     },
+    modelValue: {
+      control: 'text',
+      defaultValue: '',
+    },
   },
 } as Meta<typeof Input>;
 
