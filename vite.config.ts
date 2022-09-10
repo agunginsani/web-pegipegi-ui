@@ -2,10 +2,12 @@ import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
 export default defineConfig({
   plugins: [
     vue(),
+    vueJsx(),
     viteStaticCopy({
       targets: [
         { src: 'src/style.css', dest: '.' },
@@ -31,7 +33,12 @@ export default defineConfig({
   test: {
     coverage: {
       all: true,
-      exclude: ['src/test', '**/*.spec.ts', '**/*.stories.tsx', '**/*.d.ts'],
+      exclude: [
+        'src/test',
+        '**/*.spec.{ts,tsx}',
+        '**/*.stories.tsx',
+        '**/*.d.ts',
+      ],
       include: ['src'],
       reporter: ['lcov', 'text'],
     },
