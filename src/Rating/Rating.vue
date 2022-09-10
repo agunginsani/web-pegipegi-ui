@@ -7,38 +7,38 @@
 </script>
 
 <script lang="ts" setup>
-  import { v4 as uuidv4 } from 'uuid';
-
   type RatingProps = {
-    value?: number;
+    modelValue?: number;
     max?: number;
     precision?: 0.5 | 1;
     readonly?: boolean;
   };
 
+  type RatingEmits = {
+    (e: 'update:modelValue', value: number): void;
+  };
+
   const props = withDefaults(defineProps<RatingProps>(), {
-    value: 3,
+    modelValue: 3,
     max: 5,
     precision: 1,
     readonly: false,
   });
 
-  const emit = defineEmits<{
-    (e: 'input', value: number): void;
-  }>();
+  const emit = defineEmits<RatingEmits>();
 
   const ratingOptions = [...Array(props.max * 2).keys()].map(
     (rating) => (rating + 1) * 0.5
   );
-  const rating = ref(props.value);
-  const hover = ref(props.value);
-  const uuid = uuidv4();
+  const rating = ref(props.modelValue);
+  const hover = ref(props.modelValue);
+  const uuid = Date.now();
 
   function handleRatingChange(value: number) {
     rating.value =
       props.precision === 1 && value % 1 !== 0 ? value + 0.5 : value;
 
-    emit('input', rating.value);
+    emit('update:modelValue', rating.value);
   }
 
   function handleRatingHover(value: number) {
@@ -105,10 +105,10 @@
         <input
           :id="`rating-${uuid}-${ratingValue}`"
           type="radio"
-          name="rating"
+          :name="`rating-${uuid}`"
           class="sr-only"
           :value="ratingValue"
-          :checked="ratingValue === value"
+          :checked="ratingValue === modelValue"
           @change="handleRatingChange(ratingValue)"
         />
       </template>

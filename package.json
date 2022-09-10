@@ -73,8 +73,5 @@
     "vue": "^3.2.37",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.39.5"
-  },
-  "dependencies": {
-    "uuid": "^9.0.0"
   }
 }
