@@ -52,7 +52,6 @@ it('renders and emits correctly when precision is 0.5', async () => {
 });
 
 const ReactiveRating = defineComponent({
-  components: { Rating },
   setup() {
     const rating = ref(3);
 

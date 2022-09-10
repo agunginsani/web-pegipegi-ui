@@ -4,7 +4,9 @@ import Button from './Button.vue';
 
 it('renders and emits correctly', async () => {
   const user = userEvent.setup();
-  const { emitted } = render(Button, { slots: { default: 'Example' } });
+  const { emitted, rerender } = render(Button, {
+    slots: { default: 'Example' },
+  });
   await user.click(screen.getByRole('button', { name: /example/i }));
   expect(emitted('click').length).toBe(1);
   expect(emitted('focus').length).toBe(1);
@@ -15,4 +17,6 @@ it('renders and emits correctly', async () => {
   expect(emitted('blur').length).toBe(1);
   await user.tab();
   expect(emitted('focus').length).toBe(2);
+  await rerender({ disabled: true });
+  expect(screen.getByRole('button', { name: /example/i })).toBeDisabled();
 });

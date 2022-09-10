@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Input from './Input.vue';
+import { defineComponent } from 'vue';
 
 it('renders and emits correctly', async () => {
   const user = userEvent.setup();
@@ -23,4 +24,22 @@ it('renders and emits correctly', async () => {
   const initialValue = 'initial value';
   await rerender({ modelValue: initialValue });
   expect(screen.getByRole('textbox')).toHaveValue(initialValue);
+  await rerender({ disabled: true });
+  expect(screen.getByRole('textbox')).toBeDisabled();
+});
+
+const InputWithLabel = defineComponent({
+  setup() {
+    return () => (
+      <div>
+        <label for="name">Name</label>
+        <Input id="name" />
+      </div>
+    );
+  },
+});
+
+it('handles <InputWithLabel />', () => {
+  render(InputWithLabel);
+  expect(screen.getByRole('textbox', { name: /name/i })).toBeInTheDocument();
 });
