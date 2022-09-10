@@ -1,6 +1,6 @@
 {
   "name": "@pegipegi/pegipegi-web-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "types": "./dist/types/main.d.ts",
   "main": "./dist/main.umd.cjs",
