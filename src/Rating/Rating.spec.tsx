@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Rating from './Rating.vue';
 import { defineComponent, ref } from 'vue';
 
-it.skip('renders and emits correctly when precision is 1', async () => {
+it('renders and emits correctly when precision is 1', async () => {
   const user = userEvent.setup();
   const props = { modelValue: 2, precision: 1, max: 5 };
   const { emitted } = render(Rating, { props });

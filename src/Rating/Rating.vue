@@ -44,23 +44,23 @@
 <template>
   <div class="ratings flex">
     <span
-      v-for="star in max"
-      :key="star"
+      v-for="fullStar in max"
+      :key="fullStar"
       :class="[
-        `star-${star} flex hover:scale-125 duration-100 ease-linear`,
+        `star-${fullStar} flex hover:scale-125 duration-100 ease-linear`,
         { 'pointer-events-none': readonly },
       ]"
     >
       <template v-if="precision === 1">
         <label
-          :for="`rating-${uuid}-${star}`"
-          :class="['cursor-pointer pr-[16px]', { 'pr-0': star === max }]"
-          @mouseover="hover = star"
+          :for="`rating-${uuid}-${fullStar}`"
+          :class="['cursor-pointer', { 'pr-[16px]': fullStar !== max }]"
+          @mouseover="hover = fullStar"
           @mouseleave="hover = rating"
         >
-          <span class="sr-only">Rating {{ star }} out of {{ max }}</span>
+          <span class="sr-only">Rating {{ fullStar }} out of {{ max }}</span>
           <svg
-            :class="star <= hover ? 'fill-yellow-500' : 'fill-neutral-50'"
+            :class="fullStar <= hover ? 'fill-yellow-500' : 'fill-neutral-50'"
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -72,20 +72,20 @@
           </svg>
         </label>
         <input
-          :id="`rating-${uuid}-${star}`"
+          :id="`rating-${uuid}-${fullStar}`"
           type="radio"
           :name="`rating-${uuid}`"
           class="sr-only"
-          :value="star"
-          :checked="star === modelValue"
-          @change="handleRatingChange(star)"
+          :value="fullStar"
+          :checked="fullStar === modelValue"
+          @change="handleRatingChange(fullStar)"
         />
       </template>
       <template v-else>
         <svg
           :class="[
             'absolute',
-            star <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
+            fullStar <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
           ]"
           width="20"
           height="20"
@@ -97,7 +97,10 @@
           />
         </svg>
         <template
-          v-for="ratingValue in halfStar.slice((star - 1) * 2, star * 2)"
+          v-for="ratingValue in halfStar.slice(
+            (fullStar - 1) * 2,
+            fullStar * 2
+          )"
           :key="`rating-${uuid}-${ratingValue}`"
         >
           <label
@@ -109,9 +112,9 @@
             @mouseover="hover = ratingValue"
             @mouseleave="hover = rating"
           >
-            <span class="sr-only"
-              >Rating {{ ratingValue }} out of {{ max }}</span
-            >
+            <span class="sr-only">
+              Rating {{ ratingValue }} out of {{ max }}
+            </span>
             <svg
               :class="[
                 ratingValue <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
