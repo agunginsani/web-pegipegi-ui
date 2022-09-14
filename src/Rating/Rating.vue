@@ -27,7 +27,7 @@
 
   const emit = defineEmits<RatingEmits>();
 
-  const halfStar = [...Array(props.max * 2).keys()].map(
+  const halfStars = [...Array(props.max * 2).keys()].map(
     (rating) => (rating + 1) * 0.5
   );
   const rating = ref(props.modelValue);
@@ -42,12 +42,12 @@
 </script>
 
 <template>
-  <div class="ratings flex">
+  <div class="flex">
     <span
       v-for="fullStar in max"
       :key="fullStar"
       :class="[
-        `star-${fullStar} flex hover:scale-125 duration-100 ease-linear`,
+        'flex hover:scale-125 duration-100 ease-linear',
         { 'pointer-events-none': readonly },
       ]"
     >
@@ -97,7 +97,7 @@
           />
         </svg>
         <template
-          v-for="ratingValue in halfStar.slice(
+          v-for="ratingValue in halfStars.slice(
             (fullStar - 1) * 2,
             fullStar * 2
           )"
