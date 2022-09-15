@@ -30,14 +30,11 @@
   const halfStars = [...Array(props.max * 2).keys()].map(
     (rating) => (rating + 1) * 0.5
   );
-  const rating = ref(props.modelValue);
-  const hover = ref(props.modelValue);
+  const ratingHover = ref(props.modelValue);
   const uuid = Date.now();
 
-  function handleRatingChange(value: number) {
-    rating.value = value;
-
-    emit('update:modelValue', rating.value);
+  function handleRatingChange(event: Event) {
+    emit('update:modelValue', Number((event.target as HTMLInputElement).value));
   }
 </script>
 
@@ -55,12 +52,14 @@
         <label
           :for="`rating-${uuid}-${fullStar}`"
           :class="['cursor-pointer', { 'pr-[16px]': fullStar !== max }]"
-          @mouseover="hover = fullStar"
-          @mouseleave="hover = rating"
+          @mouseover="ratingHover = fullStar"
+          @mouseleave="ratingHover = modelValue"
         >
           <span class="sr-only">Rating {{ fullStar }} out of {{ max }}</span>
           <svg
-            :class="fullStar <= hover ? 'fill-yellow-500' : 'fill-neutral-50'"
+            :class="
+              fullStar <= ratingHover ? 'fill-yellow-500' : 'fill-neutral-50'
+            "
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -76,16 +75,17 @@
           type="radio"
           :name="`rating-${uuid}`"
           class="sr-only"
+          :disabled="readonly"
           :value="fullStar"
           :checked="fullStar === modelValue"
-          @change="handleRatingChange(fullStar)"
+          @change="handleRatingChange"
         />
       </template>
       <template v-else>
         <svg
           :class="[
             'absolute',
-            fullStar <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
+            fullStar <= ratingHover ? 'fill-yellow-500' : 'fill-neutral-50',
           ]"
           width="20"
           height="20"
@@ -109,15 +109,17 @@
               'cursor-pointer relative',
               { 'last-of-type:pr-[16px]': ratingValue !== max },
             ]"
-            @mouseover="hover = ratingValue"
-            @mouseleave="hover = rating"
+            @mouseover="ratingHover = ratingValue"
+            @mouseleave="ratingHover = modelValue"
           >
             <span class="sr-only">
               Rating {{ ratingValue }} out of {{ max }}
             </span>
             <svg
               :class="[
-                ratingValue <= hover ? 'fill-yellow-500' : 'fill-neutral-50',
+                ratingValue <= ratingHover
+                  ? 'fill-yellow-500'
+                  : 'fill-neutral-50',
                 { 'scale-x-[-1]': ratingValue % 1 === 0 },
               ]"
               width="10"
@@ -135,9 +137,9 @@
             type="radio"
             :name="`rating-${uuid}`"
             class="sr-only"
+            :disabled="readonly"
             :value="ratingValue"
-            :checked="ratingValue === modelValue"
-            @change="handleRatingChange(ratingValue)"
+            @change="handleRatingChange"
           />
         </template>
       </template>

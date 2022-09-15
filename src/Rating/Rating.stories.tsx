@@ -1,5 +1,6 @@
 import Rating from './Rating.vue';
 import { Meta, StoryFn } from '@storybook/vue3';
+import { ref } from 'vue';
 
 export default {
   title: 'Rating',
@@ -29,9 +30,10 @@ export default {
 export const Template: StoryFn<typeof Rating> = (args) => ({
   components: { Rating },
   setup() {
-    return { args };
+    const rating = ref();
+    return { args, rating };
   },
-  template: '<Rating v-bind="args" />',
+  template: '<Rating v-bind="args" v-model="rating" />',
 });
 
 Template.storyName = 'Rating';
