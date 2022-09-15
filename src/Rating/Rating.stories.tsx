@@ -30,7 +30,7 @@ export default {
 export const Template: StoryFn<typeof Rating> = (args) => ({
   components: { Rating },
   setup() {
-    const rating = ref();
+    const rating = ref(args.value);
     return { args, rating };
   },
   template: '<Rating v-bind="args" v-model="rating" />',
