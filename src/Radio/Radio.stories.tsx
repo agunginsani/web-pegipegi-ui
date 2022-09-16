@@ -7,6 +7,11 @@ export default {
   component: Radio,
   parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
+    value: {
+      control: 'radio',
+      options: ['One', 'Two'],
+      defaultValue: 'One',
+    },
     disabled: {
       control: 'boolean',
       defaultValue: false,
@@ -17,7 +22,7 @@ export default {
 export const Template: StoryFn<typeof Radio> = (args) => ({
   components: { Radio },
   setup() {
-    const picked = ref('One');
+    const picked = ref(args.value);
     return { args, picked };
   },
   template: `

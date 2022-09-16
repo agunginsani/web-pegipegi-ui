@@ -8,10 +8,10 @@
 
 <script lang="ts" setup>
   type RadioProps = {
-    label?: string;
-    disabled?: boolean;
-    modelValue?: string;
     value?: string;
+    disabled?: boolean;
+    label?: string;
+    modelValue?: string;
   };
 
   type RadioEmits = {
@@ -19,10 +19,10 @@
   };
 
   withDefaults(defineProps<RadioProps>(), {
-    label: '',
-    disabled: false,
-    modelValue: '',
     value: '',
+    disabled: false,
+    label: '',
+    modelValue: '',
   });
 
   const emit = defineEmits<RadioEmits>();
@@ -39,16 +39,22 @@
   <label
     :for="`radio-${uuid}`"
     :class="[
-      'flex gap-[5px] cursor-pointer',
-      { 'cursor-not-allowed': radio?.disabled },
+      'flex gap-[5px]',
+      disabled ? 'cursor-not-allowed' : 'cursor-pointer',
     ]"
   >
     <div
-      class="relative w-[20px] h-[20px] rounded-full border-[2.5px] border-orange-400"
+      :class="[
+        'relative w-[20px] h-[20px] rounded-full border-[2.5px]',
+        disabled ? 'border-neutral-200' : 'border-orange-400',
+      ]"
     >
       <div
         v-if="value === modelValue"
-        class="bg-orange-400 w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full"
+        :class="[
+          'absolute w-[10px] h-[10px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full',
+          disabled ? 'bg-neutral-200' : 'bg-orange-400',
+        ]"
       ></div>
     </div>
     <span v-if="label">{{ label }}</span>
