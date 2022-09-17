@@ -139,6 +139,7 @@
             class="sr-only"
             :disabled="readonly"
             :value="ratingValue"
+            :checked="ratingValue === modelValue"
             @change="handleRatingChange"
           />
         </template>

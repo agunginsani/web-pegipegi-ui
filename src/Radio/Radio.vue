@@ -67,6 +67,7 @@
     name="radio"
     :value="value"
     :disabled="disabled"
+    :checked="value === modelValue"
     @change="handleRadioChange"
   />
 </template>
