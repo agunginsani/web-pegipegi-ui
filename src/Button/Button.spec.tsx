@@ -1,37 +1,11 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Button from './Button.vue';
 
 const ExampleButton = defineComponent({
-  props: {
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    onFocus: {
-      type: Function as PropType<() => void>,
-      default: () => null,
-    },
-    onBlur: {
-      type: Function as PropType<() => void>,
-      default: () => null,
-    },
-    onClick: {
-      type: Function as PropType<() => void>,
-      default: () => null,
-    },
-    onMouseenter: {
-      type: Function as PropType<() => void>,
-      default: () => null,
-    },
-    onMouseleave: {
-      type: Function as PropType<() => void>,
-      default: () => null,
-    },
-  },
-  setup(props) {
-    return () => <Button {...props}>Example</Button>;
+  setup(props, { attrs }) {
+    return () => <Button {...attrs}>Example</Button>;
   },
 });
 
