@@ -27,7 +27,6 @@
 
   const emit = defineEmits<RadioEmits>();
 
-  const radio = ref<HTMLInputElement | null>(null);
   const uuid = Date.now() + Math.random();
 
   function handleRadioChange(event: Event) {
@@ -61,7 +60,6 @@
   </label>
   <input
     :id="`radio-${uuid}`"
-    ref="radio"
     class="sr-only"
     type="radio"
     name="radio"

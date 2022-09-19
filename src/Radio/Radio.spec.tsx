@@ -1,70 +1,81 @@
-import { render, screen, fireEvent } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import Radio from './Radio.vue';
 import { defineComponent, ref } from 'vue';
 
-it('renders and emits correctly when radio is clicked', () => {
-  const props = {
-    value: 'One',
-    modelValue: '',
-    label: 'One',
-    disabled: false,
-  };
-
-  const { emitted } = render(Radio, { props });
-
-  expect(screen.getAllByRole('radio')).toHaveLength(1);
-  const radioOne = screen.getByRole('radio', { name: /one/i });
-  fireEvent.click(radioOne);
-  expect(emitted('update:modelValue').length).toBe(1);
-  expect(emitted('update:modelValue')[0]).toEqual(['One']);
-  expect(radioOne).toBeChecked();
-});
-
-const ReactiveRadio = defineComponent({
+const ControlledRadio = defineComponent({
   components: { Radio },
-  setup() {
+  props: { disabled: { type: Boolean, default: false } },
+  setup(props) {
     const picked = ref('One');
-    return { picked };
+
+    function changeToValueTwo() {
+      picked.value = 'Two';
+    }
+
+    function changeToValueThree() {
+      picked.value = 'Three';
+    }
+    return () => (
+      <div>
+        <Radio
+          label="One"
+          v-model={picked.value}
+          value="One"
+          disabled={props.disabled}
+        />
+        <Radio
+          label="Two"
+          v-model={picked.value}
+          value="Two"
+          disabled={props.disabled}
+        />
+        <Radio
+          label="Three"
+          v-model={picked.value}
+          value="Three"
+          disabled={props.disabled}
+        />
+        <button onClick={changeToValueTwo}>change two</button>
+        <button onClick={changeToValueThree}>change three</button>
+      </div>
+    );
   },
-  template: `
-    <div>
-      <Radio label="One" v-model="picked" value="One" />
-      <Radio label="Two" v-model="picked" value="Two" disabled />
-      <Radio label="Three" v-model="picked" value="Three" />
-    </div>
-    `,
 });
 
-it('should render label correctly when passing props label', () => {
-  render(ReactiveRadio);
-  const labelOne = screen.getByText(/one/i);
-  expect(labelOne).toContainHTML('span');
+it('handles `ControlledRadio`', async () => {
+  const user = userEvent.setup();
+  render(ControlledRadio);
 
-  const labelTwo = screen.getByText(/two/i);
-  expect(labelTwo).toContainHTML('span');
-
-  const labelThree = screen.getByText(/three/i);
-  expect(labelThree).toContainHTML('span');
-});
-
-it('should radio two disabled when passing props disabled equals true', () => {
-  render(ReactiveRadio);
-  const radioTwo = screen.getByLabelText(/two/i);
-  expect(radioTwo).toBeDisabled();
-});
-
-it('renders 3 radio and emits correctly with ReactiveRadio', () => {
-  render(ReactiveRadio);
   expect(screen.getAllByRole('radio')).toHaveLength(3);
 
-  const radioOne = screen.getByLabelText(/one/i);
+  const radioOne = screen.getByRole('radio', { name: /one/i });
+  const radioTwo = screen.getByRole('radio', { name: /two/i });
+  const radioThree = screen.getByRole('radio', { name: /three/i });
+
   expect(radioOne).toBeChecked();
+  expect(radioTwo).not.toBeChecked();
+  expect(radioThree).not.toBeChecked();
 
-  const radioTwo = screen.getByLabelText(/two/i);
-  fireEvent.click(radioTwo);
+  await user.click(screen.getByRole('button', { name: /change two/i }));
+  expect(radioOne).not.toBeChecked();
   expect(radioTwo).toBeChecked();
+  expect(radioThree).not.toBeChecked();
 
-  const radioThree = screen.getByLabelText(/three/i);
-  fireEvent.click(radioThree);
+  await user.click(screen.getByRole('button', { name: /change three/i }));
+  expect(radioOne).not.toBeChecked();
+  expect(radioTwo).not.toBeChecked();
   expect(radioThree).toBeChecked();
+});
+
+it('should disabled when passing props disabled equals true', () => {
+  render(ControlledRadio, {
+    props: {
+      disabled: true,
+    },
+  });
+
+  screen.getAllByRole('radio').forEach((element) => {
+    expect(element).toBeDisabled();
+  });
 });
