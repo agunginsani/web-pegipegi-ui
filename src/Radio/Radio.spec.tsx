@@ -4,18 +4,14 @@ import Radio from './Radio.vue';
 import { defineComponent, ref } from 'vue';
 
 const ControlledRadio = defineComponent({
-  components: { Radio },
-  props: { disabled: { type: Boolean, default: false } },
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup(props) {
     const picked = ref('One');
-
-    function changeToValueTwo() {
-      picked.value = 'Two';
-    }
-
-    function changeToValueThree() {
-      picked.value = 'Three';
-    }
     return () => (
       <div>
         <Radio
@@ -36,14 +32,12 @@ const ControlledRadio = defineComponent({
           value="Three"
           disabled={props.disabled}
         />
-        <button onClick={changeToValueTwo}>change two</button>
-        <button onClick={changeToValueThree}>change three</button>
       </div>
     );
   },
 });
 
-it('handles `ControlledRadio`', async () => {
+it('handles <ControlledRadio />', async () => {
   const user = userEvent.setup();
   render(ControlledRadio);
 
@@ -57,12 +51,12 @@ it('handles `ControlledRadio`', async () => {
   expect(radioTwo).not.toBeChecked();
   expect(radioThree).not.toBeChecked();
 
-  await user.click(screen.getByRole('button', { name: /change two/i }));
+  await user.click(radioTwo);
   expect(radioOne).not.toBeChecked();
   expect(radioTwo).toBeChecked();
   expect(radioThree).not.toBeChecked();
 
-  await user.click(screen.getByRole('button', { name: /change three/i }));
+  await user.click(radioThree);
   expect(radioOne).not.toBeChecked();
   expect(radioTwo).not.toBeChecked();
   expect(radioThree).toBeChecked();
