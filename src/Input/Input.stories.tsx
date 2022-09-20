@@ -6,21 +6,46 @@ export default {
   component: Input,
   argTypes: {
     size: {
-      control: 'radio',
       options: ['small', 'medium', 'large'],
-      defaultValue: 'medium',
     },
     disabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     error: {
       control: 'boolean',
-      defaultValue: false,
     },
     modelValue: {
       control: 'text',
-      defaultValue: '',
+    },
+    'onUpdate:modelValue': {
+      table: {
+        category: 'Events',
+      },
+    },
+    onInput: {
+      table: {
+        category: 'Events',
+      },
+    },
+    onMouseenter: {
+      table: {
+        category: 'Events',
+      },
+    },
+    onMouseleave: {
+      table: {
+        category: 'Events',
+      },
+    },
+    onBlur: {
+      table: {
+        category: 'Events',
+      },
+    },
+    onFocus: {
+      table: {
+        category: 'Events',
+      },
     },
   },
 } as Meta<typeof Input>;
@@ -32,5 +57,12 @@ export const Template: StoryFn<typeof Input> = (args) => ({
   },
   template: '<Input v-bind="args" />',
 });
+
+Template.args = {
+  modelValue: '',
+  size: 'medium',
+  disabled: false,
+  error: false,
+};
 
 Template.storyName = 'Input';
