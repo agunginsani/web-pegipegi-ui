@@ -33,3 +33,7 @@ You need to install [Node.js](https://nodejs.dev/en/download/) first.
 ```bash
 npm run dev
 ```
+
+### VSCode Support
+
+Refer to the [official docs](https://vuejs.org/guide/typescript/overview.html#ide-support).
