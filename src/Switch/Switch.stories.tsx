@@ -9,11 +9,6 @@ export default {
       control: 'boolean',
       defaultValue: false,
     },
-    os: {
-      control: 'radio',
-      options: ['most_device', 'ios'],
-      defaultValue: 'most_device',
-    },
     modelValue: {
       control: 'boolean',
       defaultValue: false,
