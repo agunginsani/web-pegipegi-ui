@@ -14,7 +14,15 @@ export default {
     modelValue: {
       control: 'text',
     },
+    placeholder: {
+      control: 'text',
+    },
     'onUpdate:modelValue': {
+      table: {
+        category: 'Events',
+      },
+    },
+    onExpand: {
       table: {
         category: 'Events',
       },
@@ -52,7 +60,10 @@ export const Template: StoryFn<typeof Textarea> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<Textarea v-bind="args" />',
+  template: `
+    <div style="height: 112px; width: 328px;">
+      <Textarea v-bind="args" />
+    </div>`,
 });
 
 Template.args = {
