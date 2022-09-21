@@ -47,7 +47,7 @@
       class="opacity-0 absolute disabled:pointer-events-none cursor-pointer w-5 h-5"
       :checked="checked"
       :disabled="disabled"
-      :value="checked"
+      :value="value"
       @change="handleCheck"
     />
     <div
