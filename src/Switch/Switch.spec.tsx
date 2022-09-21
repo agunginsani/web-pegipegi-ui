@@ -1,4 +1,4 @@
-import { defineComponent, definedComponent, PropType, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Switch from './Switch.vue';
