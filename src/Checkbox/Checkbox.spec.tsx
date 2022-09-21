@@ -35,11 +35,11 @@ it('handles <ControlledInput />', async () => {
   // isChecked = true
   render(ControlledInput, { props });
   const checkbox = screen.getByRole('checkbox', { name: /checkbox/i });
-  expect(checkbox).toBeChecked()
+  expect(checkbox).toBeChecked();
 
   // isChecked = false
   await user.click(checkbox);
-  expect(checkbox).not.toBeChecked()
+  expect(checkbox).not.toBeChecked();
 });
 
 it('handles <ControlledInput disabled />', () => {
