@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import Checkbox from './Checkbox.vue';
 import { defineComponent, ref, watch } from 'vue';
 
-const initialValue = true;
+const initialValue = null;
 
-const ControlledInput = defineComponent({
+const ControlledCheckbox = defineComponent({
   emits: ['valueChanged'],
   setup(props, { attrs, emit }) {
     const value = ref(initialValue);
@@ -23,26 +23,25 @@ const ControlledInput = defineComponent({
   },
 });
 
-it('handles <ControlledInput />', async () => {
+it('handles <ControlledCheckbox />', async () => {
   const user = userEvent.setup();
   const props = {
-    onValueChanged: vi.fn(),
-    onFocus: vi.fn(),
-    onBlur: vi.fn(),
-    onInput: vi.fn(),
+    onClick: vi.fn(),
   };
-
-  // isChecked = true
-  render(ControlledInput, { props });
+  render(ControlledCheckbox, { props });
   const checkbox = screen.getByRole('checkbox', { name: /checkbox/i });
+
+  await user.click(checkbox);
   expect(checkbox).toBeChecked();
+  expect(props.onClick).toHaveBeenCalled();
 
   // isChecked = false
   await user.click(checkbox);
   expect(checkbox).not.toBeChecked();
+  expect(props.onClick).toHaveBeenCalled();
 });
 
-it('handles <ControlledInput disabled />', () => {
-  render(ControlledInput, { props: { disabled: true } });
+it('handles <ControlledCheckbox disabled />', () => {
+  render(ControlledCheckbox, { props: { disabled: true } });
   expect(screen.getByRole('checkbox', { name: /checkbox/i })).toBeDisabled();
 });
