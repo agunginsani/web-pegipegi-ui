@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Checkbox from './Checkbox.vue';
 import { defineComponent, ref, watch } from 'vue';
 
-const initialValue = null;
+const initialValue = false;
 
 const ControlledCheckbox = defineComponent({
   emits: ['valueChanged'],
