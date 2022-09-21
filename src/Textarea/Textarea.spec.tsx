@@ -17,7 +17,8 @@ const ControlledTextarea = defineComponent({
 
     return () => {
       <div>
-        <Textarea v-model={value.value} {...attrs}></Textarea>
+        <label for="Textarea1">Textarea1</label>
+        <Textarea id="Textarea1" v-model={value.value} {...attrs}></Textarea>
       </div>;
     };
   },
@@ -32,7 +33,7 @@ it('handles <ControlledTextarea />', async () => {
     onInput: vi.fn(),
   };
   render(ControlledTextarea, { props });
-  const textbox = screen.getByRole('textbox', { name: /name/i });
+  const textbox = screen.getByRole('textbox', { name: /Textarea/i });
   expect(textbox).toHaveValue(initialValue);
   const newValue = ' and new value';
   await user.type(textbox, newValue);
@@ -50,5 +51,5 @@ it('handles <ControlledTextarea />', async () => {
 
 it('handles <ControlledTextarea disabled />', () => {
   render(ControlledTextarea, { props: { disabled: true } });
-  expect(screen.getByRole('textbox', { name: /name/i })).toBeDisabled();
+  expect(screen.getByRole('textbox', { name: /Textarea/i })).toBeDisabled();
 });
