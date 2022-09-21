@@ -61,3 +61,7 @@
   font-style: italic;
   src: url('https://new-assets.s3.ap-southeast-1.amazonaws.com/fonts/ProximaNova-BoldItalic.woff');
 }
+
+input:checked + div svg {
+  @apply block;
+}
