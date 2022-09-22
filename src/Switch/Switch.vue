@@ -1,37 +1,50 @@
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref, watch } from 'vue';
 
   defineComponent({
     name: 'PSwitch',
+    inheritAttrs: false,
   });
 </script>
 
 <script lang="ts" setup>
   type SwitchProps = {
     disabled?: boolean; // default `false`
-    modelValue?: boolean; // default `false`
+    modelValue?: Array<string>; // default `false`
+    value?: string;
   };
 
   type SwitchEmits = {
-    (e: 'update:modelValue', value: boolean): void;
+    (e: 'update:modelValue', value: Array<string>): void;
   };
 
+  const inputVal = ref<Array<string>>(props.modelValue);
   const emit = defineEmits<SwitchEmits>();
+
+  watch(props.modelValue, (modelValue, prevModelValue) => {
+    inputVal.value = modelValue;
+  });
+
+  watch(inputVal, (newVal, prevVal) => {
+    emit('update:modelValue', newVal);
+  });
 
   const props = withDefaults(defineProps<SwitchProps>(), {
     disabled: false,
-    modelValue: false,
+    modelValue: () => [],
+    value: '',
   });
 </script>
 
 <template>
   <div>
     <input
-      :checked="props.modelValue"
+      v-bind="$attrs"
+      v-model="inputVal"
+      :value="props.value"
       class="peer w-[52px] h-[52px] absolute opacity-0 z-[1]"
       type="checkbox"
       :disabled="props.disabled"
-      @change="emit('update:modelValue', !props.modelValue)"
     />
     <div
       :class="{

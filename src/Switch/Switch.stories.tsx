@@ -10,10 +10,15 @@ export default {
       defaultValue: false,
     },
     modelValue: {
-      control: 'boolean',
-      defaultValue: false,
+      control: 'array',
+      defaultValue: [],
+    },
+    value: {
+      control: 'text',
+      defaultValue: 'switchVal',
     },
   },
+  'onUpdate:modelValue': { table: { category: 'Events' } },
 } as Meta<typeof Switch>;
 
 export const Template: StoryFn<typeof Switch> = (args) => ({
