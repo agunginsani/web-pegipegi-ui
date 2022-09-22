@@ -18,6 +18,12 @@
     (e: 'update:modelValue', value: Array<string>): void;
   };
 
+  const props = withDefaults(defineProps<SwitchProps>(), {
+    disabled: false,
+    modelValue: () => [],
+    value: '',
+  });
+
   const inputVal = ref<Array<string>>(props.modelValue);
   const emit = defineEmits<SwitchEmits>();
 
@@ -27,12 +33,6 @@
 
   watch(inputVal, (newVal, prevVal) => {
     emit('update:modelValue', newVal);
-  });
-
-  const props = withDefaults(defineProps<SwitchProps>(), {
-    disabled: false,
-    modelValue: () => [],
-    value: '',
   });
 </script>
 
