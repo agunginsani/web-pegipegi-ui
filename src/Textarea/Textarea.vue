@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { defineComponent } from 'vue';
-
-  defineComponent({
+  export default {
     name: 'PTextarea',
     inheritAttrs: false,
-  });
+  };
 </script>
 
 <script lang="ts" setup>
