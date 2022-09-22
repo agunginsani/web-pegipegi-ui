@@ -24,6 +24,13 @@ module.exports = {
         lato: 'Lato',
       },
     },
+    boxShadow: {
+      none: '0 0 0 rgba(29, 30, 27, 0.2)',
+      skim: '0 1px 4px rgba(29, 30, 27, 0.1)',
+      lifted: '0 2px 8px rgba(29, 30, 27, 0.1)',
+      raised: '0 2px 16px rgba(29, 30, 27, 0.1)',
+      floating: '0 6px 24px rgba(29, 30, 27, 0.1)',
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
