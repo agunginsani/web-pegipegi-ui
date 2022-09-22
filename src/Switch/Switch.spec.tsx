@@ -33,7 +33,7 @@ it('handles <Switch />', async () => {
     onClick: vi.fn(),
     onValueChanged: vi.fn(),
   };
-  render(SwitchWrapper, { props });
+  render(ControlledSwitch, { props });
   const switcher = screen.getByRole('checkbox');
   expect(switcher).not.toBeChecked();
   await user.click(switcher);
@@ -48,7 +48,7 @@ it('handles <Switch />', async () => {
 
 it('handles <Switch disabled />', async () => {
   const user = userEvent.setup();
-  render(SwitchWrapper, { props: { disabled: true } });
+  render(ControlledSwitch, { props: { disabled: true } });
   const switcher = screen.getByRole('checkbox');
   await user.click(switcher);
   expect(switcher).toBeDisabled();
@@ -61,7 +61,7 @@ it('handles <Switch disabled modelValue /> ', async () => {
     onClick: vi.fn(),
     onValueChanged: vi.fn(),
   };
-  render(SwitchWrapper, {
+  render(ControlledSwitch, {
     props: { disabled: true, modelValue: ['refundable'] },
   });
   const switcher = screen.getByRole('checkbox');
