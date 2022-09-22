@@ -17,8 +17,8 @@ export default {
       control: 'text',
       defaultValue: 'switchVal',
     },
+    'onUpdate:modelValue': { table: { category: 'Events' } },
   },
-  'onUpdate:modelValue': { table: { category: 'Events' } },
 } as Meta<typeof Switch>;
 
 export const Template: StoryFn<typeof Switch> = (args) => ({
