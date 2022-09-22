@@ -1,55 +1,57 @@
-import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/vue';
 import { defineComponent, ref, watch } from 'vue';
 import Textarea from './Textarea.vue';
 
-const initialValue = 'initial value';
+const initialValue = 'initial textarea content';
 
 const ControlledTextarea = defineComponent({
   emits: ['valueChanged'],
-
   setup(props, { attrs, emit }) {
     const value = ref(initialValue);
-
     watch(value, (newValue) => {
       emit('valueChanged', newValue);
     });
-
-    return () => {
+    return () => (
       <div>
-        <label for="Textarea1">Textarea1</label>
-        <Textarea id="Textarea1" v-model={value.value} {...attrs}></Textarea>
-      </div>;
-    };
+        <Textarea v-model={value.value} {...attrs} />
+      </div>
+    );
   },
 });
 
-it('handles <ControlledTextarea />', async () => {
-  const user = userEvent.setup();
-  const props = {
+it('updates value on input typed', async () => {
+  const viMock = {
     onValueChanged: vi.fn(),
     onFocus: vi.fn(),
     onBlur: vi.fn(),
     onInput: vi.fn(),
   };
-  render(ControlledTextarea, { props });
-  const textbox = screen.getByRole('textbox', { name: /Textarea/i });
+  render(ControlledTextarea, { props: viMock });
+
+  // have initial value
+  const textbox = screen.getByRole('textbox');
   expect(textbox).toHaveValue(initialValue);
-  const newValue = ' and new value';
-  await user.type(textbox, newValue);
-  expect(textbox).toHaveValue(initialValue + newValue);
-  expect(props.onValueChanged).toHaveBeenLastCalledWith(
-    initialValue + newValue
-  );
-  expect(props.onInput).toHaveBeenLastCalledWith(expect.any(InputEvent));
-  expect(props.onFocus).toHaveBeenCalledTimes(1);
+
+  // user type new value
+  const user = userEvent.setup();
+  const typedValue = ' user-typed value';
+  const newValue = initialValue + typedValue;
+
+  await user.type(textbox, typedValue);
+  expect(viMock.onFocus).toHaveBeenCalledTimes(1);
+  expect(textbox).toHaveValue(newValue);
+  expect(viMock.onValueChanged).toHaveBeenLastCalledWith(newValue);
+  expect(viMock.onInput).toHaveBeenLastCalledWith(expect.any(InputEvent));
+
   await user.tab();
-  expect(props.onBlur).toHaveBeenCalledTimes(1);
+  expect(viMock.onBlur).toHaveBeenCalledTimes(1);
+
   await user.tab();
-  expect(props.onFocus).toHaveBeenCalledTimes(2);
+  expect(viMock.onFocus).toHaveBeenCalledTimes(2);
 });
 
-it('handles <ControlledTextarea disabled />', () => {
+it('handles disabled prop', () => {
   render(ControlledTextarea, { props: { disabled: true } });
-  expect(screen.getByRole('textbox', { name: /Textarea/i })).toBeDisabled();
+  expect(screen.getByRole('textbox')).toBeDisabled();
 });
