@@ -5,7 +5,7 @@ import Switch from './Switch.vue';
 
 const initialValue: Array<string> = [];
 
-const SwitchWrapper = defineComponent({
+const ControlledSwitch = defineComponent({
   emits: ['valueChanged'],
   setup(props, { attrs, emit }) {
     const value = ref(initialValue);
