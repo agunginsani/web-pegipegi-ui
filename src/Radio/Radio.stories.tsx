@@ -5,7 +5,6 @@ import { ref } from 'vue';
 export default {
   title: 'Radio',
   component: Radio,
-  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     value: {
       control: 'radio',
@@ -15,6 +14,11 @@ export default {
     disabled: {
       control: 'boolean',
       defaultValue: false,
+    },
+    'onUpdate:modelValue': {
+      table: {
+        category: 'Events',
+      },
     },
   },
 } as Meta<typeof Radio>;

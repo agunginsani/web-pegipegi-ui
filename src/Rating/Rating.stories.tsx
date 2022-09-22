@@ -5,7 +5,6 @@ import { ref } from 'vue';
 export default {
   title: 'Rating',
   component: Rating,
-  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     value: {
       control: 'number',
@@ -23,6 +22,11 @@ export default {
     readonly: {
       control: 'boolean',
       defaultValue: false,
+    },
+    'onUpdate:modelValue': {
+      table: {
+        category: 'Events',
+      },
     },
   },
 } as Meta<typeof Rating>;

@@ -62,7 +62,7 @@ it('handles <ControlledRadio />', async () => {
   expect(radioThree).toBeChecked();
 });
 
-it('should disabled when passing props disabled equals true', () => {
+it('handles <ControlledRadio disabled />', () => {
   render(ControlledRadio, {
     props: {
       disabled: true,
