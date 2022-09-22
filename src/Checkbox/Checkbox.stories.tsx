@@ -5,27 +5,20 @@ export default {
   title: 'Checkbox',
   component: Checkbox,
   argTypes: {
-    id: {
-      control: 'text',
-    },
     value: {
       control: 'text',
     },
-    refs: {
-      control: 'text',
-    },
-    checked: {
+    indeterminate: {
       control: 'boolean',
       defaultValue: false,
+    },
+    modelValue: {
+      control: 'array',
+      defaultValue: [],
     },
     disabled: {
       control: 'boolean',
       defaultValue: false,
-    },
-    type: {
-      control: 'radio',
-      options: ['selected', 'indeterminate', 'unselected', 'checked'],
-      defaultValue: 'selected',
     },
   },
 } as Meta<typeof Checkbox>;
@@ -35,7 +28,7 @@ export const Template: StoryFn<typeof Checkbox> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<Checkbox v-bind="args">Button</Checkbox>',
+  template: '<Checkbox v-bind="args">Checkbox</Checkbox>',
 });
 
 Template.storyName = 'Checkbox';

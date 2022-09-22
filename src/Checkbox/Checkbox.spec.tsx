@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Checkbox from './Checkbox.vue';
 import { defineComponent, ref, watch } from 'vue';
 
-const initialValue = false;
+const initialValue = ['Checkbox Value'];
 
 const ControlledCheckbox = defineComponent({
   emits: ['valueChanged'],
@@ -16,8 +16,7 @@ const ControlledCheckbox = defineComponent({
 
     return () => (
       <div>
-        <label for="checkbox">Checkbox</label>
-        <Checkbox id="checkbox" checked={value.value} {...attrs} />
+        <Checkbox {...attrs} v-model={value.value} />
       </div>
     );
   },
@@ -29,7 +28,7 @@ it('handles <ControlledCheckbox />', async () => {
     onClick: vi.fn(),
   };
   render(ControlledCheckbox, { props });
-  const checkbox = screen.getByRole('checkbox', { name: /checkbox/i });
+  const checkbox = screen.getByRole('checkbox');
 
   await user.click(checkbox);
   expect(checkbox).toBeChecked();
@@ -43,5 +42,5 @@ it('handles <ControlledCheckbox />', async () => {
 
 it('handles <ControlledCheckbox disabled />', () => {
   render(ControlledCheckbox, { props: { disabled: true } });
-  expect(screen.getByRole('checkbox', { name: /checkbox/i })).toBeDisabled();
+  expect(screen.getByRole('checkbox')).toBeDisabled();
 });
