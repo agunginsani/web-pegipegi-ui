@@ -58,7 +58,9 @@
           <span class="sr-only">Rating {{ fullStar }} out of {{ max }}</span>
           <svg
             :class="
-              fullStar <= ratingHover ? 'fill-yellow-500' : 'fill-neutral-50'
+              fullStar <= ratingHover
+                ? 'fill-yellow-candle-400'
+                : 'fill-neutral-tuna-50'
             "
             width="20"
             height="20"
@@ -85,7 +87,9 @@
         <svg
           :class="[
             'absolute',
-            fullStar <= ratingHover ? 'fill-yellow-500' : 'fill-neutral-50',
+            fullStar <= ratingHover
+              ? 'fill-yellow-candle-400'
+              : 'fill-neutral-tuna-50',
           ]"
           width="20"
           height="20"
@@ -118,8 +122,8 @@
             <svg
               :class="[
                 ratingValue <= ratingHover
-                  ? 'fill-yellow-500'
-                  : 'fill-neutral-50',
+                  ? 'fill-yellow-candle-400'
+                  : 'fill-neutral-tuna-50',
                 { 'scale-x-[-1]': ratingValue % 1 === 0 },
               ]"
               width="10"
