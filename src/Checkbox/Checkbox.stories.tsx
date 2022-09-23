@@ -33,7 +33,7 @@ export const Template: StoryFn<typeof Checkbox> = (args) => ({
   setup() {
     return { args };
   },
-  template: '<Checkbox v-bind="args">Checkbox</Checkbox>',
+  template: '<Checkbox v-bind="args" />',
 });
 
 Template.storyName = 'Checkbox';
