@@ -19,7 +19,7 @@
   };
 
   withDefaults(defineProps<RadioProps>(), {
-    value: 'One',
+    value: '',
     modelValue: '',
     disabled: false,
   });
