@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Radio from './Radio.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
 const ControlledRadio = defineComponent({
   props: {
@@ -10,27 +10,38 @@ const ControlledRadio = defineComponent({
       default: false,
     },
   },
-  setup(props) {
+  emits: ['valueChanged'],
+  setup(props, { attrs, emit }) {
     const picked = ref('One');
+
+    watch(picked, (newValue) => {
+      emit('valueChanged', newValue);
+    });
     return () => (
       <div>
+        <label for="one">One</label>
         <Radio
-          label="One"
+          id="one"
           v-model={picked.value}
           value="One"
           disabled={props.disabled}
+          {...attrs}
         />
+        <label for="two">Two</label>
         <Radio
-          label="Two"
+          id="two"
           v-model={picked.value}
           value="Two"
           disabled={props.disabled}
+          {...attrs}
         />
+        <label for="three">Three</label>
         <Radio
-          label="Three"
+          id="three"
           v-model={picked.value}
           value="Three"
           disabled={props.disabled}
+          {...attrs}
         />
       </div>
     );

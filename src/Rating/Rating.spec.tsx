@@ -1,4 +1,4 @@
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref, watch } from 'vue';
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Rating from './Rating.vue';
@@ -13,14 +13,25 @@ const ControlledRating = defineComponent({
       type: Number,
       default: undefined,
     },
+    readonly: {
+      type: Boolean,
+      default: undefined,
+    },
   },
-  setup(props) {
+  emits: ['valueChanged'],
+  setup(props, { attrs, emit }) {
     const rating = ref(3);
+
+    watch(rating, (newValue) => {
+      emit('valueChanged', newValue);
+    });
     return () => (
       <Rating
         max={props.max}
         precision={props.precision}
+        readonly={props.readonly}
         v-model={rating.value}
+        {...attrs}
       />
     );
   },
@@ -94,6 +105,18 @@ it('handles <ControlledRating precision="0.5" :max="7" />', async () => {
     expect(element).toHaveAccessibleName(`Rating ${value} out of ${7}`);
     if (value === 3) expect(element).toBeChecked();
     else expect(element).not.toBeChecked();
+  });
+});
+
+it('handles <ControlledRating readonly />', () => {
+  render(ControlledRating, {
+    props: {
+      readonly: true,
+    },
+  });
+
+  screen.getAllByRole('radio').forEach((element) => {
+    expect(element).toBeDisabled();
   });
 });
 
