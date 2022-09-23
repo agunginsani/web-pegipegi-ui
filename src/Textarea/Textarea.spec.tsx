@@ -6,6 +6,7 @@ import Textarea from './Textarea.vue';
 const initialValue = 'initial textarea content';
 
 const ControlledTextarea = defineComponent({
+  inheritAttrs: false,
   emits: ['valueChanged'],
   setup(props, { attrs, emit }) {
     const value = ref(initialValue);
@@ -14,13 +15,14 @@ const ControlledTextarea = defineComponent({
     });
     return () => (
       <div>
-        <Textarea v-model={value.value} {...attrs} />
+        <label for="TextArea1">MyTextarea</label>
+        <Textarea id="TextArea1" v-model={value.value} {...attrs} />
       </div>
     );
   },
 });
 
-it('updates value on input typed', async () => {
+it('handles <ControlledTextarea />', async () => {
   const viMock = {
     onValueChanged: vi.fn(),
     onFocus: vi.fn(),
@@ -30,7 +32,7 @@ it('updates value on input typed', async () => {
   render(ControlledTextarea, { props: viMock });
 
   // have initial value
-  const textbox = screen.getByRole('textbox');
+  const textbox = screen.getByRole('textbox', { name: 'MyTextarea' });
   expect(textbox).toHaveValue(initialValue);
 
   // user type new value
@@ -51,7 +53,7 @@ it('updates value on input typed', async () => {
   expect(viMock.onFocus).toHaveBeenCalledTimes(2);
 });
 
-it('handles disabled prop', () => {
+it('handles <ControlledTextarea disabled/>', () => {
   render(ControlledTextarea, { props: { disabled: true } });
-  expect(screen.getByRole('textbox')).toBeDisabled();
+  expect(screen.getByRole('textbox', { name: 'MyTextarea' })).toBeDisabled();
 });
