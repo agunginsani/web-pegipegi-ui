@@ -71,7 +71,8 @@
       class="fill-current hidden w-3 h-3 text-orange-400 pointer-events-none"
       version="1.1"
       viewBox="0 0 17 12"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g fill="none" fill-rule="evenodd">
         <g class="fill-white" transform="translate(-9 -11)">
           <path
@@ -86,7 +87,8 @@
       v-else-if="indeterminate"
       viewBox="0 0 20 20"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M4 0.00012207C1.79086 0.00012207 0 1.79098 0 4.00012V16.0001C0 18.2093 1.79086 20.0001 4 20.0001H16C18.2091 20.0001 20 18.2093 20 16.0001V4.00012C20 1.79098 18.2091 0.00012207 16 0.00012207H4ZM5.5 8.50012H14.5C15.3284 8.50012 16 9.17169 16 10.0001C16 10.8285 15.3284 11.5001 14.5 11.5001H5.5C4.67157 11.5001 4 10.8285 4 10.0001C4 9.17169 4.67157 8.50012 5.5 8.50012Z"
         :class="[
