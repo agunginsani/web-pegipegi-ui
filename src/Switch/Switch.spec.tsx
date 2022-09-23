@@ -27,17 +27,15 @@ const ControlledSwitch = defineComponent({
   },
 });
 
-it('handles <Switch />', async () => {
+it('handles <ControlledSwitch />', async () => {
   const user = userEvent.setup();
   const props = {
-    onClick: vi.fn(),
     onValueChanged: vi.fn(),
   };
   render(ControlledSwitch, { props });
   const switcher = screen.getByRole('checkbox');
   expect(switcher).not.toBeChecked();
   await user.click(switcher);
-  expect(props.onClick).toHaveBeenCalled();
   expect(switcher).toBeChecked();
   expect(props.onValueChanged).toHaveBeenLastCalledWith(['refundable']);
 
@@ -46,7 +44,7 @@ it('handles <Switch />', async () => {
   expect(props.onValueChanged).toHaveBeenLastCalledWith([]);
 });
 
-it('handles <Switch disabled />', async () => {
+it('handles <ControlledSwitch disabled />', async () => {
   const user = userEvent.setup();
   render(ControlledSwitch, { props: { disabled: true } });
   const switcher = screen.getByRole('checkbox');
@@ -55,18 +53,14 @@ it('handles <Switch disabled />', async () => {
   expect(switcher).not.toBeChecked();
 });
 
-it('handles <Switch disabled modelValue /> ', async () => {
+it('handles <ControlledSwitch disabled modelValue /> ', async () => {
   const user = userEvent.setup();
-  const props = {
-    onClick: vi.fn(),
-    onValueChanged: vi.fn(),
-  };
   render(ControlledSwitch, {
     props: { disabled: true, modelValue: ['refundable'] },
   });
   const switcher = screen.getByRole('checkbox');
+  expect(switcher).toBeChecked();
   await user.click(switcher);
   expect(switcher).toBeDisabled();
   expect(switcher).toBeChecked();
-  expect(props.onClick).not.toHaveBeenCalled();
 });

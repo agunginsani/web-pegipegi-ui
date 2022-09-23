@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defineComponent, ref, watch } from 'vue';
+  import { defineComponent } from 'vue';
 
   defineComponent({
     name: 'PSwitch',
@@ -9,8 +9,8 @@
 
 <script lang="ts" setup>
   type SwitchProps = {
-    disabled?: boolean; // default `false`
-    modelValue?: Array<string>; // default `false`
+    disabled?: boolean;
+    modelValue?: Array<string>;
     value?: string;
   };
 
@@ -24,16 +24,7 @@
     value: '',
   });
 
-  // const inputVal = ref<Array<string>>(props.modelValue);
   const emit = defineEmits<SwitchEmits>();
-
-  // watch(props.modelValue, (modelValue, prevModelValue) => {
-  //   inputVal.value = modelValue;
-  // });
-
-  // watch(inputVal, (newVal, prevVal) => {
-  //   emit('update:modelValue', newVal);
-  // });
 
   function onSwitchChange() {
     let result: Array<string> = [];
@@ -47,7 +38,6 @@
 </script>
 
 <template>
-  {{ props.modelValue }}
   <div>
     <input
       v-bind="$attrs"
