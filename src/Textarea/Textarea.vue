@@ -39,16 +39,26 @@
 <template>
   <div
     :class="[
-      'relative p-3 pr-7 h-full w-full border rounded-lg rounded-tl-none outline-none focus-within:border-orange-400',
-      disabled ? 'bg-platinum-50 text-gray-300' : 'bg-white',
+      'relative p-3 pr-7 h-full w-full border rounded-lg rounded-tl-none outline-none',
+      // bg
+      disabled ? 'bg-neutral-tuna-25' : error ? 'bg-red-flower-50' : 'bg-white',
+      // text color
+      disabled
+        ? 'text-neutral-tuna-300'
+        : error
+        ? 'text-red-flower-700'
+        : 'text-neutral-tuna-900',
+      // border
+      !disabled && error ? 'border-red-flower-700' : 'border-neutral-tuna-100',
+      // border focus-within
       !disabled && error
-        ? 'bg-red-25 border-red-400 text-red-400'
-        : 'bg-transparent border-gray-50 text-gray-900',
+        ? 'focus-within:border-red-flower-700'
+        : 'focus-within:border-orange-400',
     ]"
   >
     <textarea
       :class="[
-        '-mb-2 h-full w-full border-none resize-none outline-none bg-transparent',
+        '-mb-2 h-full w-full border-none resize-none outline-none bg-transparent placeholder:text-neutral-tuna-300 placeholder:disabled:text-neutral-tuna-100',
       ]"
       v-bind="$attrs"
       :disabled="disabled"
