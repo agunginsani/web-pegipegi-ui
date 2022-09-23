@@ -39,16 +39,24 @@ const ControlledRating = defineComponent({
 
 it('handles <ControlledRating />', async () => {
   const user = userEvent.setup();
-  render(ControlledRating);
+  const props = {
+    onValueChanged: vi.fn(),
+  };
+  render(ControlledRating, { props });
+
   const radios = screen.getAllByRole('radio');
   expect(radios).toHaveLength(5);
+
   radios.forEach((element, index) => {
     const value = index + 1;
     expect(element).toHaveAccessibleName(`Rating ${value} out of ${5}`);
     if (value === 3) expect(element).toBeChecked();
     else expect(element).not.toBeChecked();
   });
+
   await user.click(screen.getByRole('radio', { name: /rating 4 /i }));
+  expect(props.onValueChanged).toHaveBeenLastCalledWith(4);
+
   radios.forEach((element, index) => {
     const value = index + 1;
     expect(element).toHaveAccessibleName(`Rating ${value} out of ${5}`);
@@ -71,7 +79,11 @@ it('handles <ControlledRating :max="7" />', async () => {
 
 it('handles <ControlledRating precision="0.5" />', async () => {
   const user = userEvent.setup();
-  render(ControlledRating, { props: { precision: 0.5 } });
+  const props = {
+    onValueChanged: vi.fn(),
+    precision: 0.5,
+  };
+  render(ControlledRating, { props });
   const radios = screen.getAllByRole('radio');
   expect(radios).toHaveLength(10);
   radios.forEach((element, index) => {
@@ -87,6 +99,8 @@ it('handles <ControlledRating precision="0.5" />', async () => {
     if (value === 4) expect(element).toBeChecked();
     else expect(element).not.toBeChecked();
   });
+  expect(props.onValueChanged).toHaveBeenLastCalledWith(4);
+
   await user.click(screen.getByRole('radio', { name: /rating 4\.5 /i }));
   radios.forEach((element, index) => {
     const value = (index + 1) * 0.5;
@@ -94,6 +108,7 @@ it('handles <ControlledRating precision="0.5" />', async () => {
     if (value === 4.5) expect(element).toBeChecked();
     else expect(element).not.toBeChecked();
   });
+  expect(props.onValueChanged).toHaveBeenLastCalledWith(4.5);
 });
 
 it('handles <ControlledRating precision="0.5" :max="7" />', async () => {

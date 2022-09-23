@@ -3,18 +3,21 @@ import userEvent from '@testing-library/user-event';
 import Radio from './Radio.vue';
 import { defineComponent, ref, watch } from 'vue';
 
+const initialValue = 'One';
+
 const ControlledRadio = defineComponent({
+  inheritAttrs: false,
   props: {
     disabled: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
   },
   emits: ['valueChanged'],
   setup(props, { attrs, emit }) {
-    const picked = ref('One');
+    const value = ref(initialValue);
 
-    watch(picked, (newValue) => {
+    watch(value, (newValue) => {
       emit('valueChanged', newValue);
     });
     return () => (
@@ -22,7 +25,7 @@ const ControlledRadio = defineComponent({
         <label for="one">One</label>
         <Radio
           id="one"
-          v-model={picked.value}
+          v-model={value.value}
           value="One"
           disabled={props.disabled}
           {...attrs}
@@ -30,7 +33,7 @@ const ControlledRadio = defineComponent({
         <label for="two">Two</label>
         <Radio
           id="two"
-          v-model={picked.value}
+          v-model={value.value}
           value="Two"
           disabled={props.disabled}
           {...attrs}
@@ -38,7 +41,7 @@ const ControlledRadio = defineComponent({
         <label for="three">Three</label>
         <Radio
           id="three"
-          v-model={picked.value}
+          v-model={value.value}
           value="Three"
           disabled={props.disabled}
           {...attrs}
@@ -50,7 +53,10 @@ const ControlledRadio = defineComponent({
 
 it('handles <ControlledRadio />', async () => {
   const user = userEvent.setup();
-  render(ControlledRadio);
+  const props = {
+    onValueChanged: vi.fn(),
+  };
+  render(ControlledRadio, { props });
 
   expect(screen.getAllByRole('radio')).toHaveLength(3);
 
@@ -66,11 +72,13 @@ it('handles <ControlledRadio />', async () => {
   expect(radioOne).not.toBeChecked();
   expect(radioTwo).toBeChecked();
   expect(radioThree).not.toBeChecked();
+  expect(props.onValueChanged).toHaveBeenLastCalledWith('Two');
 
   await user.click(radioThree);
   expect(radioOne).not.toBeChecked();
   expect(radioTwo).not.toBeChecked();
   expect(radioThree).toBeChecked();
+  expect(props.onValueChanged).toHaveBeenLastCalledWith('Three');
 });
 
 it('handles <ControlledRadio disabled />', () => {
