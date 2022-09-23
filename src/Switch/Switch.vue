@@ -24,27 +24,39 @@
     value: '',
   });
 
-  const inputVal = ref<Array<string>>(props.modelValue);
+  // const inputVal = ref<Array<string>>(props.modelValue);
   const emit = defineEmits<SwitchEmits>();
 
-  watch(props.modelValue, (modelValue, prevModelValue) => {
-    inputVal.value = modelValue;
-  });
+  // watch(props.modelValue, (modelValue, prevModelValue) => {
+  //   inputVal.value = modelValue;
+  // });
 
-  watch(inputVal, (newVal, prevVal) => {
-    emit('update:modelValue', newVal);
-  });
+  // watch(inputVal, (newVal, prevVal) => {
+  //   emit('update:modelValue', newVal);
+  // });
+
+  function onSwitchChange() {
+    let result: Array<string> = [];
+    if (props.modelValue.includes(props.value)) {
+      result = props.modelValue.filter((val) => val !== props.value);
+    } else {
+      result = [...props.modelValue, props.value];
+    }
+    emit('update:modelValue', result);
+  }
 </script>
 
 <template>
+  {{ props.modelValue }}
   <div>
     <input
       v-bind="$attrs"
-      v-model="inputVal"
+      :checked="props.modelValue.includes(props.value)"
       :value="props.value"
       class="peer w-[52px] h-[52px] absolute opacity-0 z-[1]"
       type="checkbox"
       :disabled="props.disabled"
+      @change="onSwitchChange"
     />
     <div
       :class="{
