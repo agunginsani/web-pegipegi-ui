@@ -28,9 +28,7 @@
   });
 
   const emit = defineEmits<CheckboxEmits>();
-  const isChecked = computed(
-    () => props.modelValue?.includes(props.value) || false
-  );
+  const isChecked = computed(() => props.modelValue?.includes(props.value));
 
   function handleChange(event: Event) {
     const results = props.modelValue.filter((val) => val !== props.value);
