@@ -18,12 +18,7 @@ const ControlledCheckbox = defineComponent({
     return () => (
       <div>
         <label for="checkbox">Checkbox</label>
-        <Checkbox
-          id="checkbox"
-          aria-label="checkbox"
-          {...attrs}
-          v-model={value.value}
-        />
+        <Checkbox id="checkbox" {...attrs} v-model={value.value} />
       </div>
     );
   },
