@@ -53,9 +53,10 @@ export const Template: StoryFn<typeof Radio> = (args) => ({
     return { args };
   },
   template: `
-    <label for="radio">
+    <div class="flex gap-2">
       <Radio id="radio" v-bind="args" />
-    </label>
+      <label for="radio">Radio</label>
+    </div>
   `,
 });
 
