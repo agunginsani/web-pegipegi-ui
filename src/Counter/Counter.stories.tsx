@@ -17,10 +17,6 @@ export default {
       control: 'number',
       defaultValue: 0,
     },
-    plusSign: {
-      control: 'boolean',
-      defaultValue: false,
-    },
     disabled: {
       control: 'boolean',
       defaultValue: false,

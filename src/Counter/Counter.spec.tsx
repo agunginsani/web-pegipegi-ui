@@ -9,55 +9,52 @@ const ControlledCounter = defineComponent({
   },
 });
 
-it('handles <Counter />', async () => {
+it('handles <ControlledCounter />', async () => {
   const user = userEvent.setup();
   const props = {
     max: 2,
     min: 0,
     modelValue: 1,
-    plusSign: true,
     disabled: false,
   };
   render(ControlledCounter, { props });
-  const decrementButton = screen.getAllByRole('button')[0];
-  const incrementButton = screen.getAllByRole('button')[1];
-  const counterDisplay = screen.getAllByRole('counterDisplay')[0];
+  const decrementButton = screen.getByRole('button', { name: /Decrement/i });
+  const incrementButton = screen.getByRole('button', { name: /Increment/i });
+  const counterDisplay = screen.getByRole('counterDisplay');
   await user.click(decrementButton);
-  expect(counterDisplay).toHaveTextContent('0');
+  expect(counterDisplay).toHaveValue('0');
   await user.click(incrementButton);
-  expect(counterDisplay).toHaveTextContent('1');
+  expect(counterDisplay).toHaveValue('1');
 });
 
-it('handles <Counter /> with plusSign', async () => {
+it('handles <ControlledCounter /> with value > 99', async () => {
   const user = userEvent.setup();
   const props = {
     max: 2,
     min: 0,
-    modelValue: 1,
-    plusSign: true,
+    modelValue: 100,
     disabled: false,
   };
   render(ControlledCounter, { props });
-  const incrementButton = screen.getAllByRole('button')[1];
-  const counterDisplay = screen.getAllByRole('counterDisplay')[0];
+  const incrementButton = screen.getByRole('button', { name: /Increment/i });
+  const counterDisplay = screen.getByRole('counterDisplay');
   await user.click(incrementButton);
-  expect(counterDisplay).toHaveTextContent('1+');
+  expect(counterDisplay).toHaveValue('99+');
 });
 
-it('handles <Counter /> disabled', async () => {
+it('handles <ControlledCounter disabled />', async () => {
   const user = userEvent.setup();
   const props = {
     max: 2,
     min: 0,
     modelValue: 1,
-    plusSign: false,
     disabled: true,
   };
   render(ControlledCounter, { props });
-  const decrementButton = screen.getAllByRole('button')[0];
-  const incrementButton = screen.getAllByRole('button')[1];
-  const counterDisplay = screen.getAllByRole('counterDisplay')[0];
+  const decrementButton = screen.getByRole('button', { name: /Decrement/i });
+  const incrementButton = screen.getByRole('button', { name: /Increment/i });
+  const counterDisplay = screen.getByRole('counterDisplay');
   await user.click(decrementButton);
   await user.click(incrementButton);
-  expect(counterDisplay).toHaveTextContent('1');
+  expect(counterDisplay).toHaveValue('1');
 });
