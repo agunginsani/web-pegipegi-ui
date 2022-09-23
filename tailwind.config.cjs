@@ -115,10 +115,7 @@ module.exports = {
         50: '#eff0f1',
       },
       neutral: {
-        400: '#8A8DA6',
-        100: '#B3B5C6',
         50: '#EDEDF1',
-        25: '#F6F6F9',
       },
 
       'red-flower': {
