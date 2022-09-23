@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { computed, defineComponent, ComputedGetter } from 'vue';
+  import { ref, defineComponent } from 'vue';
 
-  defineComponent({
+  export default defineComponent({
     name: 'PCheckbox',
     inheritAttrs: false,
   });
@@ -28,16 +28,19 @@
   });
 
   const emit = defineEmits<CheckboxEmits>();
-  const isChecked = computed(
-    () => props.modelValue?.includes(props.value) || false
+  const isChecked = ref(
+    (props.value && props.modelValue?.includes(props.value)) || false
   );
 
-  function handleCheck(event: Event) {
+  function handleChange(event: Event) {
     const { value } = event.target as HTMLInputElement;
     const tempArr = props.modelValue || [];
 
-    if (!tempArr.includes(value)) tempArr.push(value);
-    else {
+    if (!tempArr.includes(value)) {
+      isChecked.value = true;
+      tempArr.push(value);
+    } else {
+      isChecked.value = false;
       const findIndex = props.modelValue.findIndex((key) => key === value);
       tempArr.splice(findIndex, 1);
     }
@@ -54,14 +57,14 @@
     :disabled="disabled"
     :checked="isChecked"
     :value="value"
-    @change="handleCheck"
+    @change="handleChange"
   />
   <div
     :class="[
       'rounded-md w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2',
       {
         'bg-white border-2 border-gray-50': !isChecked,
-        'bg-platinum-100 border-gray-300': disabled && !indeterminate,
+        'bg-platinum-100 border-gray-300': disabled,
       },
     ]"
   >
