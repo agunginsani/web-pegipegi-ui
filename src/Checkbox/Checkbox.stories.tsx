@@ -10,7 +10,6 @@ export default {
     },
     indeterminate: {
       control: 'boolean',
-      defaultValue: false,
     },
     modelValue: {
       control: 'array',
@@ -18,7 +17,6 @@ export default {
     },
     disabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     'onUpdate:modelValue': {
       table: {

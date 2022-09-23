@@ -29,20 +29,14 @@
 
   const emit = defineEmits<CheckboxEmits>();
   const isChecked = computed(
-    (): boolean => props.modelValue?.includes(props.value) || false
+    () => props.modelValue?.includes(props.value) || false
   );
 
   function handleChange(event: Event) {
-    const { value } = event.target as HTMLInputElement;
-    const tempArr = props.modelValue || [];
-
-    if (!tempArr.includes(value)) tempArr.push(value);
-    else {
-      const findIndex = props.modelValue.findIndex((key) => key === value);
-      tempArr.splice(findIndex, 1);
-    }
-
-    emit('update:modelValue', tempArr);
+    const results = props.modelValue.filter((val) => val !== props.value);
+    if (results.length === props.modelValue.length) {
+      emit('update:modelValue', [...props.modelValue, props.value]);
+    } else emit('update:modelValue', results);
   }
 </script>
 
