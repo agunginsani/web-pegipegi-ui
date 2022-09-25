@@ -88,9 +88,6 @@ module.exports = {
         50: '#FFCBB3',
         25: '#FFEEE6',
       },
-      yellow: {
-        500: '#EFBA03',
-      },
       gray: {
         900: '#1D1E1B',
         800: '#333431',
@@ -114,10 +111,6 @@ module.exports = {
         100: '#dfe2e3',
         50: '#eff0f1',
       },
-      neutral: {
-        50: '#EDEDF1',
-      },
-
       'red-flower': {
         50: '#FFF3ED',
         100: '#FFE4D5',
