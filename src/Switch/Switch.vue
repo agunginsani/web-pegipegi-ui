@@ -27,13 +27,14 @@
   const emit = defineEmits<SwitchEmits>();
 
   function onSwitchChange() {
-    let result: Array<string> = [];
-    if (props.modelValue.includes(props.value)) {
-      result = props.modelValue.filter((val) => val !== props.value);
-    } else {
-      result = [...props.modelValue, props.value];
+    const results: Array<string> = props.modelValue.filter(
+      (val) => val !== props.value
+    );
+
+    if (results.length === props.modelValue.length) {
+      results.push(props.value);
     }
-    emit('update:modelValue', result);
+    emit('update:modelValue', results);
   }
 </script>
 
@@ -53,7 +54,7 @@
         // base styling
         'top-2 w-[52px] rounded-full bg-neutral-tuna-50 h-[16px] translate-y-[8px] transition-all duration-300': true,
         // peer modifier
-        'peer-checked:bg-orange-75 peer-checked:[&>*]:bg-orange-400 peer-checked:[&>*]:left-6': true,
+        'peer-checked:bg-orange-inter-200 peer-checked:[&>*]:bg-orange-400 peer-checked:[&>*]:left-6': true,
         // disabled modifier
         '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:bg-neutral-tuna-200 peer-checked:bg-neutral-50 ':
           props.disabled,
