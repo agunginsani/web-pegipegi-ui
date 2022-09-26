@@ -56,7 +56,7 @@
         // peer modifier
         'peer-checked:bg-orange-inter-200 peer-checked:[&>*]:bg-orange-400 peer-checked:[&>*]:left-6': true,
         // disabled modifier
-        '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:bg-neutral-tuna-200 peer-checked:bg-neutral-50 ':
+        '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:bg-neutral-tuna-200 peer-checked:bg-neutral-tuna-50':
           props.disabled,
       }"
     >
