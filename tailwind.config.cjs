@@ -84,7 +84,6 @@ module.exports = {
         300: '#FE7333',
         200: '#FE854D',
         100: '#FFA880',
-        75: '#FFD5A5',
         50: '#FFCBB3',
         25: '#FFEEE6',
       },

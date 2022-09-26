@@ -7,15 +7,12 @@ export default {
   argTypes: {
     disabled: {
       control: 'boolean',
-      defaultValue: false,
     },
     modelValue: {
       control: 'array',
-      defaultValue: [],
     },
     value: {
       control: 'text',
-      defaultValue: 'switchVal',
     },
     'onUpdate:modelValue': { table: { category: 'Events' } },
   },

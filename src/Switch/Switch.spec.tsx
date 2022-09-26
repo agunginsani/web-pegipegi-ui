@@ -3,12 +3,16 @@ import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Switch from './Switch.vue';
 
-const initialValue: Array<string> = [];
-
 const ControlledSwitch = defineComponent({
   emits: ['valueChanged'],
+  props: {
+    initialValue: {
+      type: Array,
+      default: [],
+    },
+  },
   setup(props, { attrs, emit }) {
-    const value = ref(initialValue);
+    const value = ref(props.initialValue);
     watch(value, (newValue) => {
       emit('valueChanged', newValue);
     });
@@ -53,10 +57,10 @@ it('handles <ControlledSwitch disabled />', async () => {
   expect(switcher).not.toBeChecked();
 });
 
-it('handles <ControlledSwitch disabled modelValue /> ', async () => {
+it("handles <ControlledSwitch disabled :initial-value=['refundable'] />", async () => {
   const user = userEvent.setup();
   render(ControlledSwitch, {
-    props: { disabled: true, modelValue: ['refundable'] },
+    props: { disabled: true, initialValue: ['refundable'] },
   });
   const switcher = screen.getByRole('checkbox');
   expect(switcher).toBeChecked();
