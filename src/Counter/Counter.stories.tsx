@@ -21,6 +21,11 @@ export default {
       control: 'boolean',
       defaultValue: false,
     },
+    'onUpdate:modelValue': {
+      table: {
+        category: 'Events',
+      },
+    },
   },
 } as Meta<typeof Counter>;
 
