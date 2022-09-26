@@ -4,15 +4,15 @@ import userEvent from '@testing-library/user-event';
 import Switch from './Switch.vue';
 
 const ControlledSwitch = defineComponent({
-  emits: ['valueChanged'],
   props: {
     initialValue: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
   },
+  emits: ['valueChanged'],
   setup(props, { attrs, emit }) {
     const value = ref(props.initialValue);
     watch(value, (newValue) => {
