@@ -3,6 +3,7 @@
 
   defineComponent({
     name: 'PCounter',
+    inheritAttrs: false,
   });
 </script>
 
@@ -79,7 +80,7 @@
       <span class="sr-only">Decrement</span>
     </button>
     <input
-      role="counterDisplay"
+      v-bind="$attrs"
       readonly
       class="w-9 text-center text-lg font-bold text-neutral-tuna-tuna-900 outline-0"
       :class="{ 'text-neutral-tuna-200': disabled }"

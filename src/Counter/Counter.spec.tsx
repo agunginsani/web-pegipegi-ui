@@ -5,7 +5,7 @@ import Counter from './Counter.vue';
 
 const ControlledCounter = defineComponent({
   setup(props, { attrs }) {
-    return () => <Counter {...attrs} />;
+    return () => <Counter aria-label="total passenger" {...attrs} />;
   },
 });
 
@@ -20,7 +20,7 @@ it('handles <ControlledCounter />', async () => {
   render(ControlledCounter, { props });
   const decrementButton = screen.getByRole('button', { name: /Decrement/i });
   const incrementButton = screen.getByRole('button', { name: /Increment/i });
-  const counterDisplay = screen.getByRole('counterDisplay');
+  const counterDisplay = screen.getByRole('textbox', { name: /total passenger/i })
   await user.click(decrementButton);
   expect(counterDisplay).toHaveValue('0');
   await user.click(incrementButton);
@@ -37,7 +37,7 @@ it('handles <ControlledCounter /> with value > 99', async () => {
   };
   render(ControlledCounter, { props });
   const incrementButton = screen.getByRole('button', { name: /Increment/i });
-  const counterDisplay = screen.getByRole('counterDisplay');
+  const counterDisplay = screen.getByRole('textbox', { name: /total passenger/i })
   await user.click(incrementButton);
   expect(counterDisplay).toHaveValue('99+');
 });
@@ -53,7 +53,7 @@ it('handles <ControlledCounter disabled />', async () => {
   render(ControlledCounter, { props });
   const decrementButton = screen.getByRole('button', { name: /Decrement/i });
   const incrementButton = screen.getByRole('button', { name: /Increment/i });
-  const counterDisplay = screen.getByRole('counterDisplay');
+  const counterDisplay = screen.getByRole('textbox', { name: /total passenger/i })
   await user.click(decrementButton);
   await user.click(incrementButton);
   expect(counterDisplay).toHaveValue('1');
