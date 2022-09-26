@@ -66,7 +66,7 @@
         <img
           v-else
           src="./indeterminate-disabled.svg"
-          alt="indeterminate-disabled"
+          alt=""
         />
       </template>
 
