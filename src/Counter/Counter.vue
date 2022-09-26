@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defineComponent, ref, computed, onMounted } from 'vue';
+  import { defineComponent, computed, onMounted } from 'vue';
 
   export default defineComponent({
     name: 'PCounter',
@@ -27,38 +27,33 @@
   };
   const emit = defineEmits<CounterEmits>();
 
-  const counter = ref(props.modelValue);
-
   const counterDisplay = computed(() => {
-    if (counter.value > 99) {
+    if (props.modelValue > 99) {
       return `99+`;
     }
-    return counter.value;
+    return props.modelValue;
   });
 
   onMounted(() => {
-    if (counter.value > props.max) {
-      counter.value = props.max;
-      emit('update:modelValue', counter.value);
+    if (props.modelValue > props.max) {
+      emit('update:modelValue', props.max);
     }
   });
 
   const disabledIncrement = computed(
-    () => counter.value >= props.max || props.disabled
+    () => props.modelValue >= props.max || props.disabled
   );
 
   const disabledDecrement = computed(
-    () => counter.value <= props.min || props.disabled
+    () => props.modelValue <= props.min || props.disabled
   );
 
   function incrementCounter(): void {
-    counter.value += 1;
-    emit('update:modelValue', counter.value);
+    emit('update:modelValue', props.modelValue + 1);
   }
 
   function decrementCounter(): void {
-    counter.value -= 1;
-    emit('update:modelValue', counter.value);
+    emit('update:modelValue', props.modelValue - 1);
   }
 </script>
 

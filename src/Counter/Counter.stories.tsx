@@ -31,10 +31,11 @@ export default {
 
 export const Template: StoryFn<typeof Counter> = (args) => ({
   components: { Counter },
+  data: () => ({ counter: args.modelValue }),
   setup() {
     return { args };
   },
-  template: '<Counter v-bind="args" />',
+  template: '<Counter v-bind="args" v-model="counter" />',
 });
 
 Template.storyName = 'Counter';
