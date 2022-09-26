@@ -8,7 +8,9 @@ const ControlledSwitch = defineComponent({
   props: {
     initialValue: {
       type: Array,
-      default: [],
+      default() {
+        return []
+      },
     },
   },
   setup(props, { attrs, emit }) {
