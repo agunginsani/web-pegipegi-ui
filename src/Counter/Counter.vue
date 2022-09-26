@@ -1,7 +1,7 @@
 <script lang="ts">
   import { defineComponent, ref, computed } from 'vue';
 
-  defineComponent({
+  export default defineComponent({
     name: 'PCounter',
     inheritAttrs: false,
   });
