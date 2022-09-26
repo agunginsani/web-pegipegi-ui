@@ -40,7 +40,7 @@
     if (counter.value > props.max) {
       counter.value = props.max;
       emit('update:modelValue', counter.value);
-    };
+    }
   });
 
   const disabledIncrement = computed(
