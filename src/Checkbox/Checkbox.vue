@@ -63,11 +63,7 @@
       <!-- component indeterminate -->
       <template v-else-if="isChecked && indeterminate">
         <img v-if="!disabled" src="./indeterminate.svg" alt="" />
-        <img
-          v-else
-          src="./indeterminate-disabled.svg"
-          alt=""
-        />
+        <img v-else src="./indeterminate-disabled.svg" alt="" />
       </template>
 
       <!-- component selected -->
