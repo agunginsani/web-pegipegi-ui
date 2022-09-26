@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defineComponent, ref, computed } from 'vue';
+  import { defineComponent, ref, computed, onMounted } from 'vue';
 
   export default defineComponent({
     name: 'PCounter',
@@ -34,6 +34,13 @@
       return `99+`;
     }
     return counter.value;
+  });
+
+  onMounted(() => {
+    if (counter.value > props.max) {
+      counter.value = props.max;
+      emit('update:modelValue', counter.value);
+    };
   });
 
   const disabledIncrement = computed(

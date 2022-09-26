@@ -33,7 +33,7 @@ it('handles <ControlledCounter />', async () => {
 it('handles <ControlledCounter /> with value > 99', async () => {
   const user = userEvent.setup();
   const props = {
-    max: 2,
+    max: 100,
     min: 0,
     modelValue: 100,
     disabled: false,
@@ -45,6 +45,20 @@ it('handles <ControlledCounter /> with value > 99', async () => {
   });
   await user.click(incrementButton);
   expect(counterDisplay).toHaveValue('99+');
+});
+
+it('handles <ControlledCounter /> with value > max', async () => {
+  const props = {
+    max: 2,
+    min: 0,
+    modelValue: 100,
+    disabled: false,
+  };
+  await render(ControlledCounter, { props });
+  const counterDisplay = screen.getByRole('textbox', {
+    name: /total passenger/i,
+  });
+  expect(counterDisplay).toHaveValue('2');
 });
 
 it('handles <ControlledCounter disabled />', async () => {
