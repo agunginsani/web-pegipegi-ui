@@ -110,7 +110,6 @@ module.exports = {
         100: '#dfe2e3',
         50: '#eff0f1',
       },
-
       'red-flower': {
         50: '#FFF3ED',
         100: '#FFE4D5',
