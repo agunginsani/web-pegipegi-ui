@@ -58,23 +58,23 @@
       ]"
     >
       <!-- Unselected Condition || Outline Component -->
-      <img v-if="!isChecked && !disabled" src="./outline.svg" alt="outline" />
+      <img v-if="!isChecked && !disabled" src="./outline.svg" alt="" />
 
       <!-- component indeterminate -->
-      <div v-else-if="isChecked && indeterminate">
-        <img v-if="!disabled" src="./indeterminate.svg" alt="indeterminate" />
+      <template v-else-if="isChecked && indeterminate">
+        <img v-if="!disabled" src="./indeterminate.svg" alt="" />
         <img
           v-else
           src="./indeterminate-disabled.svg"
           alt="indeterminate-disabled"
         />
-      </div>
+      </template>
 
       <!-- component selected -->
-      <div v-else-if="isChecked && !indeterminate">
-        <img v-if="!disabled" src="./checked.svg" alt="checked" />
-        <img v-else src="./checked-disabled.svg" alt="checked-disabled" />
-      </div>
+      <template v-else-if="isChecked && !indeterminate">
+        <img v-if="!disabled" src="./checked.svg" alt="" />
+        <img v-else src="./checked-disabled.svg" alt="" />
+      </template>
     </div>
   </label>
 </template>
