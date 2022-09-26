@@ -60,16 +60,14 @@ export const Template: StoryFn<typeof Textarea> = (args) => ({
   setup() {
     return { args };
   },
-  template: `
-    <div style="height: 112px; width: 328px;">
-      <Textarea v-bind="args" />
-    </div>`,
+  template: '<Textarea v-bind="args" />',
 });
 
 Template.args = {
   modelValue: '',
   disabled: false,
   error: false,
+  placeholder: '',
 };
 
 Template.storyName = 'Textarea';
