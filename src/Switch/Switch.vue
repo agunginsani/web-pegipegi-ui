@@ -28,10 +28,10 @@
 
   function onSwitchChange(event: Event) {
     const { value, checked } = event.target as HTMLInputElement;
-    const result = props.modelValue.filter((val) => val !== value);
+    const results = props.modelValue.filter((val) => val !== value);
 
-    if (checked) result.push(value);
-    emit('update:modelValue', result);
+    if (checked) results.push(value);
+    emit('update:modelValue', results);
   }
 </script>
 
