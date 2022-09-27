@@ -1,21 +1,32 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Counter from './Counter.vue';
 
 const ControlledCounter = defineComponent({
   inheritAttrs: false,
+
   setup(props, { attrs }) {
-    return () => <Counter aria-label="total passenger" {...attrs} />;
+    const counter = ref(attrs.modelValue);
+
+    return () => (
+      <Counter
+        v-model={counter.value}
+        aria-label="total passenger"
+        max={attrs.max}
+        min={attrs.min}
+        disabled={attrs.disabled}
+      />
+    );
   },
 });
 
 it('handles <ControlledCounter />', async () => {
   const user = userEvent.setup();
   const props = {
-    max: 2,
+    max: 10,
     min: 0,
-    modelValue: 1,
+    modelValue: 5,
     disabled: false,
   };
   render(ControlledCounter, { props });
@@ -25,9 +36,9 @@ it('handles <ControlledCounter />', async () => {
     name: /total passenger/i,
   });
   await user.click(decrementButton);
-  expect(counterDisplay).toHaveValue('0');
+  expect(counterDisplay).toHaveValue('4');
   await user.click(incrementButton);
-  expect(counterDisplay).toHaveValue('1');
+  expect(counterDisplay).toHaveValue('5');
 });
 
 it('handles <ControlledCounter /> with value > 99', async () => {
