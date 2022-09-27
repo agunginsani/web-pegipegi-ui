@@ -11,11 +11,9 @@ const ControlledCounter = defineComponent({
 
     return () => (
       <Counter
+        {...attrs}
         v-model={counter.value}
         aria-label="total passenger"
-        max={attrs.max}
-        min={attrs.min}
-        disabled={attrs.disabled}
       />
     );
   },
