@@ -33,25 +33,9 @@
 
 <template>
   <label>
-    <div
-      :class="[
-        'relative w-[20px] h-[20px] rounded-full border-[2.5px]',
-        disabled
-          ? 'border-neutral-tuna-200 cursor-not-allowed'
-          : 'border-orange-inter-600 cursor-pointer',
-      ]"
-    >
-      <div
-        v-if="value === modelValue"
-        :class="[
-          'absolute w-[10px] h-[10px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full',
-          disabled ? 'bg-neutral-tuna-200' : 'bg-orange-inter-600',
-        ]"
-      ></div>
-    </div>
     <input
       v-bind="$attrs"
-      class="sr-only"
+      class="peer sr-only"
       type="radio"
       name="radio"
       :value="value"
@@ -59,5 +43,16 @@
       :checked="value === modelValue"
       @change="handleRadioChange"
     />
+    <div
+      :class="[
+        'relative w-[20px] h-[20px] rounded-full border-[2.5px]',
+        'peer-disabled:border-neutral-tuna-200 peer-disabled:cursor-not-allowed border-orange-inter-600 cursor-pointer',
+        '[&>*]:hidden peer-checked:[&>*]:block peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:[&>*]:bg-orange-inter-600',
+      ]"
+    >
+      <div
+        class="absolute w-[10px] h-[10px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full"
+      />
+    </div>
   </label>
 </template>
