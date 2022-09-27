@@ -39,12 +39,12 @@
 </script>
 
 <template>
-  <div>
+  <label>
     <input
       v-bind="$attrs"
       :checked="props.modelValue.includes(props.value)"
       :value="props.value"
-      class="peer w-[52px] h-[52px] absolute opacity-0 z-[1]"
+      class="peer sr-only"
       type="checkbox"
       :disabled="props.disabled"
       @change="onSwitchChange"
@@ -64,5 +64,5 @@
         class="rounded-full w-[28px] h-[28px] bg-neutral-tuna-300 absolute top-[2px] left-0 duration-300 transition-all -translate-y-[8px]"
       ></div>
     </div>
-  </div>
+  </label>
 </template>
