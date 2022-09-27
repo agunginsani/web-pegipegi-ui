@@ -7,7 +7,7 @@ const ControlledCounter = defineComponent({
   inheritAttrs: false,
 
   setup(props, { attrs }) {
-    const counter = ref(attrs.modelValue);
+    const counter = ref(attrs.initialValue);
 
     return () => (
       <Counter
@@ -24,7 +24,7 @@ it('handles <ControlledCounter />', async () => {
   const props = {
     max: 10,
     min: 0,
-    modelValue: 5,
+    initialValue: 5,
     disabled: false,
   };
   render(ControlledCounter, { props });
@@ -39,12 +39,12 @@ it('handles <ControlledCounter />', async () => {
   expect(counterDisplay).toHaveValue('5');
 });
 
-it('handles <ControlledCounter /> with value > 99', async () => {
+it('handles <ControlledCounter :max="100" :initial-value="100" />', async () => {
   const user = userEvent.setup();
   const props = {
     max: 100,
     min: 0,
-    modelValue: 100,
+    initialValue: 100,
     disabled: false,
   };
   render(ControlledCounter, { props });
@@ -56,11 +56,11 @@ it('handles <ControlledCounter /> with value > 99', async () => {
   expect(counterDisplay).toHaveValue('99+');
 });
 
-it('handles <ControlledCounter /> with value > max', async () => {
+it('handles <ControlledCounter :max="2" :initial-value="100" />', async () => {
   const props = {
     max: 2,
     min: 0,
-    modelValue: 100,
+    initialValue: 100,
     disabled: false,
   };
   await render(ControlledCounter, { props });
@@ -75,7 +75,7 @@ it('handles <ControlledCounter disabled />', async () => {
   const props = {
     max: 2,
     min: 0,
-    modelValue: 1,
+    initialValue: 1,
     disabled: true,
   };
   render(ControlledCounter, { props });
