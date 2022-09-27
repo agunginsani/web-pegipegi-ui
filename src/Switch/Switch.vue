@@ -26,14 +26,11 @@
 
   const emit = defineEmits<SwitchEmits>();
 
-  function onSwitchChange() {
-    const results: Array<string> = props.modelValue.filter(
-      (val) => val !== props.value
-    );
+  function onSwitchChange(event: Event) {
+    const { value, checked } = event.target as HTMLInputElement;
+    const results = props.modelValue.filter((val) => val !== value);
 
-    if (results.length === props.modelValue.length) {
-      results.push(props.value);
-    }
+    if (checked) results.push(value);
     emit('update:modelValue', results);
   }
 </script>
