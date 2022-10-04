@@ -11,13 +11,13 @@
     alt?: string;
     src?: string;
     size?: 'sm' | 'md' | 'lg';
-  }
+  };
 
   withDefaults(defineProps<AvatarProps>(), {
     alt: '',
     src: '',
     size: 'md',
-  })
+  });
 </script>
 
 <template>
