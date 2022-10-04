@@ -6,3 +6,4 @@ export { default as Checkbox } from './Checkbox/Checkbox.vue';
 export { default as Radio } from './Radio/Radio.vue';
 export { default as Textarea } from './Textarea/Textarea.vue';
 export { default as Counter } from './Counter/Counter.vue';
+export { default as Avatar } from './Counter/Avatar.vue';
