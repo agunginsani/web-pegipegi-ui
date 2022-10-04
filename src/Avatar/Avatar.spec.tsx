@@ -6,22 +6,16 @@ import { defineComponent } from 'vue';
 const initialValue = 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1';
 
 const ControlledAvatar = defineComponent({
-  props: {
-    size: {
-      type: String,
-      default: 'md',
-    },
-  },
   inheritAttrs: false,
   setup(props, { attrs, emit }) {
     return () => (
-      <Avatar size={props.size} src={initialValue} alt='img' {...attrs} />
+      <Avatar src={initialValue} alt='img' {...attrs} />
     );
   },
 });
 
 it('handles default size <ControlledAvatar />', async () => {
-  render(ControlledAvatar);
+  render(ControlledAvatar, { props: { size: 'md' }});
 
   const img = screen.getByRole('img');
   const wrapper = screen.getByTestId('avatar-wrapper');
