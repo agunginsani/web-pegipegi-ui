@@ -33,9 +33,9 @@
       }
     ]"
   >
-  <img v-if="src" :src="src" :alt="alt" />
-  <template v-else>
-    <slot />
-  </template>
+    <img v-if="src" :src="src" :alt="alt" />
+    <template v-else>
+      <slot />
+    </template>
   </div>
 </template>

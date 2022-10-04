@@ -7,7 +7,7 @@ const initialValue = 'https://images.unsplash.com/photo-1550525811-e5869dd03032?
 const ControlledAvatar = defineComponent({
   inheritAttrs: false,
   setup(props, { attrs }) {
-    return () => <Avatar src={initialValue} alt='img' {...attrs} />;
+    return () => <Avatar src={initialValue} alt="img" {...attrs} />;
   },
 });
 
@@ -33,7 +33,7 @@ it('handles slot <ControlledAvatar />', async () => {
   const { getAllByRole } = render(ControlledAvatar, {
     slots: {
       default: '<img width={40} height={40} src="https://www.pegipegi.com/assets-hotel-homepage-pc/img/logo.svg" />',
-    }
+    },
   });
 
   getAllByRole('img');
