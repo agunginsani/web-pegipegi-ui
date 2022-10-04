@@ -16,7 +16,7 @@ const ControlledAvatar = defineComponent({
   setup(props, { attrs, emit }) {
     return () => (
       <Avatar size={props.size} src={initialValue} alt='img' {...attrs} />
-    )
+    );
   },
 });
 

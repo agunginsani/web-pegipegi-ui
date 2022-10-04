@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
   type AvatarProps = {
-    alt?: string
-    src?: string
+    alt?: string;
+    src?: string;
     size?: 'sm' | 'md' | 'lg';
   }
 
