@@ -51,9 +51,9 @@
         // base styling
         'top-2 w-[52px] rounded-full bg-neutral-tuna-50 h-[16px] translate-y-[8px] transition-all duration-300': true,
         // peer modifier
-        'peer-checked:bg-orange-inter-200 peer-checked:[&>*]:bg-orange-400 peer-checked:[&>*]:left-6': true,
+        'peer-checked:bg-purple-affair-200 peer-checked:[&>*]:bg-purple-affair-700 peer-checked:[&>*]:left-6': true,
         // disabled modifier
-        '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:bg-neutral-tuna-200 peer-checked:bg-neutral-tuna-50':
+        '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:!bg-neutral-tuna-200 peer-checked:!bg-neutral-tuna-50':
           props.disabled,
       }"
     >
