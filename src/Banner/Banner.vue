@@ -1,165 +1,152 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+  import { defineComponent, computed } from 'vue';
 
-export default defineComponent({
-  name: 'PBanner',
-  inheritAttrs: false,
-});
+  export default defineComponent({
+    name: 'PBanner',
+    inheritAttrs: false,
+  });
 </script>
 
 <script lang="ts" setup>
-type BannerProps = {
-  color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
-  priority?: 'high' | 'low';
-};
+  type BannerProps = {
+    color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
+    priority?: 'high' | 'low';
+  };
 
-const props = withDefaults(defineProps<BannerProps>(), {
-  color: 'neutral',
-  priority: 'high',
-});
+  const props = withDefaults(defineProps<BannerProps>(), {
+    color: 'neutral',
+    priority: 'high',
+  });
 
-type BannerEmits = {
-  (e: 'close'): void;
-};
-const emit = defineEmits<BannerEmits>();
+  type BannerEmits = {
+    (e: 'close'): void;
+  };
+  const emit = defineEmits<BannerEmits>();
 
-function onClose(): void {
-  emit('close');
-}
-
-const wrapperStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-orange-inter-50';
-        default:
-          return 'bg-orange-inter-600';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-blue-dodger-50';
-        default:
-          return 'bg-blue-dodger-600';
-      }
-    case 'warning':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-yellow-candle-50';
-        default:
-          return 'bg-yellow-candle-300';
-      }
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-green-emerald-50';
-        default:
-          return 'bg-green-emerald-600';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-red-flower-50';
-        default:
-          return 'bg-red-flower-700';
-      }
-    default:
-      return 'bg-neutral-tuna-0';
+  function onClose(): void {
+    emit('close');
   }
-});
 
-const contentStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'text-neutral-tuna-900';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'text-blue-dodger-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'warning':
-      return 'text-neutral-tuna-900';
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'text-green-emerald-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'text-red-flower-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    default:
-      return 'text-neutral-tuna-900';
-  }
-});
+  const wrapperStyle = computed(() => {
+    switch (props.color) {
+      case 'accent':
+        switch (props.priority) {
+          case 'low':
+            return 'bg-orange-inter-50';
+          default:
+            return 'bg-orange-inter-600';
+        }
+      case 'info':
+        switch (props.priority) {
+          case 'low':
+            return 'bg-blue-dodger-50';
+          default:
+            return 'bg-blue-dodger-600';
+        }
+      case 'warning':
+        switch (props.priority) {
+          case 'low':
+            return 'bg-yellow-candle-50';
+          default:
+            return 'bg-yellow-candle-300';
+        }
+      case 'positive':
+        switch (props.priority) {
+          case 'low':
+            return 'bg-green-emerald-50';
+          default:
+            return 'bg-green-emerald-600';
+        }
+      case 'negative':
+        switch (props.priority) {
+          case 'low':
+            return 'bg-red-flower-50';
+          default:
+            return 'bg-red-flower-700';
+        }
+      default:
+        return 'bg-neutral-tuna-0';
+    }
+  });
 
-const buttonStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-neutral-tuna-900';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-blue-dodger-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'warning':
-      return 'fill-neutral-tuna-900';
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-green-emerald-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-red-flower-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    default:
-      return 'fill-orange-inter-600';
-  }
-});
+  const contentStyle = computed(() => {
+    switch (props.color) {
+      case 'accent':
+        switch (props.priority) {
+          case 'low':
+            return 'text-neutral-tuna-900';
+          default:
+            return 'text-neutral-tuna-0';
+        }
+      case 'info':
+        switch (props.priority) {
+          case 'low':
+            return 'text-blue-dodger-700';
+          default:
+            return 'text-neutral-tuna-0';
+        }
+      case 'warning':
+        return 'text-neutral-tuna-900';
+      case 'positive':
+        switch (props.priority) {
+          case 'low':
+            return 'text-green-emerald-700';
+          default:
+            return 'text-neutral-tuna-0';
+        }
+      case 'negative':
+        switch (props.priority) {
+          case 'low':
+            return 'text-red-flower-700';
+          default:
+            return 'text-neutral-tuna-0';
+        }
+      default:
+        return 'text-neutral-tuna-900';
+    }
+  });
+
+  const buttonStyle = computed(() => {
+    switch (props.color) {
+      case 'accent':
+        switch (props.priority) {
+          case 'low':
+            return 'fill-neutral-tuna-900';
+          default:
+            return 'fill-neutral-tuna-0';
+        }
+      case 'info':
+        switch (props.priority) {
+          case 'low':
+            return 'fill-blue-dodger-700';
+          default:
+            return 'fill-neutral-tuna-0';
+        }
+      case 'warning':
+        return 'fill-neutral-tuna-900';
+      case 'positive':
+        switch (props.priority) {
+          case 'low':
+            return 'fill-green-emerald-700';
+          default:
+            return 'fill-neutral-tuna-0';
+        }
+      case 'negative':
+        switch (props.priority) {
+          case 'low':
+            return 'fill-red-flower-700';
+          default:
+            return 'fill-neutral-tuna-0';
+        }
+      default:
+        return 'fill-orange-inter-600';
+    }
+  });
 </script>
 
 <template>
   <div
-    class="
-      flex
-      gap-3
-      items-stretch
-      rounded-lg
-      max-w-xs
-      py-2
-      pl-5
-      pr-11
-      relative
-      bg-[url('./src/Banner/pattern.svg')]
-      bg-[length:105px_72px]
-      bg-no-repeat bg-right-bottom
-    "
+    class="flex gap-3 items-stretch rounded-lg max-w-xs py-2 pl-5 pr-11 relative bg-[url('./src/Banner/pattern.svg')] bg-[length:105px_72px] bg-no-repeat bg-right-bottom"
     :class="wrapperStyle"
   >
     <slot name="icon" />

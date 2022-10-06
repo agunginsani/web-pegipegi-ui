@@ -3,39 +3,78 @@ import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
   title: 'Banner',
-  component: Banner,
-  argTypes: {
-    color: {
-      control: 'radio',
-      options: ['neutral', 'accent', 'info', 'warning', 'positive', 'negative'],
-    },
-    priority: {
-      control: 'radio',
-      options: ['high', 'low'],
-    },
-    onClose: {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Banner>;
 
-export const Template: StoryFn<typeof Banner> = (args) => ({
+export const Template: StoryFn<typeof Banner> = () => ({
   components: { Banner },
-  setup() {
-    return { args };
-  },
-  template: ` <Banner v-bind="args">
-                <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
-                <template #title><strong>Title Message</strong></template>
-                <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
-              </Banner>`,
+  template: `
+              <div class="grid grid-cols-2">
+                <div class="grid gap-y-2">
+                  <Banner color="neutral" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="accent" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="info" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="warning" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="positive" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="negative" priority="high">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                </div>
+                <div class="grid gap-y-2"> 
+                  <Banner color="neutral" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="accent" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="info" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="warning" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="positive" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                  <Banner color="negative" priority="low">
+                    <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
+                    <template #title><strong>Title Message</strong></template>
+                    <template #description><p>Write a short message with a maximum of only 2 lines.</p></template>
+                  </Banner>
+                </div>
+              </div>
+            `,
 });
-
-Template.args = {
-  color: 'neutral',
-  priority: 'high',
-};
 
 Template.storyName = 'Banner';
