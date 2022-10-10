@@ -2,7 +2,8 @@ import { render, screen } from '@testing-library/vue';
 import Avatar from './Avatar.vue';
 import { defineComponent } from 'vue';
 
-const initialValue = 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1';
+const initialValue =
+  'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1';
 
 const ControlledAvatar = defineComponent({
   inheritAttrs: false,
@@ -32,7 +33,8 @@ it('handles size=lg <ControlledAvatar />', async () => {
 it('handles slot <ControlledAvatar />', async () => {
   const { getAllByRole } = render(ControlledAvatar, {
     slots: {
-      default: '<img width={40} height={40} src="https://www.pegipegi.com/assets-hotel-homepage-pc/img/logo.svg" />',
+      default:
+        '<img width={40} height={40} src="https://www.pegipegi.com/assets-hotel-homepage-pc/img/logo.svg" />',
     },
   });
 
