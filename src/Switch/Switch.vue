@@ -52,7 +52,7 @@
         'top-2 w-[52px] rounded-full bg-neutral-tuna-50 h-[16px] translate-y-[8px] transition-all duration-300 peer-checked:[&>*]:left-6': true,
         // enable modifier
         'peer-checked:bg-purple-affair-200 peer-checked:[&>*]:bg-purple-affair-700':
-        !props.disabled,
+          !props.disabled,
         // disabled modifier
         '[&>*]:bg-neutral-tuna-200 bg-neutral-tuna-25 peer-checked:[&>*]:bg-neutral-tuna-200 peer-checked:bg-neutral-tuna-50':
           props.disabled,
