@@ -28,118 +28,104 @@ function onClose(): void {
 }
 
 const wrapperStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-orange-inter-50';
-        default:
-          return 'bg-orange-inter-600';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-blue-dodger-50';
-        default:
-          return 'bg-blue-dodger-600';
-      }
-    case 'warning':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-yellow-candle-50';
-        default:
-          return 'bg-yellow-candle-300';
-      }
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-green-emerald-50';
-        default:
-          return 'bg-green-emerald-600';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'bg-red-flower-50';
-        default:
-          return 'bg-red-flower-700';
-      }
-    default:
-      return 'bg-neutral-tuna-0';
+  if (props.priority === 'low') {
+    switch (props.color) {
+      case 'accent':
+        return 'bg-orange-inter-50';
+      case 'info':
+        return 'bg-blue-dodger-50';
+      case 'warning':
+        return 'bg-yellow-candle-50';
+      case 'positive':
+        return 'bg-green-emerald-50';
+      case 'negative':
+        return 'bg-red-flower-50';
+      default:
+        return 'bg-neutral-tuna-0';
+    }
+  } else {
+    switch (props.color) {
+      case 'accent':
+        return 'bg-orange-inter-600';
+      case 'info':
+        return 'bg-blue-dodger-600';
+      case 'warning':
+        return 'bg-yellow-candle-300';
+      case 'positive':
+        return 'bg-green-emerald-600';
+      case 'negative':
+        return 'bg-red-flower-700';
+      default:
+        return 'bg-neutral-tuna-0';
+    }
   }
 });
 
 const contentStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'text-neutral-tuna-900';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'text-blue-dodger-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'warning':
-      return 'text-neutral-tuna-900';
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'text-green-emerald-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'text-red-flower-700';
-        default:
-          return 'text-neutral-tuna-0';
-      }
-    default:
-      return 'text-neutral-tuna-900';
+  if (props.priority === 'low') {
+    switch (props.color) {
+      case 'accent':
+        return 'text-neutral-tuna-900';
+      case 'info':
+        return 'text-blue-dodger-700';
+      case 'warning':
+        return 'text-neutral-tuna-900';
+      case 'positive':
+        return 'text-green-emerald-700';
+      case 'negative':
+        return 'text-red-flower-700';
+      default:
+        return 'text-neutral-tuna-900';
+    }
+  } else {
+    switch (props.color) {
+      case 'accent':
+        return 'text-neutral-tuna-0';
+      case 'info':
+        return 'text-neutral-tuna-0';
+      case 'warning':
+        return 'text-neutral-tuna-900';
+      case 'positive':
+        return 'text-neutral-tuna-0';
+      case 'negative':
+        return 'text-neutral-tuna-0';
+      default:
+        return 'text-neutral-tuna-900';
+    }
   }
 });
 
 const buttonStyle = computed(() => {
-  switch (props.color) {
-    case 'accent':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-neutral-tuna-900';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'info':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-blue-dodger-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'warning':
-      return 'fill-neutral-tuna-900';
-    case 'positive':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-green-emerald-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    case 'negative':
-      switch (props.priority) {
-        case 'low':
-          return 'fill-red-flower-700';
-        default:
-          return 'fill-neutral-tuna-0';
-      }
-    default:
-      return 'fill-orange-inter-600';
+  if (props.priority === 'low') {
+    switch (props.color) {
+      case 'accent':
+        return 'fill-neutral-tuna-900';
+      case 'info':
+        return 'fill-blue-dodger-700';
+      case 'warning':
+        return 'fill-neutral-tuna-900';
+      case 'positive':
+        return 'fill-green-emerald-700';
+      case 'negative':
+        return 'fill-red-flower-700';
+      default:
+        return 'fill-orange-inter-600';
+    }
+  } else {
+    switch (props.color) {
+      case 'accent':
+        return 'fill-neutral-tuna-0';
+      case 'info':
+        return 'fill-neutral-tuna-0';
+      case 'warning':
+        return 'fill-neutral-tuna-900';
+      case 'positive':
+        return 'fill-neutral-tuna-0';
+      case 'negative':
+        return 'fill-neutral-tuna-0';
+      default:
+        return 'fill-orange-inter-600';
+    }
   }
 });
 </script>
