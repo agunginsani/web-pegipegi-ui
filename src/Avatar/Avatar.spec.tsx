@@ -12,7 +12,7 @@ const ControlledAvatar = defineComponent({
 });
 
 it('handles default size <ControlledAvatar />', async () => {
-  render(ControlledAvatar, { props: { size: 'md' }});
+  render(ControlledAvatar, { props: { size: 'md' } });
 
   const img = screen.getByRole('img');
   const wrapper = screen.getByTestId('avatar-wrapper');
@@ -23,7 +23,7 @@ it('handles default size <ControlledAvatar />', async () => {
 });
 
 it('handles size=lg <ControlledAvatar />', async () => {
-  render(ControlledAvatar, { props: { size: 'lg' }});
+  render(ControlledAvatar, { props: { size: 'lg' } });
 
   const wrapper = screen.getByTestId('avatar-wrapper');
   expect(wrapper).toHaveClass('h-[72px] w-[72px]');
