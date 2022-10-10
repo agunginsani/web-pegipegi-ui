@@ -95,7 +95,7 @@ const contentStyle = computed(() => {
   }
 });
 
-const buttonStyle = computed(() => {
+const buttonIconStyle = computed(() => {
   if (props.priority === 'low') {
     switch (props.color) {
       case 'accent':
@@ -132,6 +132,7 @@ const buttonStyle = computed(() => {
 
 <template>
   <div
+    role="wrapper"
     class="
       flex
       gap-3
@@ -149,7 +150,7 @@ const buttonStyle = computed(() => {
     :class="wrapperStyle"
   >
     <slot name="icon" />
-    <div class="text-sm" :class="contentStyle">
+    <div role="content" class="text-sm" :class="contentStyle">
       <slot name="title" />
       <slot name="description" />
     </div>
@@ -158,7 +159,8 @@ const buttonStyle = computed(() => {
         viewBox="0 0 14 14"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        :class="buttonStyle"
+        role="buttonIcon"
+        :class="buttonIconStyle"
         class="absolute top-5 right-5 w-3.5 h-3.5"
       >
         <path
