@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, useSlots } from 'vue';
 
 export default defineComponent({
   name: 'PBanner',
@@ -26,6 +26,8 @@ const emit = defineEmits<BannerEmits>();
 function onClose(): void {
   emit('close');
 }
+
+const slots = useSlots();
 
 const wrapperStyle = computed(() => {
   if (props.priority === 'low') {
@@ -154,7 +156,8 @@ const buttonIconStyle = computed(() => {
       <slot name="title" />
       <slot name="description" />
     </div>
-    <button @click="onClose()">
+    <slot v-if="slots.action" name="action" />
+    <button v-else @click="onClose()">
       <svg
         viewBox="0 0 14 14"
         fill="none"
