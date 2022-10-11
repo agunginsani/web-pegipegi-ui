@@ -154,7 +154,8 @@
       <slot name="title" />
       <slot name="description" />
     </div>
-    <button @click="onClose()">
+    <slot v-if="$slots.action" name="action" />
+    <button v-else @click="onClose()">
       <svg
         viewBox="0 0 14 14"
         fill="none"
