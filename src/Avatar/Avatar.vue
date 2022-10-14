@@ -22,6 +22,7 @@
 
 <template>
   <div
+    role="avatar"
     :class="[
       'flex justify-center items-center overflow-hidden rounded-full ring-2 ring-white',
       {

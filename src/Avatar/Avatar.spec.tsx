@@ -8,19 +8,20 @@ const initialValue =
 const ExampleAvatar = defineComponent({
   inheritAttrs: false,
   setup(props, { attrs }) {
-    return () => (
-      <Avatar src={initialValue} alt="img" {...attrs}>
-        Content
-      </Avatar>
-    );
+    return () => <Avatar {...attrs}>Content</Avatar>;
   },
 });
 
-it('handles slot <ExampleAvatar />', async () => {
+it('handles default <ExampleSnackbar>Content</ExampleSnackbar>', async () => {
+  render(ExampleAvatar);
+  expect(screen.getByRole('avatar')).toHaveTextContent('Content');
+});
+
+it(`handles <ExampleAvatar src="${initialValue}" alt="image" />`, async () => {
   render(ExampleAvatar, {
-    slots: {
-      default:
-        '<img alt="image" width={40} height={40} src="https://www.pegipegi.com/assets-hotel-homepage-pc/img/logo.svg" />',
+    props: {
+      src: initialValue,
+      alt: 'image',
     },
   });
 
