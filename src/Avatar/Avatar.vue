@@ -22,7 +22,6 @@
 
 <template>
   <div
-    data-testid="avatar-wrapper"
     :class="[
       'flex justify-center items-center overflow-hidden rounded-full ring-2 ring-white',
       {
