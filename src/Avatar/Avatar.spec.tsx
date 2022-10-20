@@ -25,5 +25,5 @@ it(`handles <ExampleAvatar src="${initialValue}" alt="image" />`, async () => {
     },
   });
 
-  screen.getByRole('img');
+  expect(screen.getByRole('img')).toBeInTheDocument();;
 });
