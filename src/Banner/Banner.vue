@@ -150,7 +150,7 @@
     :class="wrapperStyle"
   >
     <slot name="icon" />
-    <div role="content" class="text-sm" :class="contentStyle">
+    <div class="text-sm" :class="contentStyle">
       <slot name="title" />
       <slot name="description" />
     </div>
