@@ -134,7 +134,6 @@ const buttonIconStyle = computed(() => {
 
 <template>
   <div
-    role="wrapper"
     class="
       flex
       gap-3
@@ -152,7 +151,7 @@ const buttonIconStyle = computed(() => {
     :class="wrapperStyle"
   >
     <slot name="icon" />
-    <div role="content" class="text-sm" :class="contentStyle">
+    <div class="text-sm" :class="contentStyle">
       <slot name="title" />
       <slot name="description" />
     </div>
@@ -162,7 +161,6 @@ const buttonIconStyle = computed(() => {
         viewBox="0 0 14 14"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        role="buttonIcon"
         :class="buttonIconStyle"
         class="absolute top-5 right-5 w-3.5 h-3.5"
       >
