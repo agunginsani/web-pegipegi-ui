@@ -1,5 +1,12 @@
 {
-  "editor.formatOnSave": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    ".eslintrc.*": ".eslintignore",
+    ".prettierrc": ".prettierignore",
+    "package.json": "package-lock.json",
+    "tsconfig.json": "tsconfig.*.json"
+  },
   "files.associations": {
     "*.css": "tailwindcss"
   }
