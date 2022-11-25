@@ -18,10 +18,10 @@
     "./tailwind-config": "./dist/tailwind.config.cjs"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "@pegipegi:registry": "https://npm.pkg.github.com"
   },
   "repository": {
-    "url": "https://github.com/pegipegi/pegipegi-web-ui.git"
+    "url": "https://github.com/pegipegi/web-pegipegi-ui.git"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write"
