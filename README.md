@@ -26,7 +26,7 @@ pnpm add @pegipegi/web-pegipegi-ui
 
 ### Configuration
 
-Make sure you have installed [Nuxt Tailwind](https://tailwindcss.nuxt.dev/) with nuxt . Then, you need to add this on `tailwind.config.cjs`.
+Make sure you have installed [Nuxt Tailwind](https://tailwindcss.nuxt.dev/). Then, you need to add this on `tailwind.config.cjs`.
 
 ```js
 /**
@@ -37,7 +37,7 @@ module.exports = {
 };
 ```
 
-You also need to add component style to your `nuxt.config.ts`.
+You also need to add component and tailwind style to your `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
