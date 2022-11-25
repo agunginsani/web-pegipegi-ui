@@ -37,14 +37,13 @@ module.exports = {
 };
 ```
 
-You also need to add component and tailwind style to your `nuxt.config.ts`.
+You also need to update `tailwindcss` config on `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
   // ...
-  css: ['@pegipegi/pegipegi-web-ui/component-style'],
   tailwindcss: {
-    cssPath: '@pegipegi/pegipegi-web-ui/tailwind-style',
+    cssPath: '@pegipegi/pegipegi-web-ui/style',
   },
   // ...
 });
