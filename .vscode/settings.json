@@ -5,7 +5,8 @@
     ".eslintrc.*": ".eslintignore",
     ".prettierrc": ".prettierignore",
     "package.json": "package-lock.json",
-    "tsconfig.json": "tsconfig.*.json"
+    "tsconfig.json": "tsconfig.*.json",
+    "cloudbuild.yml": "dockerfile, nginx.conf"
   },
   "files.associations": {
     "*.css": "tailwindcss"
