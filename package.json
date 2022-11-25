@@ -13,8 +13,7 @@
       "import": "./dist/main.js",
       "require": "./dist/main.umd.cjs"
     },
-    "./component-style": "./dist/style.css",
-    "./tailwind-style": "./dist/main.css",
+    "./style": "./dist/main.css",
     "./tailwind-config": "./dist/tailwind.config.cjs"
   },
   "publishConfig": {
