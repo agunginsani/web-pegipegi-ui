@@ -33,6 +33,7 @@ Make sure you have installed [Nuxt Tailwind](https://tailwindcss.nuxt.dev/). The
  * @type {import('tailwindcss').Config}
  */
 module.exports = {
+  content: ["./**/@pegipegi/web-pegipegi-ui/**/*.js"]
   presets: [require('@pegipegi/pegipegi-web-ui/tailwind-config')],
 };
 ```
