@@ -4,6 +4,12 @@ Pegipegi's web design system.
 
 ## Adding `@pegipegi/web-pegipegi-ui` to your Project
 
+### Exported Packages
+
+- `@pegipegi/web-pegipegi-ui`: Vue components
+- `@pegipegi/web-pegipegi-ui/style`: Base tailwind style
+- `@pegipegi/web-pegipegi-ui/tailwind-config`: Tailwind config preset
+
 ### Installation
 
 With npm
@@ -26,7 +32,7 @@ pnpm add @pegipegi/web-pegipegi-ui
 
 ### Configuration
 
-Make sure you have installed [Nuxt Tailwind](https://tailwindcss.nuxt.dev/). Then, you need to add this on `tailwind.config.cjs`.
+Add this on `tailwind.config.cjs`.
 
 ```js
 /**
@@ -38,7 +44,7 @@ module.exports = {
 };
 ```
 
-You also need to update `tailwindcss` config on `nuxt.config.ts`.
+If you use Nuxt.js, make sure you have installed [Nuxt Tailwind](https://tailwindcss.nuxt.dev/). Then, you need to update `tailwindcss` config on `nuxt.config.ts` to include this package style in your project.
 
 ```js
 export default defineNuxtConfig({
@@ -49,6 +55,8 @@ export default defineNuxtConfig({
   // ...
 });
 ```
+
+If you are not using Nuxt.js, just import `@pegipegi/pegipegi-web-ui/style` to your main entry point file.
 
 ## Contributing
 
