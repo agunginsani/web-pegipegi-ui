@@ -7,3 +7,4 @@ export { default as Radio } from './Radio/Radio.vue';
 export { default as Textarea } from './Textarea/Textarea.vue';
 export { default as Counter } from './Counter/Counter.vue';
 export { default as Avatar } from './Avatar/Avatar.vue';
+export { default as Alert } from './Avatar/Alert.vue';
