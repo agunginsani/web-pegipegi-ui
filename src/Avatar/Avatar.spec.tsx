@@ -12,25 +12,20 @@ const SimpleAvatar = defineComponent({
   },
 });
 
-const AvatarWithProps = defineComponent({
+const AvatarWithImage = defineComponent({
   inheritAttrs: false,
   setup() {
     return () => <Avatar src={initialValue} alt="dummy image" />;
   },
 });
 
-it('handles default <SimpleAvatar>Content</SimpleAvatar>', async () => {
+it('handles default <SimpleAvatar />', async () => {
   render(SimpleAvatar);
   expect(screen.getByText('Content')).toBeInTheDocument();
 });
 
-it(`handles <AvatarWithProps src="${initialValue}" alt="dummy image" />`, async () => {
-  render(AvatarWithProps, {
-    props: {
-      src: initialValue,
-      alt: 'image',
-    },
-  });
+it(`handles <AvatarWithImage />`, async () => {
+  render(AvatarWithImage);
 
-  expect(screen.getByRole('img')).toBeInTheDocument();;
+  expect(screen.getByRole('img')).toBeInTheDocument();
 });
