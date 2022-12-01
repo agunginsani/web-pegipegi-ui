@@ -25,9 +25,10 @@
     :class="[
       'flex justify-center items-center overflow-hidden rounded-full ring-2 ring-white',
       {
-        'h-[40px] w-[40px]': size === 'sm',
-        'h-[56px] w-[56px]': size === 'md',
-        'h-[72px] w-[72px]': size === 'lg',
+        'bg-orange-inter-600 text-white': !src,
+        'h-[40px] w-[40px] text-base': size === 'sm',
+        'h-[56px] w-[56px] text-lg': size === 'md',
+        'h-[72px] w-[72px] text-2xl': size === 'lg',
       },
     ]"
   >
