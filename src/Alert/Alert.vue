@@ -29,8 +29,8 @@
       },
     ]"
   >
-    <slot />
     <slot name="icon" />
+    <slot />
     <slot name="action" />
   </div>
 </template>
