@@ -23,6 +23,6 @@ export const Image: StoryFn<typeof Avatar> = () => ({
       <Avatar src="https://picsum.photos/100" alt="Dummy" size="small" />
       <Avatar src="https://picsum.photos/100" alt="Dummy" />
       <Avatar src="https://picsum.photos/100" alt="Dummy" size="large" />
-    <div>
+    </div>
   `,
 });
