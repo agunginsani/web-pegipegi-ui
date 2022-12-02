@@ -19,7 +19,7 @@
   <div
     role="alert"
     :class="[
-      'flex justify-between gap-3 w-full text-black rounded-lg p-3',
+      'flex justify-between gap-x-3 w-full text-black rounded-lg p-3',
       {
         'text-white': color !== 'warning',
         'bg-blue-dodger-600': color === 'accent',
