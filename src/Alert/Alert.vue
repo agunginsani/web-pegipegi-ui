@@ -30,7 +30,9 @@
     ]"
   >
     <slot name="icon" />
-    <slot />
+    <div class="w-full text-left">
+      <slot />
+    </div>
     <slot name="action" />
   </div>
 </template>
