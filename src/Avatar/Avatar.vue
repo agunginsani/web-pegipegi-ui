@@ -10,13 +10,13 @@
   type AvatarProps = {
     alt?: string;
     src?: string;
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'small' | 'medium' | 'large';
   };
 
   withDefaults(defineProps<AvatarProps>(), {
     alt: '',
     src: '',
-    size: 'md',
+    size: 'medium',
   });
 </script>
 
@@ -26,9 +26,9 @@
       'flex justify-center items-center overflow-hidden rounded-full ring-2 ring-white',
       {
         'bg-orange-inter-600 text-white': !src,
-        'h-[40px] w-[40px] text-base': size === 'sm',
-        'h-[56px] w-[56px] text-lg': size === 'md',
-        'h-[72px] w-[72px] text-2xl': size === 'lg',
+        'h-[40px] w-[40px] text-base': size === 'small',
+        'h-[56px] w-[56px] text-lg': size === 'medium',
+        'h-[72px] w-[72px] text-2xl': size === 'large',
       },
     ]"
   >

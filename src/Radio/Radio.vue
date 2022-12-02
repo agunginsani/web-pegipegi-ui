@@ -34,13 +34,13 @@
 <template>
   <label>
     <input
-      v-bind="$attrs"
       class="peer sr-only"
       type="radio"
       name="radio"
       :value="value"
       :disabled="disabled"
       :checked="value === modelValue"
+      v-bind="$attrs"
       @change="handleRadioChange"
     />
     <div

@@ -3,34 +3,31 @@ import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
   title: 'Alert',
-  component: Alert,
-  argTypes: {
-    color: {
-      control: 'radio',
-      options: ['accent', 'warning', 'positive', 'negative'],
-    },
-    default: {
-      control: 'text',
-    },
-    icon: {
-      control: 'text',
-    },
-    action: {
-      control: 'text',
-    },
-  },
 } as Meta<typeof Alert>;
 
-export const Template: StoryFn<typeof Alert> = (args) => ({
+export const Template: StoryFn<typeof Alert> = () => ({
   components: { Alert },
-  setup() {
-    return { args };
-  },
-  template: '<Alert v-bind="args">{{ args.default }}</Alert>',
+  template: `
+    <div class="grid gap-y-2">
+      <Alert color="accent">Text</Alert>
+      <Alert color="warning">
+        Text
+        <template #action>
+          <button>Action</button>
+        </template>
+      </Alert>
+      <Alert color="positive">
+        <template #icon>
+          <img src="https://picsum.photos/20" height="20" />
+        </template>
+        Text
+        <template #action>
+          <button>Action</button>
+        </template>
+      </Alert>
+      <Alert color="negative">Text</Alert>
+    </div>
+  `,
 });
-
-Template.args = {
-  color: 'accent',
-};
 
 Template.storyName = 'Alert';

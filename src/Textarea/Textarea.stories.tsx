@@ -1,66 +1,33 @@
 import Textarea from './Textarea.vue';
 import { Meta, StoryFn } from '@storybook/vue3';
+import { ref } from 'vue';
 
 export default {
   title: 'Textarea',
-  component: Textarea,
-  argTypes: {
-    disabled: {
-      control: 'boolean',
-    },
-    error: {
-      control: 'boolean',
-    },
-    modelValue: {
-      control: 'text',
-    },
-    placeholder: {
-      control: 'text',
-    },
-    'onUpdate:modelValue': {
-      table: {
-        category: 'Events',
-      },
-    },
-    onExpand: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onInput: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseenter: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseleave: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onBlur: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onFocus: {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Textarea>;
 
-export const Template: StoryFn<typeof Textarea> = (args) => ({
+export const Template: StoryFn<typeof Textarea> = () => ({
   components: { Textarea },
   setup() {
-    return { args };
+    const description = ref('');
+    return { description };
   },
-  template: '<Textarea v-bind="args" />',
+  template: `
+    <div class="grid gap-y-2">
+      <div class="grid gapy-y-2">
+        <label for="description">Please describe yourself?</label>
+        <Textarea id="description" v-model="description" />
+      </div>
+      <div class="grid gapy-y-2">
+        <label for="description-1">Please describe yourself?</label>
+        <Textarea id="description-1" disabled value="War should be stopped!" />
+      </div>
+      <div class="grid gapy-y-2">
+        <label for="description-2">Please describe yourself?</label>
+        <Textarea id="description-2" value="Heil Hitler! Heil Mein Führer!" readonly error />
+      </div>
+    </div>
+  `,
 });
 
 Template.args = {

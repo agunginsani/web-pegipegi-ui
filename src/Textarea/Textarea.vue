@@ -62,9 +62,9 @@
       :class="[
         '-mb-2 h-full w-full border-none resize-none outline-none bg-transparent placeholder:text-neutral-tuna-300 placeholder:disabled:text-neutral-tuna-100',
       ]"
-      v-bind="$attrs"
       :disabled="disabled"
       :value="modelValue"
+      v-bind="$attrs"
       @input="handleInput"
     ></textarea>
 

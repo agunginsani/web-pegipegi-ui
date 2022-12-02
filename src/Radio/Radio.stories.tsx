@@ -1,64 +1,38 @@
 import Radio from './Radio.vue';
 import { Meta, StoryFn } from '@storybook/vue3';
+import { ref } from 'vue';
 
 export default {
   title: 'Radio',
-  component: Radio,
-  argTypes: {
-    value: {
-      control: 'text',
-    },
-    modelValue: {
-      control: 'text',
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    'onUpdate:modelValue': {
-      table: {
-        category: 'Events',
-      },
-    },
-    onClick: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseenter: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseleave: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onFocus: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onBlur: {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Radio>;
 
-export const Template: StoryFn<typeof Radio> = (args) => ({
+export const Template: StoryFn<typeof Radio> = () => ({
   components: { Radio },
   setup() {
-    return { args };
+    const value = ref('banana');
+    return { value };
   },
-  template: '<Radio v-bind="args" />',
+  template: `
+    <div class="grid gap-y-2">
+      <p>Selected value: {{ value }}</p>
+      <div class="flex gap-x-1 items-center">
+        <Radio id="apple" value="apple" v-model="value" />
+        <label for="apple">Apple</label>
+      </div>
+      <div class="flex gap-x-1 items-center">
+        <Radio id="forbidden-apple" value="forbidden-apple" v-model="value" disabled />
+        <label for="forbidden-apple">Forbidden Apple</label>
+      </div>
+      <div class="flex gap-x-1 items-center">
+        <Radio id="melon" value="melon" v-model="value" />
+        <label for="melon">Melon</label>
+      </div>
+      <div class="flex gap-x-1 items-center">
+        <Radio id="banana" value="banana" v-model="value" disabled />
+        <label for="banana">Banana</label>
+      </div>
+    </div>
+  `,
 });
-
-Template.args = {
-  value: 'radio',
-  modelValue: '',
-  disabled: false,
-};
 
 Template.storyName = 'Radio';
