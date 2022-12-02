@@ -45,14 +45,15 @@
 <template>
   <label class="flex items-center">
     <input
-      v-bind="$attrs"
       type="checkbox"
       class="peer sr-only"
       :indeterminate="indeterminate"
       :disabled="disabled"
       :checked="modelValue.includes(value)"
       :value="value"
+      v-bind="$attrs"
       @change="handleChange"
+      @input="$emit('input', $event)"
     />
     <!-- Enabled state. -->
     <img

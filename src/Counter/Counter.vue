@@ -82,11 +82,11 @@
       <span class="sr-only">Decrement</span>
     </button>
     <input
-      v-bind="$attrs"
       readonly
       class="w-9 text-center text-lg font-bold text-neutral-tuna-tuna-900 outline-0"
       :class="{ 'text-neutral-tuna-200': disabled }"
       :value="counterDisplay"
+      v-bind="$attrs"
     />
     <button
       class="w-9 h-9 rounded-full bg-neutral-tuna-50"

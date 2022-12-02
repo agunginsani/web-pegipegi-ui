@@ -3,67 +3,29 @@ import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
   title: 'Button',
-  component: Button,
-  argTypes: {
-    variant: {
-      control: 'radio',
-      options: ['filled', 'outline', 'text'],
-    },
-    size: {
-      control: 'radio',
-      options: ['small', 'medium', 'large'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    block: {
-      control: 'boolean',
-    },
-    default: {
-      control: 'text',
-    },
-    onClick: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseenter: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseleave: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onFocus: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onBlur: {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Button>;
 
-export const Template: StoryFn<typeof Button> = (args) => ({
+export const Template: StoryFn<typeof Button> = () => ({
   components: { Button },
-  setup() {
-    return { args };
-  },
-  template: '<Button v-bind="args">{{ args.default }}</Button>',
+  template: `
+    <div class="grid gap-y-2">
+      <div class="flex items-center gap-x-2">
+        <Button variant="outline" size="small">Click</Button>
+        <Button variant="outline">Click</Button>
+        <Button variant="outline" size="large">Click</Button>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <Button size="small">Click</Button>
+        <Button>Click</Button>
+        <Button size="large">Click</Button>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <Button variant="text" size="small">Click</Button>
+        <Button variant="text">Click</Button>
+        <Button variant="text" size="large">Click</Button>
+      </div>
+    </div>
+  `,
 });
-
-Template.args = {
-  variant: 'filled',
-  size: 'medium',
-  disabled: false,
-  block: false,
-  default: 'Button',
-};
 
 Template.storyName = 'Button';

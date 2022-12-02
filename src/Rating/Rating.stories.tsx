@@ -1,44 +1,49 @@
 import Rating from './Rating.vue';
 import { Meta, StoryFn } from '@storybook/vue3';
+import { ref } from 'vue';
 
 export default {
   title: 'Rating',
-  component: Rating,
-  argTypes: {
-    modelValue: {
-      control: 'number',
-    },
-    max: {
-      control: 'number',
-    },
-    precision: {
-      control: 'radio',
-      options: [0.5, 1],
-    },
-    readonly: {
-      control: 'boolean',
-    },
-    'onUpdate:modelValue': {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Rating>;
 
-export const Template: StoryFn<typeof Rating> = (args) => ({
+export const Full: StoryFn<typeof Rating> = () => ({
   components: { Rating },
   setup() {
-    return { args };
+    const value = ref(0);
+    return { value };
   },
-  template: '<Rating v-bind="args" />',
+  template: `
+    <div class="grid gap-y-2">
+      <p>Your rating: {{ value }}</p>
+      <Rating v-model="value" />
+    </div>
+  `,
 });
 
-Template.args = {
-  modelValue: 3,
-  max: 5,
-  precision: 1,
-  readonly: false,
-};
+export const Half: StoryFn<typeof Rating> = () => ({
+  components: { Rating },
+  setup() {
+    const value = ref(0);
+    return { value };
+  },
+  template: `
+    <div class="grid gap-y-2">
+      <p>Your rating: {{ value }}</p>
+      <Rating v-model="value" :precision="0.5" />
+    </div>
+  `,
+});
 
-Template.storyName = 'Rating';
+export const CustomMaximum: StoryFn<typeof Rating> = () => ({
+  components: { Rating },
+  setup() {
+    const value = ref(0);
+    return { value };
+  },
+  template: `
+    <div class="grid gap-y-2">
+      <p>Your rating: {{ value }}</p>
+      <Rating v-model="value" :max="10" />
+    </div>
+  `,
+});

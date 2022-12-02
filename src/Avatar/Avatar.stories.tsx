@@ -3,33 +3,26 @@ import { Meta, StoryFn } from '@storybook/vue3';
 
 export default {
   title: 'Avatar',
-  component: Avatar,
-  argTypes: {
-    src: {
-      control: 'text',
-    },
-    alt: {
-      control: 'text',
-    },
-    size: {
-      control: 'radio',
-      options: ['sm', 'md', 'lg'],
-    },
-  },
 } as Meta<typeof Avatar>;
 
-export const Template: StoryFn<typeof Avatar> = (args) => ({
+export const Text: StoryFn<typeof Avatar> = () => ({
   components: { Avatar },
-  setup() {
-    return { args };
-  },
-  template: '<Avatar v-bind="args">{{ args.default }}</Avatar>',
+  template: `
+    <div class="flex gap-x-2">
+      <Avatar size="small">RR</Avatar>
+      <Avatar>RR</Avatar>
+      <Avatar size="large">RR</Avatar>
+    </div>
+  `,
 });
 
-Template.args = {
-  src: '',
-  alt: '',
-  size: 'md',
-};
-
-Template.storyName = 'Avatar';
+export const Image: StoryFn<typeof Avatar> = () => ({
+  components: { Avatar },
+  template: `
+    <div class="flex gap-x-2">
+      <Avatar src="https://picsum.photos/100" alt="Dummy" size="small" />
+      <Avatar src="https://picsum.photos/100" alt="Dummy" />
+      <Avatar src="https://picsum.photos/100" alt="Dummy" size="large" />
+    <div>
+  `,
+});

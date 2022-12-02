@@ -38,12 +38,12 @@
 <template>
   <label>
     <input
-      v-bind="$attrs"
       :checked="props.modelValue.includes(props.value)"
       :value="props.value"
       class="peer sr-only"
       type="checkbox"
       :disabled="props.disabled"
+      v-bind="$attrs"
       @change="onSwitchChange"
     />
     <div
