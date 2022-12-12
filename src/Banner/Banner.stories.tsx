@@ -8,7 +8,7 @@ export default {
 export const Template: StoryFn<typeof Banner> = () => ({
   components: { Banner },
   template: `
-              <div class="grid grid-cols-2">
+              <div class="flex gap-x-5">
                 <div class="grid gap-y-2">
                   <Banner color="neutral" priority="high">
                     <template #icon><img width="14" height="14" src="./src/Banner/logo.svg" alt="logo"/></template>
