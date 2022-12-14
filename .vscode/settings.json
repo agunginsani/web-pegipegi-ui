@@ -1,5 +1,14 @@
 {
-  "editor.formatOnSave": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    ".eslintrc.*": ".eslintignore",
+    ".prettierrc": ".prettierignore",
+    "package.json": "package-lock.json",
+    "tsconfig.json": "tsconfig.*.json",
+    "cloudbuild.yml": "dockerfile, nginx.conf",
+    "tailwind.config.cjs": "postcss.config.cjs"
+  },
   "files.associations": {
     "*.css": "tailwindcss"
   }

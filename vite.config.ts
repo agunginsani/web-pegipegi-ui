@@ -10,7 +10,7 @@ export default defineConfig({
     vueJsx(),
     viteStaticCopy({
       targets: [
-        { src: 'src/style.css', dest: '.' },
+        { src: 'src/main.css', dest: '.' },
         { src: 'tailwind.config.cjs', dest: '.' },
       ],
     }),
@@ -19,7 +19,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       fileName: 'main',
-      name: 'PegipegiWebUI',
+      name: 'WebPegipegiUI',
     },
     rollupOptions: {
       external: ['vue'],

@@ -1,68 +1,33 @@
 import Input from './Input.vue';
 import { Meta, StoryFn } from '@storybook/vue3';
+import { ref } from 'vue';
 
 export default {
   title: 'Input',
-  component: Input,
-  argTypes: {
-    size: {
-      options: ['small', 'medium', 'large'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    error: {
-      control: 'boolean',
-    },
-    modelValue: {
-      control: 'text',
-    },
-    'onUpdate:modelValue': {
-      table: {
-        category: 'Events',
-      },
-    },
-    onInput: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseenter: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onMouseleave: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onBlur: {
-      table: {
-        category: 'Events',
-      },
-    },
-    onFocus: {
-      table: {
-        category: 'Events',
-      },
-    },
-  },
 } as Meta<typeof Input>;
 
-export const Template: StoryFn<typeof Input> = (args) => ({
+export const Template: StoryFn<typeof Input> = () => ({
   components: { Input },
   setup() {
-    return { args };
+    const name = ref('');
+    return { name };
   },
-  template: '<Input v-bind="args" />',
+  template: `
+    <div class="grid gap-y-2">
+      <div class="grid gapy-y-2">
+        <label for="name">Who are you?</label>
+        <Input id="name" v-model="name" size="small" />
+      </div>
+      <div class="grid gapy-y-2">
+        <label for="name-1">Who are you?</label>
+        <Input id="name-1" value="Iron Man" disabled />
+      </div>
+      <div class="grid gapy-y-2">
+        <label for="name-2">Who are you?</label>
+        <Input id="name-2" value="Nazi" readonly error size="large" />
+      </div>
+    </div>
+  `,
 });
-
-Template.args = {
-  modelValue: '',
-  size: 'medium',
-  disabled: false,
-  error: false,
-};
 
 Template.storyName = 'Input';

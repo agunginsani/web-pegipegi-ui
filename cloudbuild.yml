@@ -1,0 +1,25 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['build', '-t', 'asia.gcr.io/$PROJECT_ID/web-pegipegi-ui/$SHORT_SHA', '.']
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia.gcr.io/$PROJECT_ID/web-pegipegi-ui/$SHORT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'web-pegipegi-ui'
+      - '--allow-unauthenticated'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'asia-southeast2'
+      - '--project'
+      - '$PROJECT_ID'
+      - '--image'
+      - 'asia.gcr.io/$PROJECT_ID/web-pegipegi-ui/$SHORT_SHA'
