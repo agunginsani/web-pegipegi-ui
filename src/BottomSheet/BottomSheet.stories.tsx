@@ -16,6 +16,7 @@ export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
   data() {
     return {
       isBottomSheetVisible: true,
+      hiddenContent: false,
       args,
     };
   },
@@ -42,6 +43,9 @@ export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
           aria-labelledby="title"
         >
         <div id="title">Non-Presistent Bottom Sheet</div>
+        <button @click="hiddenContent=!hiddenContent">Show Expandable Content</button>
+        {{ args.default }}
+        <div v-if="hiddenContent" class="w-full h-[85vh] bg-red-100">{{ args.default }}</div>
         </BottomSheet>
     </div>
     `,
@@ -113,7 +117,10 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
               v-model="isBottomSheetVisible"
               aria-labelledby="title"
             >
-              <div style="width:100%;height:90vh;overflow-y:auto;background:red;">
+              <div
+                id="scrollable"
+                class="touch-pan-y"
+                style="width:100%;height:90vh;overflow-y:auto;background:red;">
                 <div style="width:100%;height:400px;background:gold;margin-bottom:10px;">
                     <div style="width:100%;text-align:center;color:#fff;bottom:0;position:relative;">section 1</div>
                 </div>

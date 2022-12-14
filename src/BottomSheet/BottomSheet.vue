@@ -1,9 +1,10 @@
 <script lang="ts">
   import { defineComponent, ref, onMounted, watch, watchEffect } from 'vue';
-  import { useSwipe } from '@vueuse/core';
+  import { useSwipe, onClickOutside } from '@vueuse/core';
 
   defineComponent({
     name: 'PBottomSheet',
+    inheritAttrs: false,
   });
 </script>
 
@@ -28,6 +29,8 @@
   const staticBottomY = ref(-1000);
   const isClosing = ref(false);
   const bottomY = ref(staticBottomY.value);
+  const bottomSheet = ref<HTMLElement | null>(null);
+  const isOverflowContentAtTop = ref(false);
 
   function setStaticBottomY() {
     let contentHeight = 0;
@@ -35,24 +38,76 @@
 
     bodyHeight = document.documentElement.clientHeight;
     if (content.value) {
+      console.log('test', content.value.clientHeight);
       contentHeight = content.value.clientHeight;
     }
 
     if (contentHeight >= (93 / 100) * bodyHeight) {
-      staticBottomY.value = bodyHeight * -3 - (98 / 100) * (bodyHeight * -2);
+      staticBottomY.value = bodyHeight * -1;
     } else {
       staticBottomY.value = bodyHeight * -2 + contentHeight + 40;
     }
-    console.log(staticBottomY.value);
   }
+
+  const { isSwiping, lengthY } = useSwipe(swiper, {
+    passive: false,
+    onSwipe() {
+      const length = staticBottomY.value + lengthY.value;
+      bottomY.value = length;
+    },
+    onSwipeEnd() {
+      const length = staticBottomY.value + lengthY.value;
+      let tmpLength = length;
+      let tmpStaticBtmY = staticBottomY.value;
+      let contentHeight = 0;
+      let closingPrecentage = 0;
+
+      // calculate precentage of closing bottom sheet
+      if (length < 0) tmpLength = length * -1;
+      if (staticBottomY.value < 0) tmpStaticBtmY = staticBottomY.value * -1;
+      if (content.value) contentHeight = content.value.clientHeight;
+
+      // bottom sheet will close when user swipe > 90% from content width
+      closingPrecentage = (90 / 100) * contentHeight;
+
+      // close bottom sheets when swipe down + swipe end
+      if (tmpLength > tmpStaticBtmY + closingPrecentage) {
+        isClosing.value = true;
+        bottomY.value = -2000;
+        isClosing.value = false;
+        document.documentElement.style.overflow = 'visible';
+        emit('update:modelValue', false);
+        bottomY.value = staticBottomY.value;
+      } else bottomY.value = staticBottomY.value;
+    },
+  });
+
+  onClickOutside(bottomSheet, () => {
+    if (props.persistent) return;
+    document.documentElement.style.overflow = 'visible';
+    emit('update:modelValue', false);
+  });
 
   watchEffect(() => {
     setStaticBottomY();
+    console.log(staticBottomY.value);
   });
 
   onMounted(() => {
     setStaticBottomY();
     document.documentElement.style.overflow = 'hidden';
+    // document.getElementById('scrollable')?.addEventListener('scroll', () => {
+    //   console.log(document.getElementById('scrollable')?.scrollTop === 0);
+    //   isOverflowContentAtTop.value =
+    //     document.getElementById('scrollable')?.scrollTop === 0;
+    // });
+    const resizeObserver = new ResizeObserver(() => {
+      if (content.value) {
+        staticBottomY.value = content.value.clientHeight;
+      }
+    });
+
+    resizeObserver.observe(content.value as HTMLElement);
   });
 
   watch(staticBottomY, (val) => {
@@ -67,43 +122,6 @@
     }
   );
 
-  function onOverlayClick() {
-    if (props.persistent) return;
-    document.documentElement.style.overflow = 'visible';
-    emit('update:modelValue', false);
-  }
-
-  const { isSwiping, lengthY } = useSwipe(swiper, {
-    passive: false,
-    onSwipe() {
-      const length = staticBottomY.value + lengthY.value;
-      bottomY.value = length;
-    },
-    onSwipeEnd() {
-      const length = staticBottomY.value + lengthY.value;
-      let tmpLength = length;
-      let tmpStaticBtmY = staticBottomY.value;
-      if (length < 0) tmpLength = length * -1;
-      if (staticBottomY.value < 0) tmpStaticBtmY = staticBottomY.value * -1;
-
-      // calculate additional Y axis to trigger bottom sheet closing
-      const additionalClosingTriggerY = () => {
-        const a = Math.trunc(tmpLength / 50);
-        return 1000 / a;
-      };
-
-      // close bottom sheets when swipe down + swipe end
-      if (tmpLength > tmpStaticBtmY + additionalClosingTriggerY()) {
-        isClosing.value = true;
-        bottomY.value = -2000;
-        isClosing.value = false;
-        document.documentElement.style.overflow = 'visible';
-        emit('update:modelValue', false);
-        bottomY.value = staticBottomY.value;
-      } else bottomY.value = staticBottomY.value;
-    },
-  });
-
   watch(isSwiping, (val) => {
     isClosing.value = val;
   });
@@ -115,7 +133,6 @@
     <div
       v-show="modelValue"
       class="w-[inherit] fixed h-[100vh] bg-[rgba(0,0,0,0.2)] transition-all"
-      @click="onOverlayClick"
     />
     <!-- bottom sheet -->
     <div
@@ -128,6 +145,8 @@
         'rounded-t-[20px] pt-6 px-4',
         isClosing ? '' : 'transition-all duration-500',
       ]"
+      role="dialog"
+      v-bind="$attrs"
     >
       <div
         v-if="!props.persistent"
@@ -138,6 +157,7 @@
       </div>
 
       <div ref="content" class="pb-2">
+        {{ isOverflowContentAtTop ? 'able to swipe' : 'not be able to swipe' }}
         <slot />
       </div>
     </div>
