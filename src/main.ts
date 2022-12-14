@@ -5,3 +5,4 @@ export { default as Switch } from './Switch/Switch.vue';
 export { default as Checkbox } from './Checkbox/Checkbox.vue';
 export { default as Radio } from './Radio/Radio.vue';
 export { default as Textarea } from './Textarea/Textarea.vue';
+export { default as BottomSheet } from './BottomSheet/BottomSheet.vue';
