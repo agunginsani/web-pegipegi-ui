@@ -30,7 +30,6 @@
   const isClosing = ref(false);
   const bottomY = ref(staticBottomY.value);
   const bottomSheet = ref<HTMLElement | null>(null);
-  const isOverflowContentAtTop = ref(false);
 
   function setStaticBottomY() {
     let contentHeight = 0;
@@ -89,10 +88,6 @@
 
   onMounted(() => {
     document.documentElement.style.overflow = 'hidden';
-    document.getElementById('scrollable')?.addEventListener('scroll', () => {
-      isOverflowContentAtTop.value =
-        document.getElementById('scrollable')?.scrollTop === 0;
-    });
     const resizeObserver = new ResizeObserver(() => {
       if (content.value) {
         setStaticBottomY();
@@ -149,7 +144,6 @@
       </div>
 
       <div ref="content" class="pb-2">
-        {{ isOverflowContentAtTop ? 'able to swipe' : 'not be able to swipe' }}
         <slot />
       </div>
     </div>
