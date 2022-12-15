@@ -38,7 +38,6 @@
 
     bodyHeight = document.documentElement.clientHeight;
     if (content.value) {
-      console.log('test', content.value.clientHeight);
       contentHeight = content.value.clientHeight;
     }
 
@@ -88,22 +87,15 @@
     emit('update:modelValue', false);
   });
 
-  watchEffect(() => {
-    setStaticBottomY();
-    console.log(staticBottomY.value);
-  });
-
   onMounted(() => {
-    setStaticBottomY();
     document.documentElement.style.overflow = 'hidden';
-    // document.getElementById('scrollable')?.addEventListener('scroll', () => {
-    //   console.log(document.getElementById('scrollable')?.scrollTop === 0);
-    //   isOverflowContentAtTop.value =
-    //     document.getElementById('scrollable')?.scrollTop === 0;
-    // });
+    document.getElementById('scrollable')?.addEventListener('scroll', () => {
+      isOverflowContentAtTop.value =
+        document.getElementById('scrollable')?.scrollTop === 0;
+    });
     const resizeObserver = new ResizeObserver(() => {
       if (content.value) {
-        staticBottomY.value = content.value.clientHeight;
+        setStaticBottomY();
       }
     });
 
