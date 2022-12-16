@@ -26,15 +26,15 @@ export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
     },
   },
   template: `
-    <div style="height:200vh;">
-        <h1 style="width:100%;text-align:center;font-weight:700;">Non-Presistent Bottom Sheet</h1>
-        <p style="text-align:center;width:100%;">
+    <div class="h-[200vh]">
+        <h1 class="w-full text-center bold">Non-Presistent Bottom Sheet</h1>
+        <p class="text-center w-full">
         {{ isBottomSheetVisible? 'Try to scroll the page when bottom sheet active' : 'Page scroll is enable' }}
         </p>
 
-        <div style="display:flex;justify-content:center;width:100%;margin-top:10px;">
+        <div class="flex justify-center w-full mt-3">
             <button
-            style="background:grey; width: 70px;border-radius:4px;margin-bottom:10px;"
+            class="bg-orange-500 w-20 text-white rounded-lg mb-3"
             @click="onButtonOpen">open</button>
         </div>
 
@@ -43,9 +43,14 @@ export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
           aria-labelledby="title"
         >
         <div id="title">Non-Presistent Bottom Sheet</div>
-        <button @click="hiddenContent=!hiddenContent">Show Expandable Content</button>
-        {{ args.default }}
-        <div v-if="hiddenContent" class="w-full h-[85vh] bg-red-100">{{ args.default }}</div>
+        <div>Default Content</div>
+        <div v-if="hiddenContent" class="w-full h-[75vh] mb-5 bg-red-100">
+        Expandable Content Area
+        </div>
+        <button
+        class="bg-orange-500 w-60 text-white rounded-lg mb-3"
+        @click="hiddenContent=!hiddenContent"
+        >Show Expandable Content</button>
         </BottomSheet>
     </div>
     `,
@@ -65,15 +70,15 @@ export const Presistent: StoryFn<typeof BottomSheet> = (args) => ({
     },
   },
   template: `
-      <div style="height:200vh;">
-          <h1 style="width:100%;text-align:center;font-weight:700;">Presistent Bottom Sheet</h1>
-          <p style="text-align:center;width:100%;">
+      <div class="h-[200vh]">
+          <h1 class="w-full text-center bold">Presistent Bottom Sheet</h1>
+          <p class="text-center w-full">
             {{ isBottomSheetVisible? 'Try to scroll the page when bottom sheet active' : 'Page scroll is enable' }}
           </p>
 
-          <div style="display:flex;justify-content:center;width:100%;margin-top:10px;">
+          <div class="flex justify-center w-full mt-3">
             <button
-            style="background:grey; width: 70px;border-radius:4px;margin-bottom:10px;"
+            class="bg-orange-500 w-20 text-white rounded-lg mb-3"
             @click="onButtonOpen">open</button>
           </div>
 
@@ -84,7 +89,7 @@ export const Presistent: StoryFn<typeof BottomSheet> = (args) => ({
             >
             <div id="title">Presistent Bottom Sheet</div>
             <button
-              style="background:grey; width: 120px;border-radius:4px;margin-bottom:10px;"
+              class="bg-orange-500 p-2 text-white rounded-lg mb-3"
               @click="isBottomSheetVisible=false"
             >Close Modal</button>
           </BottomSheet>
@@ -106,11 +111,15 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
     },
   },
   template: `
-        <div style="height:200vh;">
-            <h1 style="width:100%;text-align:center;font-weight:700;">Scrollable Bottom Sheet</h1>
-            <div style="display:flex;justify-content:center;width:100%;margin-top:10px;">
+        <div class="h-[200vh]">
+            <h1 class="w-full text-center bold">Scrollable Bottom Sheet</h1>
+            <p class="text-center w-full">
+              {{ isBottomSheetVisible? 'Try to scroll the page when bottom sheet active' : 'Page scroll is enable' }}
+            </p>
+
+            <div class="flex justify-center w-full mt-3">
             <button
-                style="background:grey; width: 70px;border-radius:4px;margin-bottom:10px;"
+                class="bg-orange-500 p-2 text-white rounded-lg mb-3"
                 @click="onButtonOpen">open</button>
             </div>
             <BottomSheet
@@ -120,12 +129,13 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
               <div
                 id="scrollable"
                 class="touch-pan-y"
-                style="width:100%;height:90vh;overflow-y:auto;background:red;">
-                <div style="width:100%;height:400px;background:gold;margin-bottom:10px;">
-                    <div style="width:100%;text-align:center;color:#fff;bottom:0;position:relative;">section 1</div>
+                class="w-full h-[90vh] overflow-y-auto">
+                <div
+                class="w-full h-[400px] bg-purple-25 mb-2">
+                    <div class="w-full text-center">section 1</div>
                 </div>
-                <div style="width:100%;height:400px;background:blue;">
-                    <div style="width:100%;text-align:center;color:#fff;">section 2</div>
+                <div class="w-full h-[400px] bg-purple-50 mb-2">
+                  <div class="w-full text-center">section 2</div>
                 </div>
               </div>
             </BottomSheet>
