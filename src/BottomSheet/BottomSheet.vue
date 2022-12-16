@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defineComponent, ref, onMounted, watch, watchEffect } from 'vue';
+  import { defineComponent, ref, onMounted, watch } from 'vue';
   import { useSwipe, onClickOutside } from '@vueuse/core';
 
   defineComponent({
@@ -117,10 +117,12 @@
 <template>
   <div class="w-full fixed left-0 top-0">
     <!-- overlay -->
-    <div
-      v-show="modelValue"
-      class="w-[inherit] fixed h-[100vh] bg-[rgba(0,0,0,0.2)] transition-all"
-    />
+    <Transition>
+      <div
+        v-if="modelValue"
+        class="w-[inherit] fixed h-[100vh] bg-[rgba(0,0,0,0.2)] transition-all"
+      />
+    </Transition>
     <!-- bottom sheet -->
     <div
       ref="bottomSheet"
@@ -149,3 +151,15 @@
     </div>
   </div>
 </template>
+
+<style>
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+</style>
