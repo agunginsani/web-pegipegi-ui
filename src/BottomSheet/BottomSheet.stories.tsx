@@ -11,7 +11,7 @@ export default {
   },
 } as Meta<typeof BottomSheet>;
 
-export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
+export const NonPersistent: StoryFn<typeof BottomSheet> = (args) => ({
   components: { BottomSheet },
   data() {
     return {
@@ -50,13 +50,13 @@ export const NonPresistent: StoryFn<typeof BottomSheet> = (args) => ({
         <button
         class="bg-orange-500 w-60 text-white rounded-lg mb-3"
         @click="hiddenContent=!hiddenContent"
-        >Show Expandable Content</button>
+        >{{ !hiddenContent? 'Show' : 'Hide' }} Expandable Content</button>
         </BottomSheet>
     </div>
     `,
 });
 
-export const Presistent: StoryFn<typeof BottomSheet> = (args) => ({
+export const Persistent: StoryFn<typeof BottomSheet> = (args) => ({
   components: { BottomSheet },
   data() {
     return {
@@ -143,12 +143,12 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
         `,
 });
 
-NonPresistent.args = {
+NonPersistent.args = {
   default: 'Content1',
 };
 
-Presistent.args = {
+Persistent.args = {
   default: 'Content1',
 };
 
-NonPresistent.storyName = 'Non-Presistent';
+NonPersistent.storyName = 'Non-Persistent';

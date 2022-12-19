@@ -22,10 +22,11 @@ export default defineConfig({
       name: 'WebPegipegiUI',
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@vueuse/core'],
       output: {
         globals: {
           vue: 'Vue',
+          '@vueuse/core': '@vueuse/core',
         },
       },
     },

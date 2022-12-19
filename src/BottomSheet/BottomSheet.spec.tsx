@@ -2,7 +2,7 @@
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import BottomSheet from './BottomSheet.vue';
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 class ResizeObserver {
   observe() {}
@@ -12,7 +12,6 @@ class ResizeObserver {
 
 const ControlledNonPresistentBottomSheet = defineComponent({
   inheritAttrs: false,
-  emits: ['valueChanged'],
   setup() {
     const showBottomSheet = ref(true);
 
@@ -29,7 +28,6 @@ const ControlledNonPresistentBottomSheet = defineComponent({
 
 const ControlledPresistentBottomSheet = defineComponent({
   inheritAttrs: false,
-  emits: ['valueChanged'],
   setup() {
     const showBottomSheet = ref(true);
 
@@ -58,10 +56,7 @@ const ControlledPresistentBottomSheet = defineComponent({
 it('handles <ControlledNonPresistentBottomSheet />', async () => {
   window.ResizeObserver = ResizeObserver;
   const user = userEvent.setup();
-  const props = {
-    onValueChanged: vi.fn(),
-  };
-  render(ControlledNonPresistentBottomSheet, { props });
+  render(ControlledNonPresistentBottomSheet);
 
   let dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toBeInTheDocument();
@@ -74,10 +69,7 @@ it('handles <ControlledNonPresistentBottomSheet />', async () => {
 it('handles <ControlledPresistentBottomSheet />', async () => {
   window.ResizeObserver = ResizeObserver;
   const user = userEvent.setup();
-  const props = {
-    onValueChanged: vi.fn(),
-  };
-  render(ControlledPresistentBottomSheet, { props });
+  render(ControlledPresistentBottomSheet);
 
   let dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toBeInTheDocument();
@@ -85,7 +77,6 @@ it('handles <ControlledPresistentBottomSheet />', async () => {
 
   dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toBeInTheDocument();
-  expect(props.onValueChanged).not.toHaveBeenLastCalledWith(false);
 
   const button = screen.getByRole('button', { name: 'Close Bottom Sheet' });
   await user.click(button);
