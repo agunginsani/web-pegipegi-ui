@@ -34,7 +34,7 @@
   const bottomSheetRef = ref<HTMLElement | null>(null);
   const overlayOpacity = ref(0);
   const staticBottomY = ref(-2000); // default bottom sheet location when hidden
-  const isClosing = ref(false);
+  const isSwipeAnimate = ref(false);
   const bottomY = ref(staticBottomY.value);
 
   function setStaticBottomY() {
@@ -76,9 +76,9 @@
 
       // close bottom sheets when swipe down + swipe end
       if (tmpLength > tmpStaticBtmY + closingPrecentage) {
-        isClosing.value = true;
+        isSwipeAnimate.value = true;
         bottomY.value = -2000;
-        isClosing.value = false;
+        isSwipeAnimate.value = false;
         document.documentElement.style.overflow = 'visible';
         emit('update:modelValue', false);
         bottomY.value = staticBottomY.value;
@@ -98,8 +98,10 @@
   });
 
   onMounted(() => {
-    document.documentElement.style.overflow = 'hidden';
-    if (props.modelValue) overlayOpacity.value = 1;
+    if (props.modelValue) {
+      document.documentElement.style.overflow = 'hidden';
+      overlayOpacity.value = 1;
+    }
     const resizeObserver = new ResizeObserver(() => {
       if (contentRef.value) setStaticBottomY();
     });
@@ -125,7 +127,7 @@
   );
 
   watch(isSwiping, (val) => {
-    isClosing.value = val;
+    isSwipeAnimate.value = val;
   });
 </script>
 
@@ -148,7 +150,7 @@
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
         'rounded-t-[20px] pt-6 px-4',
-        isClosing ? '' : 'transition-all duration-500',
+        isSwipeAnimate ? '' : 'transition-all duration-500',
       ]"
       :aria-modal="modelValue"
       role="dialog"
