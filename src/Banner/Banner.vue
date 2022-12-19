@@ -1,5 +1,6 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue';
+  import patternIcon from './pattern.svg';
 
   export default defineComponent({
     name: 'PBanner',
@@ -146,7 +147,8 @@
 
 <template>
   <div
-    class="flex gap-3 items-stretch rounded-lg max-w-xs py-2 pl-5 pr-11 relative bg-[url('./src/Banner/pattern.svg')] bg-[length:105px_72px] bg-no-repeat bg-right-bottom"
+    :style="{ backgroundImage: `url(${patternIcon})` }"
+    class="flex gap-3 items-stretch rounded-lg max-w-xs py-2 pl-5 pr-11 relative bg-[length:105px_72px] bg-no-repeat bg-right-bottom"
     :class="wrapperStyle"
   >
     <slot name="icon" />
