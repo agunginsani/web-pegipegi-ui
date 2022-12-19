@@ -39,6 +39,7 @@
   },
   "peerDependencies": {
     "tailwindcss": "^3.1.8",
+    "@vueuse/core": "^9.6.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {
@@ -80,8 +81,5 @@
     "vue": "^3.2.37",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.39.5"
-  },
-  "dependencies": {
-    "@vueuse/core": "^9.6.0"
   }
 }
