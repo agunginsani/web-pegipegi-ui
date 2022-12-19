@@ -150,6 +150,7 @@
         'rounded-t-[20px] pt-6 px-4',
         isClosing ? '' : 'transition-all duration-500',
       ]"
+      :aria-modal="modelValue"
       role="dialog"
       v-bind="$attrs"
     >

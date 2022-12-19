@@ -17,11 +17,7 @@ const ControlledNonPresistentBottomSheet = defineComponent({
 
     return () => (
       <div>
-        <BottomSheet
-          aria-modal={showBottomSheet.value}
-          v-model={showBottomSheet.value}
-          aria-labelledby="title"
-        >
+        <BottomSheet v-model={showBottomSheet.value} aria-labelledby="title">
           <div id="title">Bottom Sheet</div>
           Lorem Ipsum Dolor Sit Amet
         </BottomSheet>
@@ -40,7 +36,6 @@ const ControlledPresistentBottomSheet = defineComponent({
         <BottomSheet
           persistent={true}
           v-model={showBottomSheet.value}
-          aria-modal={showBottomSheet.value}
           aria-labelledby="title"
         >
           <div id="title">Bottom Sheet</div>
@@ -63,11 +58,10 @@ it('handles <ControlledNonPresistentBottomSheet />', async () => {
   const user = userEvent.setup();
   render(ControlledNonPresistentBottomSheet);
 
-  let dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
+  const dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toHaveAttribute('aria-modal', 'true');
   await user.click(document.body);
 
-  dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toHaveAttribute('aria-modal', 'false');
 });
 
@@ -76,12 +70,11 @@ it('handles <ControlledPresistentBottomSheet />', async () => {
   const user = userEvent.setup();
   render(ControlledPresistentBottomSheet);
 
-  let dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
+  const dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toHaveAttribute('aria-modal', 'true');
   await user.click(document.body);
 
-  dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
-  expect(dialog).toBeInTheDocument();
+  expect(dialog).toHaveAttribute('aria-modal', 'true');
 
   const button = screen.getByRole('button', { name: 'Close Bottom Sheet' });
   await user.click(button);
