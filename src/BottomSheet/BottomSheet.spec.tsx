@@ -13,23 +13,15 @@ class ResizeObserver {
 const ControlledNonPresistentBottomSheet = defineComponent({
   inheritAttrs: false,
   emits: ['valueChanged'],
-  setup(_props, { emit }) {
+  setup() {
     const showBottomSheet = ref(true);
-
-    watch(showBottomSheet, (newValue) => {
-      emit('valueChanged', newValue);
-    });
 
     return () => (
       <div>
-        {showBottomSheet.value ? (
-          <BottomSheet v-model={showBottomSheet.value} aria-labelledby="title">
-            <div id="title">Bottom Sheet</div>
-            Lorem Ipsum Dolor Sit Amet
-          </BottomSheet>
-        ) : (
-          ''
-        )}
+        <BottomSheet v-model={showBottomSheet.value} aria-labelledby="title">
+          <div id="title">Bottom Sheet</div>
+          Lorem Ipsum Dolor Sit Amet
+        </BottomSheet>
       </div>
     );
   },
@@ -38,34 +30,26 @@ const ControlledNonPresistentBottomSheet = defineComponent({
 const ControlledPresistentBottomSheet = defineComponent({
   inheritAttrs: false,
   emits: ['valueChanged'],
-  setup(props, { emit }) {
+  setup() {
     const showBottomSheet = ref(true);
-
-    watch(showBottomSheet, (newValue) => {
-      emit('valueChanged', newValue);
-    });
 
     return () => (
       <div>
-        {showBottomSheet.value ? (
-          <BottomSheet
-            persistent={true}
-            v-model={showBottomSheet.value}
-            aria-labelledby="title"
+        <BottomSheet
+          persistent={true}
+          v-model={showBottomSheet.value}
+          aria-labelledby="title"
+        >
+          <div id="title">Bottom Sheet</div>
+          Lorem Ipsum Dolor Sit Amet
+          <button
+            onClick={() => {
+              showBottomSheet.value = false;
+            }}
           >
-            <div id="title">Bottom Sheet</div>
-            Lorem Ipsum Dolor Sit Amet
-            <button
-              onClick={() => {
-                showBottomSheet.value = false;
-              }}
-            >
-              Close Bottom Sheet
-            </button>
-          </BottomSheet>
-        ) : (
-          ''
-        )}
+            Close Bottom Sheet
+          </button>
+        </BottomSheet>
       </div>
     );
   },
@@ -84,8 +68,7 @@ it('handles <ControlledNonPresistentBottomSheet />', async () => {
   await user.click(document.body);
 
   dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
-  expect(dialog).not.toBeInTheDocument();
-  expect(props.onValueChanged).toHaveBeenLastCalledWith(false);
+  expect(dialog).toHaveStyle({ bottom: '-2000px' });
 });
 
 it('handles <ControlledPresistentBottomSheet />', async () => {
@@ -106,6 +89,5 @@ it('handles <ControlledPresistentBottomSheet />', async () => {
 
   const button = screen.getByRole('button', { name: 'Close Bottom Sheet' });
   await user.click(button);
-  expect(dialog).not.toBeInTheDocument();
-  expect(props.onValueChanged).toHaveBeenLastCalledWith(false);
+  expect(dialog).toHaveStyle({ bottom: '-2000px' });
 });
