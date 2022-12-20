@@ -35,7 +35,6 @@
   const bottomSheetRef = ref<HTMLElement | null>(null);
   const overlayOpacity = ref(0);
   const staticBottomY = ref(-2000); // default bottom sheet location when hidden
-  const isTransitioning = ref(false);
   const bottomY = ref(staticBottomY.value);
   const isBodyLocked = useScrollLock(document.documentElement);
 
@@ -78,12 +77,9 @@
 
       // close bottom sheets when swipe down + swipe end
       if (tmpLength > tmpStaticBtmY + closingPrecentage) {
-        isTransitioning.value = true;
         bottomY.value = -2000;
-        isTransitioning.value = false;
         isBodyLocked.value = false;
         emit('update:modelValue', false);
-        bottomY.value = staticBottomY.value;
       } else bottomY.value = staticBottomY.value;
     },
   });
@@ -93,10 +89,18 @@
     transition: TransitionPresets.easeOutCirc,
   });
 
+  const bottomLocation = useTransition(bottomY, {
+    duration: 1,
+  });
+
   onClickOutside(bottomSheetRef, () => {
     if (props.persistent) return;
     isBodyLocked.value = false;
     emit('update:modelValue', false);
+  });
+
+  const resizeObserver = new ResizeObserver(() => {
+    if (contentRef.value) setStaticBottomY();
   });
 
   onMounted(() => {
@@ -104,11 +108,6 @@
       isBodyLocked.value = true;
       overlayOpacity.value = 1;
     }
-    const resizeObserver = new ResizeObserver(() => {
-      if (contentRef.value) setStaticBottomY();
-    });
-
-    resizeObserver.observe(contentRef.value as HTMLElement);
   });
 
   watch(staticBottomY, (val) => {
@@ -121,15 +120,17 @@
       if (val) {
         isBodyLocked.value = true;
         overlayOpacity.value = 1;
+        bottomY.value = staticBottomY.value;
       } else {
         isBodyLocked.value = false;
         overlayOpacity.value = 0;
+        bottomY.value = staticBottomY.value * 2;
       }
     }
   );
 
-  watch(isSwiping, (val) => {
-    isTransitioning.value = val;
+  watch(contentRef, (val) => {
+    if (val) resizeObserver.observe(contentRef.value as HTMLElement);
   });
 </script>
 
@@ -145,15 +146,16 @@
     />
     <!-- bottom sheet -->
     <div
+      v-if="!(opacity === 0 && !modelValue)"
       ref="bottomSheetRef"
       :style="{
-        bottom: `${modelValue ? bottomY : bottomY * 2}px`,
+        bottom: `${bottomLocation}px`,
         opacity: modelValue ? 1 : opacity,
       }"
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
         'rounded-t-[20px] pt-6 px-4',
-        isTransitioning ? '' : 'transition-all duration-500',
+        isSwiping ? '' : 'transition-all duration-500',
       ]"
       :aria-modal="modelValue"
       role="dialog"
