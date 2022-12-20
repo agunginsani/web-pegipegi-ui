@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { render, screen } from '@testing-library/vue';
+import { render, screen, waitFor } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import BottomSheet from './BottomSheet.vue';
 import { defineComponent, ref } from 'vue';
@@ -62,7 +62,9 @@ it('handles <ControlledNonPresistentBottomSheet />', async () => {
   expect(dialog).toHaveAttribute('aria-modal', 'true');
   await user.click(document.body);
 
-  expect(dialog).toHaveAttribute('aria-modal', 'false');
+  await waitFor(() => {
+    expect(dialog).not.toBeInTheDocument();
+  });
 });
 
 it('handles <ControlledPresistentBottomSheet />', async () => {
@@ -78,5 +80,8 @@ it('handles <ControlledPresistentBottomSheet />', async () => {
 
   const button = screen.getByRole('button', { name: 'Close Bottom Sheet' });
   await user.click(button);
-  expect(dialog).toHaveAttribute('aria-modal', 'false');
+
+  await waitFor(() => {
+    expect(dialog).not.toBeInTheDocument();
+  });
 });
