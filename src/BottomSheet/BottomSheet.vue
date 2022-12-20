@@ -5,6 +5,7 @@
     onClickOutside,
     TransitionPresets,
     useTransition,
+    useScrollLock,
   } from '@vueuse/core';
 
   defineComponent({
@@ -34,8 +35,9 @@
   const bottomSheetRef = ref<HTMLElement | null>(null);
   const overlayOpacity = ref(0);
   const staticBottomY = ref(-2000); // default bottom sheet location when hidden
-  const isSwipeAnimate = ref(false);
+  const isTransitioning = ref(false);
   const bottomY = ref(staticBottomY.value);
+  const isBodyLocked = useScrollLock(document.documentElement);
 
   function setStaticBottomY() {
     let contentHeight = 0;
@@ -76,10 +78,10 @@
 
       // close bottom sheets when swipe down + swipe end
       if (tmpLength > tmpStaticBtmY + closingPrecentage) {
-        isSwipeAnimate.value = true;
+        isTransitioning.value = true;
         bottomY.value = -2000;
-        isSwipeAnimate.value = false;
-        document.documentElement.style.overflow = 'visible';
+        isTransitioning.value = false;
+        isBodyLocked.value = false;
         emit('update:modelValue', false);
         bottomY.value = staticBottomY.value;
       } else bottomY.value = staticBottomY.value;
@@ -93,13 +95,13 @@
 
   onClickOutside(bottomSheetRef, () => {
     if (props.persistent) return;
-    document.documentElement.style.overflow = 'visible';
+    isBodyLocked.value = false;
     emit('update:modelValue', false);
   });
 
   onMounted(() => {
     if (props.modelValue) {
-      document.documentElement.style.overflow = 'hidden';
+      isBodyLocked.value = true;
       overlayOpacity.value = 1;
     }
     const resizeObserver = new ResizeObserver(() => {
@@ -117,17 +119,17 @@
     () => props.modelValue,
     (val) => {
       if (val) {
-        document.documentElement.style.overflow = 'hidden';
+        isBodyLocked.value = true;
         overlayOpacity.value = 1;
       } else {
-        document.documentElement.style.overflow = 'visible';
+        isBodyLocked.value = false;
         overlayOpacity.value = 0;
       }
     }
   );
 
   watch(isSwiping, (val) => {
-    isSwipeAnimate.value = val;
+    isTransitioning.value = val;
   });
 </script>
 
@@ -146,11 +148,12 @@
       ref="bottomSheetRef"
       :style="{
         bottom: `${modelValue ? bottomY : bottomY * 2}px`,
+        opacity: modelValue ? 1 : opacity,
       }"
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
         'rounded-t-[20px] pt-6 px-4',
-        isSwipeAnimate ? '' : 'transition-all duration-500',
+        isTransitioning ? '' : 'transition-all duration-500',
       ]"
       :aria-modal="modelValue"
       role="dialog"
