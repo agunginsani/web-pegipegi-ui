@@ -34,8 +34,8 @@
   const contentRef = ref<HTMLElement | null>(null);
   const bottomSheetRef = ref<HTMLElement | null>(null);
   const overlayOpacity = ref(0);
-  const staticBottomY = ref(-2000); // default bottom sheet location when hidden
-  const bottomY = ref(staticBottomY.value);
+  const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
+  const bottomY = ref(bottomSheetBottomPosition.value);
   const isBodyLocked = useScrollLock(document.documentElement);
 
   function setStaticBottomY() {
@@ -48,28 +48,29 @@
     }
 
     if (contentHeight >= (93 / 100) * bodyHeight) {
-      staticBottomY.value = bodyHeight * -1;
+      bottomSheetBottomPosition.value = bodyHeight * -1;
     } else {
-      staticBottomY.value = bodyHeight * -2 + contentHeight + 40;
+      bottomSheetBottomPosition.value = bodyHeight * -2 + contentHeight + 40;
     }
   }
 
   const { isSwiping, lengthY } = useSwipe(swiperRef, {
     passive: false,
     onSwipe() {
-      const length = staticBottomY.value + lengthY.value;
+      const length = bottomSheetBottomPosition.value + lengthY.value;
       bottomY.value = length;
     },
     onSwipeEnd() {
-      const length = staticBottomY.value + lengthY.value;
+      const length = bottomSheetBottomPosition.value + lengthY.value;
       let tmpLength = length;
-      let tmpStaticBtmY = staticBottomY.value;
+      let tmpStaticBtmY = bottomSheetBottomPosition.value;
       let contentHeight = 0;
       let closingPrecentage = 0;
 
       // calculate precentage of closing bottom sheet
       if (length < 0) tmpLength = length * -1;
-      if (staticBottomY.value < 0) tmpStaticBtmY = staticBottomY.value * -1;
+      if (bottomSheetBottomPosition.value < 0)
+        tmpStaticBtmY = bottomSheetBottomPosition.value * -1;
       if (contentRef.value) contentHeight = contentRef.value.clientHeight;
 
       // bottom sheet will close when user swipe > 90% from content width
@@ -80,16 +81,16 @@
         bottomY.value = -2000;
         isBodyLocked.value = false;
         emit('update:modelValue', false);
-      } else bottomY.value = staticBottomY.value;
+      } else bottomY.value = bottomSheetBottomPosition.value;
     },
   });
 
-  const opacity = useTransition(overlayOpacity, {
+  const opacityTransition = useTransition(overlayOpacity, {
     duration: 500,
     transition: TransitionPresets.easeOutCirc,
   });
 
-  const bottomLocation = useTransition(bottomY, {
+  const bottomPositionTransition = useTransition(bottomY, {
     duration: 1,
   });
 
@@ -110,7 +111,7 @@
     }
   });
 
-  watch(staticBottomY, (val) => {
+  watch(bottomSheetBottomPosition, (val) => {
     bottomY.value = val;
   });
 
@@ -120,11 +121,11 @@
       if (val) {
         isBodyLocked.value = true;
         overlayOpacity.value = 1;
-        bottomY.value = staticBottomY.value;
+        bottomY.value = bottomSheetBottomPosition.value;
       } else {
         isBodyLocked.value = false;
         overlayOpacity.value = 0;
-        bottomY.value = staticBottomY.value * 2;
+        bottomY.value = bottomSheetBottomPosition.value * 2;
       }
     }
   );
@@ -138,19 +139,19 @@
   <div class="w-full fixed left-0 top-0">
     <!-- overlay -->
     <div
-      v-if="!(opacity === 0 && !modelValue)"
+      v-if="!(opacityTransition === 0 && !modelValue)"
       :style="{
-        opacity,
+        opacity: opacityTransition,
       }"
       class="w-[inherit] fixed h-[100vh] bg-[rgba(0,0,0,0.2)]"
     />
     <!-- bottom sheet -->
     <div
-      v-if="!(opacity === 0 && !modelValue)"
+      v-if="!(opacityTransition === 0 && !modelValue)"
       ref="bottomSheetRef"
       :style="{
-        bottom: `${bottomLocation}px`,
-        opacity: modelValue ? 1 : opacity,
+        bottom: `${bottomPositionTransition}px`,
+        opacity: modelValue ? 1 : opacityTransition,
       }"
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',

@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { render, screen, waitFor } from '@testing-library/vue';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import BottomSheet from './BottomSheet.vue';
 import { defineComponent, ref } from 'vue';
@@ -60,11 +64,11 @@ it('handles <ControlledNonPresistentBottomSheet />', async () => {
 
   const dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toHaveAttribute('aria-modal', 'true');
-  await user.click(document.body);
+  user.click(document.body);
 
-  await waitFor(() => {
-    expect(dialog).not.toBeInTheDocument();
-  });
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole('dialog', { name: 'Bottom Sheet' })
+  );
 });
 
 it('handles <ControlledPresistentBottomSheet />', async () => {
@@ -79,9 +83,9 @@ it('handles <ControlledPresistentBottomSheet />', async () => {
   expect(dialog).toHaveAttribute('aria-modal', 'true');
 
   const button = screen.getByRole('button', { name: 'Close Bottom Sheet' });
-  await user.click(button);
+  user.click(button);
 
-  await waitFor(() => {
-    expect(dialog).not.toBeInTheDocument();
-  });
+  await waitForElementToBeRemoved(() =>
+    screen.queryByRole('dialog', { name: 'Bottom Sheet' })
+  );
 });
