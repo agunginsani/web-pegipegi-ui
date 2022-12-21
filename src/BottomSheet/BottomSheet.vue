@@ -35,10 +35,10 @@
   const bottomSheetRef = ref<HTMLElement | null>(null);
   const overlayOpacity = ref(0);
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
-  const bottomY = ref(bottomSheetBottomPosition.value);
+  const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
   const isBodyLocked = useScrollLock(document.documentElement);
 
-  function setStaticBottomY() {
+  function setbottomSheetBottomPosition() {
     let contentHeight = 0;
     let bodyHeight = 0;
 
@@ -55,10 +55,9 @@
   }
 
   const { isSwiping, lengthY } = useSwipe(swiperRef, {
-    passive: false,
     onSwipe() {
       const length = bottomSheetBottomPosition.value + lengthY.value;
-      bottomY.value = length;
+      bottomSheetSwipeBottomPosition.value = length;
     },
     onSwipeEnd() {
       const length = bottomSheetBottomPosition.value + lengthY.value;
@@ -78,10 +77,11 @@
 
       // close bottom sheets when swipe down + swipe end
       if (tmpLength > tmpStaticBtmY + closingPrecentage) {
-        bottomY.value = -2000;
+        bottomSheetSwipeBottomPosition.value = -2000;
         isBodyLocked.value = false;
         emit('update:modelValue', false);
-      } else bottomY.value = bottomSheetBottomPosition.value;
+      } else
+        bottomSheetSwipeBottomPosition.value = bottomSheetBottomPosition.value;
     },
   });
 
@@ -90,9 +90,12 @@
     transition: TransitionPresets.easeOutCirc,
   });
 
-  const bottomPositionTransition = useTransition(bottomY, {
-    duration: 1,
-  });
+  const bottomPositionTransition = useTransition(
+    bottomSheetSwipeBottomPosition,
+    {
+      duration: 1,
+    }
+  );
 
   onClickOutside(bottomSheetRef, () => {
     if (props.persistent) return;
@@ -101,7 +104,7 @@
   });
 
   const resizeObserver = new ResizeObserver(() => {
-    if (contentRef.value) setStaticBottomY();
+    if (contentRef.value) setbottomSheetBottomPosition();
   });
 
   onMounted(() => {
@@ -112,7 +115,7 @@
   });
 
   watch(bottomSheetBottomPosition, (val) => {
-    bottomY.value = val;
+    bottomSheetSwipeBottomPosition.value = val;
   });
 
   watch(
@@ -121,11 +124,12 @@
       if (val) {
         isBodyLocked.value = true;
         overlayOpacity.value = 1;
-        bottomY.value = bottomSheetBottomPosition.value;
+        bottomSheetSwipeBottomPosition.value = bottomSheetBottomPosition.value;
       } else {
         isBodyLocked.value = false;
         overlayOpacity.value = 0;
-        bottomY.value = bottomSheetBottomPosition.value * 2;
+        bottomSheetSwipeBottomPosition.value =
+          bottomSheetBottomPosition.value * 2;
       }
     }
   );
