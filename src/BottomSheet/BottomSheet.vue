@@ -5,7 +5,6 @@
     onClickOutside,
     TransitionPresets,
     useTransition,
-    useScrollLock,
   } from '@vueuse/core';
 
   defineComponent({
@@ -36,7 +35,6 @@
   const overlayOpacity = ref(0);
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
   const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
-  const isBodyLocked = useScrollLock(document.documentElement);
 
   function setbottomSheetBottomPosition() {
     let contentHeight = 0;
@@ -78,7 +76,6 @@
       // close bottom sheets when swipe down + swipe end
       if (tmpLength > tmpStaticBtmY + closingPrecentage) {
         bottomSheetSwipeBottomPosition.value = -2000;
-        isBodyLocked.value = false;
         emit('update:modelValue', false);
       } else
         bottomSheetSwipeBottomPosition.value = bottomSheetBottomPosition.value;
@@ -99,7 +96,7 @@
 
   onClickOutside(bottomSheetRef, () => {
     if (props.persistent) return;
-    isBodyLocked.value = false;
+    document.documentElement.style.overflow = 'visible';
     emit('update:modelValue', false);
   });
 
@@ -109,7 +106,7 @@
 
   onMounted(() => {
     if (props.modelValue) {
-      isBodyLocked.value = true;
+      document.documentElement.style.overflow = 'hidden';
       overlayOpacity.value = 1;
     }
   });
@@ -122,11 +119,11 @@
     () => props.modelValue,
     (val) => {
       if (val) {
-        isBodyLocked.value = true;
+        document.documentElement.style.overflow = 'hidden';
         overlayOpacity.value = 1;
         bottomSheetSwipeBottomPosition.value = bottomSheetBottomPosition.value;
       } else {
-        isBodyLocked.value = false;
+        document.documentElement.style.overflow = 'visible';
         overlayOpacity.value = 0;
         bottomSheetSwipeBottomPosition.value =
           bottomSheetBottomPosition.value * 2;
