@@ -5,6 +5,7 @@
     onClickOutside,
     TransitionPresets,
     useTransition,
+    useResizeObserver,
   } from '@vueuse/core';
 
   defineComponent({
@@ -36,7 +37,7 @@
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
   const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
 
-  function setbottomSheetBottomPosition() {
+  useResizeObserver(contentRef, () => {
     let contentHeight = 0;
     let bodyHeight = 0;
 
@@ -50,7 +51,7 @@
     } else {
       bottomSheetBottomPosition.value = bodyHeight * -2 + contentHeight + 40;
     }
-  }
+  });
 
   const { isSwiping, lengthY } = useSwipe(swiperRef, {
     onSwipe() {
@@ -100,18 +101,11 @@
     emit('update:modelValue', false);
   });
 
-  const resizeObserver = new ResizeObserver(() => {
-    if (contentRef.value) setbottomSheetBottomPosition();
-  });
-
   onMounted(() => {
     if (props.modelValue) {
       document.documentElement.style.overflow = 'hidden';
       overlayOpacity.value = 1;
     }
-
-    if (contentRef.value)
-      resizeObserver.observe(contentRef.value as HTMLElement);
   });
 
   watch(bottomSheetBottomPosition, (val) => {
