@@ -109,6 +109,9 @@
       document.documentElement.style.overflow = 'hidden';
       overlayOpacity.value = 1;
     }
+
+    if (contentRef.value)
+      resizeObserver.observe(contentRef.value as HTMLElement);
   });
 
   watch(bottomSheetBottomPosition, (val) => {
@@ -130,10 +133,6 @@
       }
     }
   );
-
-  watch(contentRef, (val) => {
-    if (val) resizeObserver.observe(val as HTMLElement);
-  });
 </script>
 
 <template>
