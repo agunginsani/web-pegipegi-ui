@@ -132,12 +132,12 @@
   );
 
   watch(contentRef, (val) => {
-    if (val) resizeObserver.observe(contentRef.value as HTMLElement);
+    if (val) resizeObserver.observe(val as HTMLElement);
   });
 </script>
 
 <template>
-  <div class="w-full fixed left-0 top-0">
+  <div class="w-full fixed left-0 top-0 z-50">
     <!-- overlay -->
     <div
       v-if="!(opacityTransition === 0 && !modelValue)"
