@@ -142,7 +142,6 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
       <BottomSheet v-model="isBottomSheetVisible" aria-labelledby="title">
         <div
           id="scrollable"
-          class="touch-pan-y"
           class="w-full h-[90vh] overflow-y-auto"
         >
           <div class="w-full h-[400px] bg-purple-25 mb-2">
