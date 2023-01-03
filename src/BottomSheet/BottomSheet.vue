@@ -155,7 +155,7 @@
       }"
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
-        'rounded-t-[20px] pt-6 px-4',
+        'rounded-t-[20px] pt-6',
         isSwiping ? '' : 'transition-all duration-500',
       ]"
       :aria-modal="modelValue"
