@@ -41,17 +41,19 @@ export const NonPersistent: StoryFn<typeof BottomSheet> = (args) => ({
       </div>
 
       <BottomSheet v-model="isBottomSheetVisible" aria-labelledby="title">
-        <div id="title">Non-Presistent Bottom Sheet</div>
-        <div>Default Content</div>
-        <div v-if="hiddenContent" class="w-full h-[75vh] mb-5 bg-red-100">
-          Expandable Content Area
+        <div class="px-4">
+          <div id="title">Non-Presistent Bottom Sheet</div>
+          <div>Default Content</div>
+          <div v-if="hiddenContent" class="w-full h-[75vh] mb-5 bg-red-100">
+            Expandable Content Area
+          </div>
+          <button
+            class="bg-orange-500 w-60 text-white rounded-lg mb-3"
+            @click="hiddenContent = !hiddenContent"
+          >
+            {{ !hiddenContent ? "Show" : "Hide" }} Expandable Content
+          </button>
         </div>
-        <button
-          class="bg-orange-500 w-60 text-white rounded-lg mb-3"
-          @click="hiddenContent = !hiddenContent"
-        >
-          {{ !hiddenContent ? "Show" : "Hide" }} Expandable Content
-        </button>
       </BottomSheet>
     </div>
     `,
@@ -95,13 +97,15 @@ export const Persistent: StoryFn<typeof BottomSheet> = (args) => ({
         v-model="isBottomSheetVisible"
         aria-labelledby="title"
       >
-        <div id="title">Presistent Bottom Sheet</div>
-        <button
-          class="bg-orange-500 p-2 text-white rounded-lg mb-3"
-          @click="isBottomSheetVisible = false"
-        >
-          Close Modal
-        </button>
+        <div class="px-4">
+          <div id="title">Presistent Bottom Sheet</div>
+          <button
+            class="bg-orange-500 p-2 text-white rounded-lg mb-3"
+            @click="isBottomSheetVisible = false"
+          >
+            Close Modal
+          </button>
+        </div>
       </BottomSheet>
     </div>
       `,
@@ -142,7 +146,6 @@ export const Scrollable: StoryFn<typeof BottomSheet> = (args) => ({
       <BottomSheet v-model="isBottomSheetVisible" aria-labelledby="title">
         <div
           id="scrollable"
-          class="touch-pan-y"
           class="w-full h-[90vh] overflow-y-auto"
         >
           <div class="w-full h-[400px] bg-purple-25 mb-2">

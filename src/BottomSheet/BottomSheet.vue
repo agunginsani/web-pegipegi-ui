@@ -5,6 +5,7 @@
     onClickOutside,
     TransitionPresets,
     useTransition,
+    useResizeObserver,
   } from '@vueuse/core';
 
   defineComponent({
@@ -36,7 +37,7 @@
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
   const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
 
-  function setbottomSheetBottomPosition() {
+  useResizeObserver(contentRef, () => {
     let contentHeight = 0;
     let bodyHeight = 0;
 
@@ -50,7 +51,7 @@
     } else {
       bottomSheetBottomPosition.value = bodyHeight * -2 + contentHeight + 40;
     }
-  }
+  });
 
   const { isSwiping, lengthY } = useSwipe(swiperRef, {
     onSwipe() {
@@ -100,10 +101,6 @@
     emit('update:modelValue', false);
   });
 
-  const resizeObserver = new ResizeObserver(() => {
-    if (contentRef.value) setbottomSheetBottomPosition();
-  });
-
   onMounted(() => {
     if (props.modelValue) {
       document.documentElement.style.overflow = 'hidden';
@@ -130,14 +127,10 @@
       }
     }
   );
-
-  watch(contentRef, (val) => {
-    if (val) resizeObserver.observe(contentRef.value as HTMLElement);
-  });
 </script>
 
 <template>
-  <div class="w-full fixed left-0 top-0">
+  <div class="w-full fixed left-0 top-0 z-50">
     <!-- overlay -->
     <div
       v-if="!(opacityTransition === 0 && !modelValue)"
@@ -156,7 +149,7 @@
       }"
       :class="[
         'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
-        'rounded-t-[20px] pt-6 px-4',
+        'rounded-t-[20px] pt-6',
         isSwiping ? '' : 'transition-all duration-500',
       ]"
       :aria-modal="modelValue"
