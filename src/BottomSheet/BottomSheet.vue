@@ -96,7 +96,7 @@
   );
 
   onClickOutside(bottomSheetRef, () => {
-    if (props.persistent) return;
+    if (props.persistent || opacityTransition.value < 1) return;
     document.documentElement.style.overflow = 'visible';
     emit('update:modelValue', false);
   });
