@@ -84,6 +84,22 @@ You need to install [Node.js](https://nodejs.dev/en/download/) first.
    npm install
    ```
 
+### Release Management
+
+1. Update package version using [npm-version](https://docs.npmjs.com/cli/v9/commands/npm-version)
+
+   ```sh
+   npm version <major | minor | patch>
+   ```
+
+2. Push the commit
+
+   ```sh
+   git push
+   ```
+
+3. Create [GitHub release](https://github.com/pegipegi/web-pegipegi-ui/releases/new)
+
 ### Running Local Development Server
 
 ```bash
