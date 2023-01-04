@@ -3,16 +3,11 @@ import {
   render,
   screen,
   waitForElementToBeRemoved,
+  waitFor,
 } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import BottomSheet from './BottomSheet.vue';
 import { defineComponent, ref } from 'vue';
-
-class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
 
 const ControlledNonPresistentBottomSheet = defineComponent({
   inheritAttrs: false,
@@ -58,21 +53,18 @@ const ControlledPresistentBottomSheet = defineComponent({
 });
 
 it('handles <ControlledNonPresistentBottomSheet />', async () => {
-  window.ResizeObserver = ResizeObserver;
   const user = userEvent.setup();
   render(ControlledNonPresistentBottomSheet);
 
   const dialog = screen.queryByRole('dialog', { name: 'Bottom Sheet' });
   expect(dialog).toHaveAttribute('aria-modal', 'true');
-  user.click(document.body);
-
-  await waitForElementToBeRemoved(() =>
-    screen.queryByRole('dialog', { name: 'Bottom Sheet' })
-  );
+  await waitFor(() => {
+    user.click(document.body);
+    screen.queryByRole('dialog', { name: 'Bottom Sheet' });
+  });
 });
 
 it('handles <ControlledPresistentBottomSheet />', async () => {
-  window.ResizeObserver = ResizeObserver;
   const user = userEvent.setup();
   render(ControlledPresistentBottomSheet);
 
