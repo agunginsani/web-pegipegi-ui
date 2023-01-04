@@ -81,6 +81,7 @@
       } else
         bottomSheetSwipeBottomPosition.value = bottomSheetBottomPosition.value;
     },
+    threshold: 0,
   });
 
   const opacityTransition = useTransition(overlayOpacity, {
