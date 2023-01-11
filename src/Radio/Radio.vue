@@ -46,8 +46,8 @@
     <div
       :class="[
         'relative w-[20px] h-[20px] rounded-full border-[2.5px]',
-        'peer-disabled:border-neutral-tuna-200 peer-disabled:cursor-not-allowed border-orange-inter-600 cursor-pointer',
-        '[&>*]:hidden peer-checked:[&>*]:block peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:[&>*]:bg-orange-inter-600',
+        'peer-disabled:border-neutral-tuna-200 peer-disabled:cursor-not-allowed peer-checked:border-purple-affair-700 border-neutral-tuna-300 cursor-pointer',
+        '[&>*]:hidden peer-checked:[&>*]:block peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:[&>*]:bg-purple-affair-700',
       ]"
     >
       <div
