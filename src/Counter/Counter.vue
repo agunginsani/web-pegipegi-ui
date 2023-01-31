@@ -72,7 +72,7 @@
         xmlns="http://www.w3.org/2000/svg"
         class="m-auto"
         :class="
-          disabledDecrement ? 'fill-neutral-tuna-200' : 'fill-orange-inter-600'
+          disabledDecrement ? 'fill-neutral-tuna-200' : 'fill-purple-affair-700'
         "
       >
         <path
@@ -101,7 +101,7 @@
         xmlns="http://www.w3.org/2000/svg"
         class="m-auto"
         :class="
-          disabledIncrement ? 'fill-neutral-tuna-200' : 'fill-orange-inter-600'
+          disabledIncrement ? 'fill-neutral-tuna-200' : 'fill-purple-affair-700'
         "
       >
         <path
