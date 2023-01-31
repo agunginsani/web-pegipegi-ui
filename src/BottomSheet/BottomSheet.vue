@@ -131,14 +131,14 @@
 </script>
 
 <template>
-  <div class="w-full fixed left-0 top-0 z-50">
+  <div class="fixed left-0 top-0 z-50 w-full">
     <!-- overlay -->
     <div
       v-if="!(opacityTransition === 0 && !modelValue)"
       :style="{
         opacity: opacityTransition,
       }"
-      class="w-[inherit] fixed h-[100vh] bg-[rgba(0,0,0,0.2)]"
+      class="fixed h-[100vh] w-[inherit] bg-[rgba(0,0,0,0.2)]"
     />
     <!-- bottom sheet -->
     <div
@@ -149,7 +149,7 @@
         opacity: modelValue ? 1 : opacityTransition,
       }"
       :class="[
-        'w-[inherit] fixed h-[200vh] bottom-0 bg-neutral-tuna-0',
+        'fixed bottom-0 h-[200vh] w-[inherit] bg-neutral-tuna-0',
         'rounded-t-[20px] pt-6',
         isSwiping ? '' : 'transition-all duration-500',
       ]"
@@ -160,9 +160,9 @@
       <div
         v-if="!props.persistent"
         ref="swiperRef"
-        class="w-full flex justify-center pb-2 absolute left-0 top-2 h-16 -translate-y-5"
+        class="absolute left-0 top-2 flex h-16 w-full -translate-y-5 justify-center pb-2"
       >
-        <div class="rounded-full w-12 h-1 bg-neutral-tuna-200 translate-y-5" />
+        <div class="h-1 w-12 translate-y-5 rounded-full bg-neutral-tuna-200" />
       </div>
 
       <div ref="contentRef" class="pb-2">

@@ -58,10 +58,10 @@
 </script>
 
 <template>
-  <div class="flex gap-1.5 items-center">
+  <div class="flex items-center gap-1.5">
     <button
-      class="w-9 h-9 rounded-full bg-neutral-tuna-50"
-      :class="{ 'cursor-auto pointer-events-none': disabledDecrement }"
+      class="h-9 w-9 rounded-full bg-neutral-tuna-50"
+      :class="{ 'pointer-events-none cursor-auto': disabledDecrement }"
       @click="decrementCounter()"
     >
       <svg
@@ -83,14 +83,14 @@
     </button>
     <input
       readonly
-      class="w-9 text-center text-lg font-bold text-neutral-tuna-tuna-900 outline-0"
+      class="text-neutral-tuna-tuna-900 w-9 text-center text-lg font-bold outline-0"
       :class="{ 'text-neutral-tuna-200': disabled }"
       :value="counterDisplay"
       v-bind="$attrs"
     />
     <button
-      class="w-9 h-9 rounded-full bg-neutral-tuna-50"
-      :class="{ 'cursor-auto pointer-events-none': disabledIncrement }"
+      class="h-9 w-9 rounded-full bg-neutral-tuna-50"
+      :class="{ 'pointer-events-none cursor-auto': disabledIncrement }"
       @click="incrementCounter()"
     >
       <svg

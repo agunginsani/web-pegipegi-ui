@@ -49,15 +49,15 @@
     <div
       :class="[
         // base styling
-        'top-2 w-[52px] rounded-full bg-neutral-tuna-50 h-[16px] translate-y-[8px] transition-all duration-300 peer-checked:[&>*]:left-6',
+        'top-2 h-[16px] w-[52px] translate-y-[8px] rounded-full bg-neutral-tuna-50 transition-all duration-300 peer-checked:[&>*]:left-6',
         // enable modifier
         'peer-checked:bg-purple-affair-200 peer-checked:[&>*]:bg-purple-affair-700',
         // disabled modifier
-        'peer-disabled:[&>*]:bg-neutral-tuna-200 peer-disabled:bg-neutral-tuna-25 peer-checked:peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:peer-disabled:bg-neutral-tuna-50',
+        'peer-disabled:bg-neutral-tuna-25 peer-checked:peer-disabled:bg-neutral-tuna-50 peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:peer-disabled:[&>*]:bg-neutral-tuna-200',
       ]"
     >
       <div
-        class="rounded-full w-[28px] h-[28px] bg-neutral-tuna-300 absolute top-[2px] left-0 duration-300 transition-all -translate-y-[8px]"
+        class="absolute top-[2px] left-0 h-[28px] w-[28px] -translate-y-[8px] rounded-full bg-neutral-tuna-300 transition-all duration-300"
       ></div>
     </div>
   </label>

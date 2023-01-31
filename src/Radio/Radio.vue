@@ -45,13 +45,13 @@
     />
     <div
       :class="[
-        'relative w-[20px] h-[20px] rounded-full border-[2.5px]',
-        'peer-disabled:border-neutral-tuna-200 peer-disabled:cursor-not-allowed peer-checked:border-purple-affair-700 border-neutral-tuna-300 cursor-pointer',
-        '[&>*]:hidden peer-checked:[&>*]:block peer-disabled:[&>*]:bg-neutral-tuna-200 peer-checked:[&>*]:bg-purple-affair-700',
+        'relative h-[20px] w-[20px] rounded-full border-[2.5px]',
+        'cursor-pointer border-neutral-tuna-300 peer-checked:border-purple-affair-700 peer-disabled:cursor-not-allowed peer-disabled:border-neutral-tuna-200',
+        '[&>*]:hidden peer-checked:[&>*]:block peer-checked:[&>*]:bg-purple-affair-700 peer-disabled:[&>*]:bg-neutral-tuna-200',
       ]"
     >
       <div
-        class="absolute w-[10px] h-[10px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full"
+        class="absolute top-1/2 left-1/2 h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 transform rounded-full"
       />
     </div>
   </label>
