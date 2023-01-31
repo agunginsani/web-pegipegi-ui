@@ -23,7 +23,7 @@
 <template>
   <div
     :class="[
-      'flex justify-center items-center overflow-hidden rounded-full ring-2 ring-white',
+      'flex items-center justify-center overflow-hidden rounded-full ring-2 ring-white',
       {
         'bg-orange-inter-600 text-white': !src,
         'h-[40px] w-[40px] text-base': size === 'small',

@@ -44,7 +44,7 @@
       v-for="fullStar in max"
       :key="fullStar"
       :class="[
-        'flex hover:scale-125 duration-100 ease-linear',
+        'flex duration-100 ease-linear hover:scale-125',
         { 'pointer-events-none': readonly },
       ]"
     >
@@ -110,7 +110,7 @@
           <label
             :for="`rating-${uuid}-${ratingValue}`"
             :class="[
-              'cursor-pointer relative',
+              'relative cursor-pointer',
               { 'last-of-type:pr-[16px]': ratingValue !== max },
             ]"
             @mouseover="ratingHover = ratingValue"

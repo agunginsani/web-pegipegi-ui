@@ -41,7 +41,7 @@
 <template>
   <div
     :class="[
-      'relative p-3 pr-7 h-full w-full border rounded-lg rounded-tl-none outline-none',
+      'relative h-full w-full rounded-lg rounded-tl-none border p-3 pr-7 outline-none',
       // bg
       disabled ? 'bg-neutral-tuna-25' : error ? 'bg-red-flower-50' : 'bg-white',
       // text color
@@ -60,7 +60,7 @@
   >
     <textarea
       :class="[
-        '-mb-2 h-full w-full border-none resize-none outline-none bg-transparent placeholder:text-neutral-tuna-300 placeholder:disabled:text-neutral-tuna-100',
+        '-mb-2 h-full w-full resize-none border-none bg-transparent outline-none placeholder:text-neutral-tuna-300 placeholder:disabled:text-neutral-tuna-100',
       ]"
       :disabled="disabled"
       :value="modelValue"

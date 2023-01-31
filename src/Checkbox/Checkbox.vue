@@ -57,33 +57,33 @@
     />
     <!-- Enabled state. -->
     <img
-      class="peer-disabled:hidden peer-indeterminate:hidden peer-checked:hidden"
+      class="peer-checked:hidden peer-indeterminate:hidden peer-disabled:hidden"
       src="./outline.svg"
       alt=""
     />
     <img
-      class="hidden peer-disabled:hidden peer-checked:inline peer-indeterminate:hidden"
+      class="hidden peer-checked:inline peer-indeterminate:hidden peer-disabled:hidden"
       src="./checked.svg"
       alt=""
     />
     <img
-      class="hidden peer-disabled:hidden peer-indeterminate:inline"
+      class="hidden peer-indeterminate:inline peer-disabled:hidden"
       src="./indeterminate.svg"
       alt=""
     />
     <!-- Disabled state. -->
     <img
-      class="peer-enabled:hidden peer-indeterminate:hidden peer-checked:hidden"
+      class="peer-checked:hidden peer-indeterminate:hidden peer-enabled:hidden"
       src="./outline-disabled.svg"
       alt=""
     />
     <img
-      class="hidden peer-enabled:hidden peer-checked:inline peer-indeterminate:hidden"
+      class="hidden peer-checked:inline peer-indeterminate:hidden peer-enabled:hidden"
       src="./checked-disabled.svg"
       alt=""
     />
     <img
-      class="hidden peer-enabled:hidden peer-indeterminate:inline"
+      class="hidden peer-indeterminate:inline peer-enabled:hidden"
       src="./indeterminate-disabled.svg"
       alt=""
     />
