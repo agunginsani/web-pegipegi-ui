@@ -18,6 +18,7 @@
   const props = withDefaults(defineProps<BannerProps>(), {
     color: 'neutral',
     priority: 'high',
+    block: true,
   });
 
   type BannerEmits = {
