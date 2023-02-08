@@ -36,7 +36,7 @@
   const overlayOpacity = ref(0);
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
   const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
-  const screenHeight = ref(0)
+  const screenHeight = ref(0);
 
   useResizeObserver(contentRef, () => {
     let contentHeight = 0;
@@ -106,7 +106,7 @@
       document.documentElement.style.overflow = 'hidden';
       overlayOpacity.value = 1;
     }
-    screenHeight.value = document.documentElement.clientHeight
+    screenHeight.value = document.documentElement.clientHeight;
   });
 
   watch(bottomSheetBottomPosition, (val) => {
