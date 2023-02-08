@@ -48,7 +48,8 @@
     if (contentHeight >= (93 / 100) * screenHeight.value) {
       bottomSheetBottomPosition.value = screenHeight.value * -1;
     } else {
-      bottomSheetBottomPosition.value = screenHeight.value * -2 + contentHeight + 40;
+      bottomSheetBottomPosition.value =
+        screenHeight.value * -2 + contentHeight + 40;
     }
   });
 
@@ -137,7 +138,7 @@
       v-if="!(opacityTransition === 0 && !modelValue)"
       :style="{
         opacity: opacityTransition,
-        height: `${screenHeight}px`
+        height: `${screenHeight}px`,
       }"
       class="fixed w-[inherit] bg-[rgba(0,0,0,0.2)]"
     />
@@ -148,7 +149,7 @@
       :style="{
         bottom: `${bottomPositionTransition}px`,
         opacity: modelValue ? 1 : opacityTransition,
-        height: `${screenHeight * 2}px`
+        height: `${screenHeight * 2}px`,
       }"
       :class="[
         'fixed bottom-0 w-[inherit] bg-neutral-tuna-0',
