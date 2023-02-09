@@ -12,13 +12,11 @@
   type BannerProps = {
     color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
     priority?: 'high' | 'low';
-    block?: boolean;
   };
 
   const props = withDefaults(defineProps<BannerProps>(), {
     color: 'neutral',
     priority: 'high',
-    block: true,
   });
 
   type BannerEmits = {
@@ -151,7 +149,7 @@
   <div
     :style="{ backgroundImage: `url(${patternIcon})` }"
     class="relative flex items-stretch gap-3 rounded-lg bg-[length:105px_72px] bg-right-bottom bg-no-repeat py-2 pl-5 pr-11"
-    :class="[wrapperStyle, !block ? 'max-w-xs' : '']"
+    :class="wrapperStyle"
   >
     <slot name="icon" />
     <div class="text-sm" :class="contentStyle">
