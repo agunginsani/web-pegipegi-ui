@@ -36,20 +36,20 @@
   const overlayOpacity = ref(0);
   const bottomSheetBottomPosition = ref(-2000); // default bottom sheet location when hidden
   const bottomSheetSwipeBottomPosition = ref(bottomSheetBottomPosition.value);
+  const screenHeight = ref(0);
 
   useResizeObserver(contentRef, () => {
     let contentHeight = 0;
-    let bodyHeight = 0;
 
-    bodyHeight = document.documentElement.clientHeight;
     if (contentRef.value) {
       contentHeight = contentRef.value.clientHeight;
     }
 
-    if (contentHeight >= (93 / 100) * bodyHeight) {
-      bottomSheetBottomPosition.value = bodyHeight * -1;
+    if (contentHeight >= (93 / 100) * screenHeight.value) {
+      bottomSheetBottomPosition.value = screenHeight.value * -1;
     } else {
-      bottomSheetBottomPosition.value = bodyHeight * -2 + contentHeight + 40;
+      bottomSheetBottomPosition.value =
+        screenHeight.value * -2 + contentHeight + 40;
     }
   });
 
@@ -107,6 +107,7 @@
       document.documentElement.style.overflow = 'hidden';
       overlayOpacity.value = 1;
     }
+    screenHeight.value = document.documentElement.clientHeight;
   });
 
   watch(bottomSheetBottomPosition, (val) => {
@@ -137,8 +138,9 @@
       v-if="!(opacityTransition === 0 && !modelValue)"
       :style="{
         opacity: opacityTransition,
+        height: `${screenHeight}px`,
       }"
-      class="fixed h-[100vh] w-[inherit] bg-[rgba(0,0,0,0.2)]"
+      class="fixed w-[inherit] bg-[rgba(0,0,0,0.2)]"
     />
     <!-- bottom sheet -->
     <div
@@ -147,9 +149,10 @@
       :style="{
         bottom: `${bottomPositionTransition}px`,
         opacity: modelValue ? 1 : opacityTransition,
+        height: `${screenHeight * 2}px`,
       }"
       :class="[
-        'fixed bottom-0 h-[200vh] w-[inherit] bg-neutral-tuna-0',
+        'fixed bottom-0 w-[inherit] bg-neutral-tuna-0',
         'rounded-t-[20px] pt-6',
         isSwiping ? '' : 'transition-all duration-500',
       ]"
