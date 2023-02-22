@@ -1,6 +1,6 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue';
-  import patternIcon from './pattern.svg';
+  import patternIcon from './pattern.webp';
 
   export default defineComponent({
     name: 'PBanner',
