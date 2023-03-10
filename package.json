@@ -1,20 +1,25 @@
 {
   "name": "@pegipegi/web-pegipegi-ui",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.9",
   "type": "module",
-  "types": "./dist/types/main.d.ts",
-  "main": "./dist/main.umd.cjs",
-  "module": "./dist/main.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.umd.cjs"
+      "main": "./dist/lib/lib.umd.cjs",
+      "module": "./dist/lib/lib.js",
+      "import": "./dist/lib/lib.js",
+      "require": "./dist/lib/lib.umd.cjs"
     },
-    "./style": "./dist/main.css",
-    "./tailwind-config": "./dist/tailwind.config.cjs"
+    "./module": {
+      "main": "./dist/module/module.cjs",
+      "types": "./dist/module/types.d.ts",
+      "import": "./dist/module/module.mjs",
+      "require": "./dist/module/module.cjs"
+    },
+    "./style": "./dist/lib/main.css",
+    "./tailwind-config": "./dist/lib/tailwind.config.cjs"
   },
   "publishConfig": {
     "@pegipegi:registry": "https://npm.pkg.github.com"
@@ -28,11 +33,12 @@
   "scripts": {
     "dev": "start-storybook -p 6006",
     "build-lib": "vue-tsc --noEmit && vite build && vue-tsc -p tsconfig.lib.json",
+    "build-module": "nuxt-module-build --outDir dist/module",
     "build-storybook": "build-storybook",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "lint-fix": "eslint src/**/*.{ts,tsx,vue} --fix",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build-lib",
+    "prepublishOnly": "npm run build-lib && npm run build-module",
     "preview": "vite serve storybook-static",
     "test": "vitest",
     "test-coverage": "vitest run --coverage"
