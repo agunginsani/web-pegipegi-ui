@@ -1,11 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PAvatar',
-  });
-</script>
-
 <script lang="ts" setup>
   type AvatarProps = {
     alt?: string;
@@ -17,6 +9,14 @@
     alt: '',
     src: '',
     size: 'medium',
+  });
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PAvatar',
   });
 </script>
 

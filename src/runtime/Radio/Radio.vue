@@ -1,12 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PRadio',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
   type RadioProps = {
     value?: string;
@@ -29,6 +20,15 @@
   function handleRadioChange(event: Event) {
     emit('update:modelValue', (event.target as HTMLInputElement).value);
   }
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PRadio',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

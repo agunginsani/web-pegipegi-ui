@@ -1,13 +1,5 @@
-<script lang="ts">
-  import { defineComponent, computed, onMounted } from 'vue';
-
-  export default defineComponent({
-    name: 'PCounter',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
+  import { defineComponent, computed, onMounted } from 'vue';
   type CounterProps = {
     max?: number;
     min?: number;
@@ -55,6 +47,13 @@
   function decrementCounter(): void {
     emit('update:modelValue', props.modelValue - 1);
   }
+</script>
+
+<script lang="ts">
+  export default defineComponent({
+    name: 'PCounter',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

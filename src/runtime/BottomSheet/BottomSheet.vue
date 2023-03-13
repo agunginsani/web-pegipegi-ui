@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
   import { defineComponent, ref, onMounted, watch } from 'vue';
   import {
     useSwipe,
@@ -8,13 +8,6 @@
     useResizeObserver,
   } from '@vueuse/core';
 
-  defineComponent({
-    name: 'PBottomSheet',
-    inheritAttrs: false,
-  });
-</script>
-
-<script lang="ts" setup>
   type BottomSheetProps = {
     modelValue?: boolean;
     persistent?: boolean;
@@ -129,6 +122,13 @@
       }
     }
   );
+</script>
+
+<script lang="ts">
+  defineComponent({
+    name: 'PBottomSheet',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

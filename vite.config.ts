@@ -10,7 +10,7 @@ export default defineConfig({
     vueJsx(),
     viteStaticCopy({
       targets: [
-        { src: 'src/main.css', dest: '.' },
+        { src: 'src/runtime/main.css', dest: '.' },
         { src: 'tailwind.config.cjs', dest: '.' },
       ],
     }),

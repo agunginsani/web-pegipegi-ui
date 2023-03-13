@@ -1,14 +1,6 @@
-<script lang="ts">
+<script lang="ts" setup>
   import { defineComponent, computed } from 'vue';
   import patternIcon from './pattern.webp';
-
-  export default defineComponent({
-    name: 'PBanner',
-    inheritAttrs: false,
-  });
-</script>
-
-<script lang="ts" setup>
   type BannerProps = {
     color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
     priority?: 'high' | 'low';
@@ -142,6 +134,13 @@
       default:
         return 'fill-orange-inter-600';
     }
+  });
+</script>
+
+<script lang="ts">
+  export default defineComponent({
+    name: 'PBanner',
+    inheritAttrs: false,
   });
 </script>
 

@@ -1,11 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  defineComponent({
-    name: 'PInput',
-  });
-</script>
-
 <script lang="ts" setup>
   type InputProps = {
     size?: 'small' | 'medium' | 'large';
@@ -32,6 +24,14 @@
     emit('input', event);
     emit('update:modelValue', (event.target as HTMLInputElement).value);
   }
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  defineComponent({
+    name: 'PInput',
+  });
 </script>
 
 <template>

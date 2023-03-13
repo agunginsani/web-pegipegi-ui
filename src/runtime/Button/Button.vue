@@ -1,12 +1,5 @@
-<script lang="ts">
-  import { defineComponent, ref, onMounted } from 'vue';
-
-  defineComponent({
-    name: 'PButton',
-  });
-</script>
-
 <script lang="ts" setup>
+  import { defineComponent, ref, onMounted } from 'vue';
   type ButtonProps = {
     variant?: 'filled' | 'outline' | 'text';
     size?: 'small' | 'medium' | 'large';
@@ -49,6 +42,12 @@
   const buttonRef = ref<HTMLButtonElement | null>(null);
   onMounted(() => {
     buttonRef.value?.addEventListener('click', createRippleEffect);
+  });
+</script>
+
+<script lang="ts">
+  defineComponent({
+    name: 'PButton',
   });
 </script>
 

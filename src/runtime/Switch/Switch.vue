@@ -1,12 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PSwitch',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
   type SwitchProps = {
     disabled?: boolean;
@@ -33,6 +24,15 @@
     if (checked) results.push(value);
     emit('update:modelValue', results);
   }
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PSwitch',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

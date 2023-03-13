@@ -1,10 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-  export default defineComponent({
-    name: 'PAlert',
-  });
-</script>
-
 <script lang="ts" setup>
   type AlertProps = {
     color?: 'accent' | 'warning' | 'positive' | 'negative';
@@ -15,6 +8,12 @@
   });
 </script>
 
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  export default defineComponent({
+    name: 'PAlert',
+  });
+</script>
 <template>
   <div
     role="alert"
