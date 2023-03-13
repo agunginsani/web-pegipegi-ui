@@ -4,6 +4,8 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
+// TODO: sortout types
+
 export default defineConfig({
   plugins: [
     vue(),
