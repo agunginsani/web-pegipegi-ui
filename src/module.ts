@@ -1,7 +1,12 @@
-import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit';
+import {
+  defineNuxtModule,
+  createResolver,
+  addComponent,
+  installModule,
+  // addComponentsDir,
+} from '@nuxt/kit';
 
-// TODO: read files using fs
-// TODO: inject config file
+// TODO: use addComponentsDir
 const components = [
   'Button',
   'Input',
@@ -22,11 +27,9 @@ export default defineNuxtModule({
     name: 'pegipegi-web-ui',
     configKey: 'ui',
   },
-  // Default configuration options of the Nuxt module
-  defaults: {},
-  setup(_, nuxt) {
+  async setup(_, nuxt) {
     const resolver = createResolver(import.meta.url);
-    nuxt.options.modules.push('@nuxtjs/tailwindcss');
+
     nuxt.options.css.push(resolver.resolve('./runtime/main.css'));
     nuxt.options.postcss = {
       plugins: {
@@ -34,6 +37,10 @@ export default defineNuxtModule({
         autoprefixer: {},
       },
     };
+
+    await installModule('@nuxtjs/tailwindcss', {
+      configPath: resolver.resolve('./runtime/tailwind.config'),
+    });
 
     components.forEach((item) =>
       addComponent({

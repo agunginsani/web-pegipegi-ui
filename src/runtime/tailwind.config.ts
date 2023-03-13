@@ -1,10 +1,14 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
+import { fileURLToPath } from 'node:url';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+const srcDir = fileURLToPath(new URL('./', import.meta.url));
+
+export default <Partial<Config>>{
+  content: [srcDir + '**/*.vue'],
 
   // TODO: refactor config
+  variants: ['responsive', 'group-hover', 'hover', 'focus', 'active'],
   theme: {
     extend: {
       keyframes: {
