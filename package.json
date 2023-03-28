@@ -16,7 +16,7 @@
       "require": "./dist/module/module.cjs"
     },
     "./style": "./dist/lib/main.css",
-    "./tailwind-config": "./dist/lib/tailwind.config.cjs"
+    "./tailwind-config": "./dist/lib/tailwind.config.json"
   },
   "publishConfig": {
     "@pegipegi:registry": "https://npm.pkg.github.com"
