@@ -2,9 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "outDir": "dist/types",
+    "outDir": "dist/lib",
     "declaration": true,
     "emitDeclarationOnly": true
   },
-  "include": ["./src/main.ts", "./src/vite-env.d.ts"]
+  "include": ["./src/lib.ts", "./src/vite-env.d.ts"]
 }
