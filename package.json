@@ -1,21 +1,17 @@
 {
   "name": "@pegipegi/web-pegipegi-ui",
-  "version": "1.0.0-beta.36",
+  "version": "1.0.0-beta.38",
   "type": "module",
   "files": [
     "dist"
   ],
+  "types": "./dist/types/lib.d.ts",
   "exports": {
     ".": {
-      "main": "./dist/lib/lib.umd.cjs",
-      "types": "./dist/lib/lib.d.ts",
-      "module": "./dist/lib/lib.js",
       "import": "./dist/lib/lib.js",
       "require": "./dist/lib/lib.umd.cjs"
     },
     "./module": {
-      "main": "./dist/module/module.cjs",
-      "types": "./dist/module/types.d.ts",
       "import": "./dist/module/module.mjs",
       "require": "./dist/module/module.cjs"
     },
