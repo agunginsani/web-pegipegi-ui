@@ -13,7 +13,9 @@
     persistent?: boolean;
   };
 
-  type BottomSheetEmits = (e: 'update:modelValue', value: boolean) => void;
+  type BottomSheetEmits = {
+    (e: 'update:modelValue', value: boolean): void;
+  };
 
   const props = withDefaults(defineProps<BottomSheetProps>(), {
     modelValue: false,

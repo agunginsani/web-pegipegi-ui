@@ -14,7 +14,9 @@
     disabled: false,
   });
 
-  type CounterEmits = (e: 'update:modelValue', value: number) => void;
+  type CounterEmits = {
+    (e: 'update:modelValue', value: number): void;
+  };
   const emit = defineEmits<CounterEmits>();
 
   const counterDisplay = computed(() => {

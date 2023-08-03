@@ -7,7 +7,9 @@
     readonly?: boolean;
   };
 
-  type RatingEmits = (e: 'update:modelValue', value: number) => void;
+  type RatingEmits = {
+    (e: 'update:modelValue', value: number): void;
+  };
 
   const props = withDefaults(defineProps<RatingProps>(), {
     modelValue: 3,
