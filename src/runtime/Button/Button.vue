@@ -63,9 +63,9 @@
           variant === 'outline',
         'border-transparent text-orange-400 disabled:bg-transparent':
           variant === 'text',
-        'rounded-[18px] py-2 px-4 text-sm': size === 'small',
-        'rounded-[22px] py-3 px-6 text-sm': size === 'medium',
-        'text-md rounded-[28px] py-4 px-8': size === 'large',
+        'rounded-[18px] px-4 py-2 text-sm': size === 'small',
+        'rounded-[22px] px-6 py-3 text-sm': size === 'medium',
+        'text-md rounded-[28px] px-8 py-4': size === 'large',
         'w-full': block,
       },
     ]"

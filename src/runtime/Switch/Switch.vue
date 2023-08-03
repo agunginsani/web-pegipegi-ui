@@ -57,7 +57,7 @@
       ]"
     >
       <div
-        class="absolute top-[2px] left-0 h-[28px] w-[28px] -translate-y-[8px] rounded-full bg-neutral-tuna-300 transition-all duration-300"
+        class="absolute left-0 top-[2px] h-[28px] w-[28px] -translate-y-[8px] rounded-full bg-neutral-tuna-300 transition-all duration-300"
       ></div>
     </div>
   </label>

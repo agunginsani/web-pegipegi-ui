@@ -155,7 +155,7 @@
       <slot name="title" />
       <slot name="description" />
     </div>
-    <div class="absolute top-5 right-5">
+    <div class="absolute right-5 top-5">
       <slot v-if="$slots.action" name="action" />
       <button v-else @click="onClose()">
         <svg
