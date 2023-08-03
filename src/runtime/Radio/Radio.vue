@@ -5,9 +5,7 @@
     disabled?: boolean;
   };
 
-  type RadioEmits = {
-    (e: 'update:modelValue', value: string): void;
-  };
+  type RadioEmits = (e: 'update:modelValue', value: string) => void;
 
   withDefaults(defineProps<RadioProps>(), {
     value: '',

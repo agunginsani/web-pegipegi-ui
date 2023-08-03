@@ -11,9 +11,7 @@
     priority: 'high',
   });
 
-  type BannerEmits = {
-    (e: 'close'): void;
-  };
+  type BannerEmits = (e: 'close') => void;
   const emit = defineEmits<BannerEmits>();
 
   function onClose(): void {

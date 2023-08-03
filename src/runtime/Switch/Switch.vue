@@ -5,9 +5,7 @@
     value?: string;
   };
 
-  type SwitchEmits = {
-    (e: 'update:modelValue', value: Array<string>): void;
-  };
+  type SwitchEmits = (e: 'update:modelValue', value: Array<string>) => void;
 
   const props = withDefaults(defineProps<SwitchProps>(), {
     disabled: false,
