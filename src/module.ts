@@ -1,26 +1,9 @@
 import {
   defineNuxtModule,
   createResolver,
-  addComponent,
   installModule,
-  // addComponentsDir,
+  addComponentsDir,
 } from '@nuxt/kit';
-
-// TODO: use addComponentsDir
-const components = [
-  'Button',
-  'Input',
-  'Rating',
-  'Switch',
-  'Checkbox',
-  'Radio',
-  'Textarea',
-  'BottomSheet',
-  'Counter',
-  'Avatar',
-  'Alert',
-  'Banner',
-];
 
 export default defineNuxtModule({
   meta: {
@@ -42,11 +25,8 @@ export default defineNuxtModule({
       configPath: resolver.resolve('./runtime/tailwind.config'),
     });
 
-    components.forEach((item) =>
-      addComponent({
-        name: item,
-        filePath: resolver.resolve(`./runtime/${item}/${item}.vue`),
-      })
-    );
+    await addComponentsDir({
+      path: resolver.resolve('./runtime'),
+    });
   },
 });
