@@ -1,12 +1,5 @@
-<script lang="ts">
-  import { defineComponent, ref } from 'vue';
-
-  defineComponent({
-    name: 'PRating',
-  });
-</script>
-
 <script lang="ts" setup>
+  import { defineComponent, ref } from 'vue';
   type RatingProps = {
     modelValue?: number;
     max?: number;
@@ -36,6 +29,12 @@
   function handleRatingChange(event: Event) {
     emit('update:modelValue', Number((event.target as HTMLInputElement).value));
   }
+</script>
+
+<script lang="ts">
+  defineComponent({
+    name: 'PRating',
+  });
 </script>
 
 <template>

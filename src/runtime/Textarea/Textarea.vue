@@ -1,12 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PTextarea',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
   type TextareaProps = {
     disabled?: boolean;
@@ -36,6 +27,15 @@
   function handleExpand(event: Event) {
     if (!props.disabled) emit('expand', event);
   }
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PTextarea',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

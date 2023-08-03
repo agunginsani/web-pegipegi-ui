@@ -1,20 +1,22 @@
 {
   "name": "@pegipegi/web-pegipegi-ui",
-  "version": "0.0.15",
+  "version": "1.0.0",
   "type": "module",
-  "types": "./dist/types/main.d.ts",
-  "main": "./dist/main.umd.cjs",
-  "module": "./dist/main.js",
   "files": [
     "dist"
   ],
+  "types": "./dist/types/lib.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.umd.cjs"
+      "import": "./dist/lib/lib.js",
+      "require": "./dist/lib/lib.umd.cjs"
     },
-    "./style": "./dist/main.css",
-    "./tailwind-config": "./dist/tailwind.config.cjs"
+    "./module": {
+      "import": "./dist/module/module.mjs",
+      "require": "./dist/module/module.cjs"
+    },
+    "./style": "./dist/lib/main.css",
+    "./tailwind-config": "./dist/lib/tailwind.config.json"
   },
   "publishConfig": {
     "@pegipegi:registry": "https://npm.pkg.github.com"
@@ -28,24 +30,27 @@
   "scripts": {
     "dev": "start-storybook -p 6006",
     "build-lib": "vue-tsc --noEmit && vite build && vue-tsc -p tsconfig.lib.json",
+    "build-module": "nuxt-module-build --outDir dist/module",
     "build-storybook": "build-storybook",
     "lint": "eslint src/**/*.{ts,tsx,vue}",
     "lint-fix": "eslint src/**/*.{ts,tsx,vue} --fix",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build-lib",
+    "prepublishOnly": "npm run build-lib && npm run build-module",
     "preview": "vite serve storybook-static",
     "test": "vitest",
     "test-coverage": "vitest run --coverage"
   },
   "peerDependencies": {
-    "@vueuse/core": "^9.7.0",
-    "tailwindcss": "^3.1.8",
-    "vue": "^3.2.37"
+    "@vueuse/core": "^9.13.0",
+    "tailwindcss": "^3.3.1",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@commitlint/cli": "^17.4.3",
-    "@commitlint/config-conventional": "^17.4.3",
+    "@babel/core": "^7.21.4",
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@nuxt/kit": "^3.3.3",
+    "@nuxt/module-builder": "^0.2.1",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-interactions": "^6.5.16",
@@ -55,32 +60,32 @@
     "@storybook/vue3": "^6.5.16",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
-    "@testing-library/vue": "^6.6.1",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vitejs/plugin-vue-jsx": "^3.0.0",
-    "@vitest/coverage-c8": "^0.28.5",
-    "@vue/eslint-config-prettier": "^7.0.0",
+    "@testing-library/vue": "^7.0.0",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vitest/coverage-c8": "^0.29.8",
+    "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
-    "@vueuse/core": "^9.12.0",
-    "autoprefixer": "^10.4.13",
+    "@vueuse/core": "^9.13.0",
+    "autoprefixer": "^10.4.14",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.34.0",
-    "eslint-plugin-storybook": "^0.6.10",
-    "eslint-plugin-vue": "^9.9.0",
+    "eslint": "^8.37.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "eslint-plugin-vue": "^9.10.0",
     "husky": "^8.0.3",
-    "jsdom": "^21.1.0",
-    "lint-staged": "^13.1.2",
+    "jsdom": "^21.1.1",
+    "lint-staged": "^13.2.0",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.4",
-    "prettier-plugin-tailwindcss": "^0.2.3",
-    "tailwindcss": "^3.2.6",
-    "typescript": "^4.9.5",
-    "vite": "^4.1.1",
-    "vite-plugin-dts": "^1.7.3",
-    "vite-plugin-static-copy": "^0.13.0",
-    "vitest": "^0.28.5",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.6",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.3",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.2.0",
+    "vite-plugin-static-copy": "^0.13.1",
+    "vitest": "^0.29.8",
     "vue": "^3.2.47",
     "vue-loader": "^17.0.1",
-    "vue-tsc": "^1.1.0"
+    "vue-tsc": "^1.2.0"
   }
 }

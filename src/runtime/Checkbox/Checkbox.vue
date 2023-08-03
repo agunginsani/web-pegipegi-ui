@@ -1,12 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PCheckbox',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
   type CheckboxProps = {
     value?: string;
@@ -40,6 +31,15 @@
       );
     }
   }
+</script>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PCheckbox',
+    inheritAttrs: false,
+  });
 </script>
 
 <template>

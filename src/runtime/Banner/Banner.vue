@@ -1,14 +1,6 @@
-<script lang="ts">
+<script lang="ts" setup>
   import { defineComponent, computed } from 'vue';
   import patternIcon from './pattern.webp';
-
-  export default defineComponent({
-    name: 'PBanner',
-    inheritAttrs: false,
-  });
-</script>
-
-<script lang="ts" setup>
   type BannerProps = {
     color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
     priority?: 'high' | 'low';
@@ -31,40 +23,20 @@
   const wrapperStyle = computed(() => {
     switch (props.color) {
       case 'accent':
-        switch (props.priority) {
-          case 'low':
-            return 'bg-orange-inter-50';
-          default:
-            return 'bg-orange-inter-600';
-        }
+        if (props.priority === 'low') return 'bg-orange-inter-50';
+        return 'bg-orange-inter-600';
       case 'info':
-        switch (props.priority) {
-          case 'low':
-            return 'bg-blue-dodger-50';
-          default:
-            return 'bg-blue-dodger-600';
-        }
+        if (props.priority === 'low') return 'bg-blue-dodger-50';
+        return 'bg-blue-dodger-600';
       case 'warning':
-        switch (props.priority) {
-          case 'low':
-            return 'bg-yellow-candle-50';
-          default:
-            return 'bg-yellow-candle-300';
-        }
+        if (props.priority === 'low') return 'bg-yellow-candle-50';
+        return 'bg-yellow-candle-300';
       case 'positive':
-        switch (props.priority) {
-          case 'low':
-            return 'bg-green-emerald-50';
-          default:
-            return 'bg-green-emerald-600';
-        }
+        if (props.priority === 'low') return 'bg-green-emerald-50';
+        return 'bg-green-emerald-600';
       case 'negative':
-        switch (props.priority) {
-          case 'low':
-            return 'bg-red-flower-50';
-          default:
-            return 'bg-red-flower-700';
-        }
+        if (props.priority === 'low') return 'bg-red-flower-50';
+        return 'bg-red-flower-700';
       default:
         return 'bg-neutral-tuna-0';
     }
@@ -73,35 +45,19 @@
   const contentStyle = computed(() => {
     switch (props.color) {
       case 'accent':
-        switch (props.priority) {
-          case 'low':
-            return 'text-neutral-tuna-900';
-          default:
-            return 'text-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'text-neutral-tuna-900';
+        return 'text-neutral-tuna-0';
       case 'info':
-        switch (props.priority) {
-          case 'low':
-            return 'text-blue-dodger-700';
-          default:
-            return 'text-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'text-blue-dodger-700';
+        return 'text-neutral-tuna-0';
       case 'warning':
         return 'text-neutral-tuna-900';
       case 'positive':
-        switch (props.priority) {
-          case 'low':
-            return 'text-green-emerald-700';
-          default:
-            return 'text-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'text-green-emerald-700';
+        return 'text-neutral-tuna-0';
       case 'negative':
-        switch (props.priority) {
-          case 'low':
-            return 'text-red-flower-700';
-          default:
-            return 'text-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'text-red-flower-700';
+        return 'text-neutral-tuna-0';
       default:
         return 'text-neutral-tuna-900';
     }
@@ -110,38 +66,29 @@
   const buttonStyle = computed(() => {
     switch (props.color) {
       case 'accent':
-        switch (props.priority) {
-          case 'low':
-            return 'fill-neutral-tuna-900';
-          default:
-            return 'fill-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'fill-neutral-tuna-900';
+        return 'fill-neutral-tuna-0';
       case 'info':
-        switch (props.priority) {
-          case 'low':
-            return 'fill-blue-dodger-700';
-          default:
-            return 'fill-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'fill-blue-dodger-700';
+        return 'fill-neutral-tuna-0';
       case 'warning':
         return 'fill-neutral-tuna-900';
       case 'positive':
-        switch (props.priority) {
-          case 'low':
-            return 'fill-green-emerald-700';
-          default:
-            return 'fill-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'fill-green-emerald-700';
+        return 'fill-neutral-tuna-0';
       case 'negative':
-        switch (props.priority) {
-          case 'low':
-            return 'fill-red-flower-700';
-          default:
-            return 'fill-neutral-tuna-0';
-        }
+        if (props.priority === 'low') return 'fill-red-flower-700';
+        return 'fill-neutral-tuna-0';
       default:
         return 'fill-orange-inter-600';
     }
+  });
+</script>
+
+<script lang="ts">
+  export default defineComponent({
+    name: 'PBanner',
+    inheritAttrs: false,
   });
 </script>
 
@@ -156,7 +103,7 @@
       <slot name="title" />
       <slot name="description" />
     </div>
-    <div class="absolute top-5 right-5">
+    <div class="absolute right-5 top-5">
       <slot v-if="$slots.action" name="action" />
       <button v-else @click="onClose()">
         <svg

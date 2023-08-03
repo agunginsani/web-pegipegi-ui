@@ -1,12 +1,3 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    name: 'PRadio',
-    inheritAttrs: false,
-  });
-</script>
-
 <script lang="ts" setup>
   type RadioProps = {
     value?: string;
@@ -31,6 +22,15 @@
   }
 </script>
 
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'PRadio',
+    inheritAttrs: false,
+  });
+</script>
+
 <template>
   <label>
     <input
@@ -51,7 +51,7 @@
       ]"
     >
       <div
-        class="absolute top-1/2 left-1/2 h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 transform rounded-full"
+        class="absolute left-1/2 top-1/2 h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 transform rounded-full"
       />
     </div>
   </label>

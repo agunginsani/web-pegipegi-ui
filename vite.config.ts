@@ -10,17 +10,18 @@ export default defineConfig({
     vueJsx(),
     viteStaticCopy({
       targets: [
-        { src: 'src/main.css', dest: '.' },
-        { src: 'tailwind.config.cjs', dest: '.' },
+        { src: 'src/runtime/main.css', dest: '.' },
+        { src: 'src/runtime/tailwind.config.json', dest: '.' },
       ],
     }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/main.ts'),
-      fileName: 'main',
+      entry: resolve(__dirname, 'src/lib.ts'),
+      fileName: 'lib',
       name: 'WebPegipegiUI',
     },
+    outDir: 'dist/lib',
     rollupOptions: {
       external: ['vue', '@vueuse/core'],
       output: {

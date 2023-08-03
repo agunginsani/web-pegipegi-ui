@@ -32,6 +32,24 @@ pnpm add @pegipegi/web-pegipegi-ui
 
 ### Configuration
 
+#### Method 1: As Nuxt Module
+
+Add `@pegipegi/web-pegipegi-ui/module` to the `modules` entry in `nuxt.config.ts`.
+
+```
+export default defineNuxtConfig({
+  // ...
+  modules: [
+   ...
+   '@pegipegi/web-pegipegi-ui/module'
+   ...
+  ]
+  // ...
+});
+```
+
+#### Method 2: As Library
+
 Add this on `tailwind.config.cjs`.
 
 ```js
