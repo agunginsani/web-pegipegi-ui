@@ -1,6 +1,5 @@
 <script lang="ts" setup>
   import { defineComponent, computed } from 'vue';
-  import patternIcon from './pattern.webp';
   type BannerProps = {
     color?: 'neutral' | 'accent' | 'info' | 'warning' | 'positive' | 'negative';
     priority?: 'high' | 'low';
@@ -94,8 +93,7 @@
 
 <template>
   <div
-    :style="{ backgroundImage: `url(${patternIcon})` }"
-    class="relative flex items-stretch gap-3 rounded-lg bg-[length:105px_72px] bg-right-bottom bg-no-repeat py-2 pl-5 pr-11"
+    class="relative flex items-stretch gap-3 overflow-hidden rounded-lg bg-no-repeat py-2 pl-5 pr-11"
     :class="wrapperStyle"
   >
     <slot name="icon" />
@@ -118,5 +116,10 @@
         </svg>
       </button>
     </div>
+    <img
+      class="absolute bottom-0 right-0 w-[105px]"
+      src="./pattern.webp"
+      alt="Pattern"
+    />
   </div>
 </template>
