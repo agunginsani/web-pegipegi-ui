@@ -27,6 +27,7 @@ export default defineNuxtModule({
 
     await addComponentsDir({
       path: resolver.resolve('./runtime'),
+      extensions: ['.vue'],
     });
   },
 });
